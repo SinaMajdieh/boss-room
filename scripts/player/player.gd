@@ -7,6 +7,7 @@ class_name Player
 
 @export_category("Timers")
 @export var jump_timer: Timer
+@export var coyote_timer: Timer
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()

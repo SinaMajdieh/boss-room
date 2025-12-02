@@ -11,7 +11,7 @@ func on_process(_delta: float) -> void:
 func on_physics_process(_delta: float) -> void:
     pass
 
-func enter() -> void:
+func enter(_previous_state: String) -> void:
     if debug:
         print_rich("[color=green]Entered %s State" % name)
 

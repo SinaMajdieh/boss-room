@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://e5nefeqvv66d"]
+[gd_scene load_steps=11 format=3 uid="uid://e5nefeqvv66d"]
 
 [ext_resource type="Script" uid="uid://dwmje6n7m1ip" path="res://scripts/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="2_6t5aa"]
@@ -8,15 +8,17 @@
 [ext_resource type="Script" uid="uid://bibmucmc3ek0s" path="res://scripts/player/states/jump.gd" id="6_3smsa"]
 [ext_resource type="Script" uid="uid://huv7d7i2cxll" path="res://scripts/player/movemnt.gd" id="7_3smsa"]
 [ext_resource type="Script" uid="uid://cjjvlrv0gh2iv" path="res://scripts/player/timers/jump.gd" id="8_8erm5"]
+[ext_resource type="Script" uid="uid://clwqpjdntciw1" path="res://scripts/player/timers/coyote.gd" id="9_ur7pv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
 height = 50.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "state_machine", "jump_timer") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "state_machine", "jump_timer", "coyote_timer") groups=["player"]]
 script = ExtResource("1_xhfnw")
 movement = NodePath("PlayerMovement")
 state_machine = NodePath("StateMachine")
-jump_timer = NodePath("JumpTimer")
+jump_timer = NodePath("Timers/JumpTimer")
+coyote_timer = NodePath("Timers/CoyoteTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kpjcp")
@@ -48,10 +50,19 @@ metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
 [node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("7_3smsa")
+jump_force = 615.0
 player = NodePath("..")
 metadata/_custom_type_script = "uid://huv7d7i2cxll"
 
-[node name="JumpTimer" type="Timer" parent="."]
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpTimer" type="Timer" parent="Timers"]
 wait_time = 0.2
 one_shot = true
 script = ExtResource("8_8erm5")
+
+[node name="CoyoteTimer" type="Timer" parent="Timers" node_paths=PackedStringArray("player")]
+wait_time = 0.12
+one_shot = true
+script = ExtResource("9_ur7pv")
+player = NodePath("../..")
