@@ -1,12 +1,7 @@
-extends Node
-class_name PlayerMovement
+extends PlayerMovement
 
 @export_category("Horizontal Movement Parameters")
 @export var speed: float = 200.0
-@export var ground_accel: float = 2500.0
-@export var ground_decel: float = 3000.0
-@export var air_accel: float = 1500.0
-@export var air_decel: float = 300.0
 
 @export_category("Horizontal Movement Parameters")
 @export var jump_force: float = 410.0
@@ -14,22 +9,16 @@ class_name PlayerMovement
 @export var gravity_down: float = 1400.0
 @export var gravity_cut: float = 2200
 
-@export_category("Components")
-@export var player: Player
-
 func apply_movement(delta: float) -> void:
 	apply_gravity(delta)
 	apply_horizontal(delta)
 
-func apply_horizontal(delta: float) -> void:
+func apply_horizontal(_delta: float) -> void:
 	var direction : float = PlayerInput.get_direction()
-	var target_speed: float = direction * speed
 	if direction:
-		var accel: float = ground_accel if player.is_on_floor() else air_accel
-		player.velocity.x = move_toward(player.velocity.x, target_speed, accel * delta)
+		player.velocity.x = direction * speed
 	else:
-		var decel: float = ground_decel if player.is_on_floor() else air_decel
-		player.velocity.x = move_toward(player.velocity.x, 0.0, decel * delta)
+		player.velocity.x = move_toward(player.velocity.x, 0.0, speed)
 
 func apply_gravity(delta: float) -> void:
 	if player.velocity.y < 0.0:
