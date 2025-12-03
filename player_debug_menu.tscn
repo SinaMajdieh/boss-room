@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://e0yemhp07eov"]
+[gd_scene load_steps=7 format=3 uid="uid://e0yemhp07eov"]
 
 [ext_resource type="Script" uid="uid://bxw45vtmgp7x6" path="res://scripts/player_debug_menu/player_state.gd" id="1_1xyl6"]
 [ext_resource type="Script" uid="uid://bshjho61pkluw" path="res://scripts/player_debug_menu/jump_timer.gd" id="2_8bl0l"]
 [ext_resource type="Script" uid="uid://dr108mbhicaai" path="res://scripts/player_debug_menu/velocity.gd" id="2_r4825"]
 [ext_resource type="Script" uid="uid://l75vk7eqalfp" path="res://scripts/player_debug_menu/position.gd" id="3_fl6t8"]
 [ext_resource type="Script" uid="uid://wk6fb421aysx" path="res://scripts/player_debug_menu/coyote_timer.gd" id="5_fl6t8"]
+[ext_resource type="Script" uid="uid://btmo8x4etyw0w" path="res://scripts/player_debug_menu/dash_cool_down.gd" id="6_0cfry"]
 
 [node name="PlayerDebugMenu" type="Control"]
 layout_mode = 3
@@ -23,25 +24,42 @@ offset_bottom = 40.0
 
 [node name="State" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
 text = "State: "
 script = ExtResource("1_1xyl6")
 
 [node name="Velocity" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
 text = "Velocity: "
 script = ExtResource("2_r4825")
 
 [node name="Position" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
 text = "Position: "
 script = ExtResource("3_fl6t8")
 
 [node name="JumpTimer" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
 text = "Jump Timer: "
 script = ExtResource("2_8bl0l")
 
 [node name="CoyoteTimer" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
 text = "Coyote Timer: "
 script = ExtResource("5_fl6t8")
+
+[node name="DashCoolDown" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
+text = "Dash Cool Down: "
+script = ExtResource("6_0cfry")

@@ -5,6 +5,7 @@ func on_physics_process(delta: float) -> void:
 
 func on_process(_delta: float) -> void:
     check_falling()
+    check_dash()
 
 func enter(_previous_state: String) -> void:
     if debug:

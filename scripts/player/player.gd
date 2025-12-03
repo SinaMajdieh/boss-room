@@ -4,6 +4,7 @@ class_name Player
 @export_category("Components")
 @export var movement: PlayerMovement
 @export var state_machine: StateMachine	 
+@export var collision_controller: PlayerCollisionController
 
 @export_category("Timers")
 @export var jump_timer: Timer

@@ -1,27 +1,55 @@
-[gd_scene load_steps=11 format=3 uid="uid://e5nefeqvv66d"]
+[gd_scene load_steps=14 format=3 uid="uid://e5nefeqvv66d"]
 
 [ext_resource type="Script" uid="uid://dwmje6n7m1ip" path="res://scripts/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="2_6t5aa"]
+[ext_resource type="Script" uid="uid://dd03qhd78hq3d" path="res://scripts/player/collision.gd" id="2_d2wvv"]
 [ext_resource type="Script" uid="uid://ciyeqcbv66srx" path="res://scripts/player/states/idle.gd" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://hho1luvqsprw" path="res://scripts/player/states/run.gd" id="4_vgqql"]
 [ext_resource type="Script" uid="uid://y6wiowo66kps" path="res://scripts/player/states/fall.gd" id="5_x3wgy"]
 [ext_resource type="Script" uid="uid://bibmucmc3ek0s" path="res://scripts/player/states/jump.gd" id="6_3smsa"]
-[ext_resource type="Script" uid="uid://huv7d7i2cxll" path="res://scripts/player/movemnt.gd" id="7_3smsa"]
+[ext_resource type="Script" uid="uid://ds6sl1fngx7d2" path="res://scripts/player/states/dash.gd" id="7_y4r1p"]
 [ext_resource type="Script" uid="uid://cjjvlrv0gh2iv" path="res://scripts/player/timers/jump.gd" id="8_8erm5"]
+[ext_resource type="Script" uid="uid://cy6rsrausb6jx" path="res://scripts/player/movement/precise_movement.gd" id="9_d2wvv"]
 [ext_resource type="Script" uid="uid://clwqpjdntciw1" path="res://scripts/player/timers/coyote.gd" id="9_ur7pv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
 height = 50.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "state_machine", "jump_timer", "coyote_timer") groups=["player"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4r1p"]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "state_machine", "collision_controller", "jump_timer", "coyote_timer") groups=["player"]]
 script = ExtResource("1_xhfnw")
 movement = NodePath("PlayerMovement")
 state_machine = NodePath("StateMachine")
+collision_controller = NodePath("PlayerCollisionController")
 jump_timer = NodePath("Timers/JumpTimer")
 coyote_timer = NodePath("Timers/CoyoteTimer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kpjcp")
+debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
+
+[node name="DashCollision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_y4r1p")
+disabled = true
+debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
+
+[node name="PlayerCollisionController" type="Node" parent="." node_paths=PackedStringArray("collisions", "current_collision")]
+script = ExtResource("2_d2wvv")
+collisions = {
+"dash": NodePath("../DashCollision"),
+"default": NodePath("../Collision")
+}
+current_collision = NodePath("../Collision")
+metadata/_custom_type_script = "uid://dd03qhd78hq3d"
+
+[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("9_d2wvv")
+jump_force = 615.0
+player = NodePath("..")
+metadata/_custom_type_script = "uid://cj1s224kcep31"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_6t5aa")
@@ -48,11 +76,13 @@ script = ExtResource("6_3smsa")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("7_3smsa")
-jump_force = 615.0
-player = NodePath("..")
-metadata/_custom_type_script = "uid://huv7d7i2cxll"
+[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("dash_timer", "dash_cool_down", "player")]
+script = ExtResource("7_y4r1p")
+dash_speed = 1350.0
+dash_timer = NodePath("../../Timers/DashTimer")
+dash_cool_down = NodePath("../../Timers/DashCoolDown")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
 [node name="Timers" type="Node" parent="."]
 
@@ -66,3 +96,13 @@ wait_time = 0.12
 one_shot = true
 script = ExtResource("9_ur7pv")
 player = NodePath("../..")
+
+[node name="DashTimer" type="Timer" parent="Timers"]
+wait_time = 0.12
+one_shot = true
+
+[node name="DashCoolDown" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timers/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]

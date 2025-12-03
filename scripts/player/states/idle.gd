@@ -7,6 +7,7 @@ func on_process(_delta: float) -> void:
 	check_movement_input()
 	check_jump_input()
 	check_falling()
+	check_dash()
 
 func can_transition() -> bool:
 	return player.is_on_floor()

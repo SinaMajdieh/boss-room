@@ -6,6 +6,7 @@ func on_physics_process(delta: float) -> void:
 func on_process(_delta: float) -> void:
 	check_falling()
 	check_jump_input()
+	check_dash()
 	if player.velocity.x == 0:
 		transition.emit("idle")
 

@@ -15,3 +15,7 @@ func check_falling() -> void:
 func check_jump_input() -> void:
 	if not player.jump_timer.is_stopped():
 		transition.emit("jump")
+
+func check_dash() -> void:
+	if PlayerInput.just_dashed():
+		transition.emit("dash")
