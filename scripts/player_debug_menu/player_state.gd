@@ -9,4 +9,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func state_changed(new_state: String) -> void:
-	text = "Player State: %s" % new_state
+	text = "State: %s" % new_state

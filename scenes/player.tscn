@@ -1,25 +1,31 @@
-[gd_scene load_steps=14 format=3 uid="uid://e5nefeqvv66d"]
+[gd_scene load_steps=17 format=3 uid="uid://e5nefeqvv66d"]
 
 [ext_resource type="Script" uid="uid://dwmje6n7m1ip" path="res://scripts/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://dd03qhd78hq3d" path="res://scripts/player/collision.gd" id="2_d2wvv"]
 [ext_resource type="Script" uid="uid://ciyeqcbv66srx" path="res://scripts/player/states/idle.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://c6hexh55a2fm1" path="res://scripts/player/movement/hollow_knight_movemnt.gd" id="3_d2wvv"]
+[ext_resource type="Script" uid="uid://tjonnyktixm3" path="res://scripts/player/health.gd" id="4_3v2ag"]
 [ext_resource type="Script" uid="uid://hho1luvqsprw" path="res://scripts/player/states/run.gd" id="4_vgqql"]
 [ext_resource type="Script" uid="uid://y6wiowo66kps" path="res://scripts/player/states/fall.gd" id="5_x3wgy"]
 [ext_resource type="Script" uid="uid://bibmucmc3ek0s" path="res://scripts/player/states/jump.gd" id="6_3smsa"]
 [ext_resource type="Script" uid="uid://ds6sl1fngx7d2" path="res://scripts/player/states/dash.gd" id="7_y4r1p"]
 [ext_resource type="Script" uid="uid://cjjvlrv0gh2iv" path="res://scripts/player/timers/jump.gd" id="8_8erm5"]
-[ext_resource type="Script" uid="uid://cy6rsrausb6jx" path="res://scripts/player/movement/precise_movement.gd" id="9_d2wvv"]
 [ext_resource type="Script" uid="uid://clwqpjdntciw1" path="res://scripts/player/timers/coyote.gd" id="9_ur7pv"]
+[ext_resource type="Script" uid="uid://co5piylw2y1u7" path="res://scripts/player/states/dead.gd" id="11_jej6c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
 height = 50.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
+height = 50.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4r1p"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "state_machine", "collision_controller", "jump_timer", "coyote_timer") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "jump_timer", "coyote_timer") groups=["player"]]
 script = ExtResource("1_xhfnw")
 movement = NodePath("PlayerMovement")
+health = NodePath("PlayerHealth")
 state_machine = NodePath("StateMachine")
 collision_controller = NodePath("PlayerCollisionController")
 jump_timer = NodePath("Timers/JumpTimer")
@@ -27,6 +33,14 @@ coyote_timer = NodePath("Timers/CoyoteTimer")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kpjcp")
+debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
+
+[node name="Dead" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 15)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_jej6c")
+disabled = true
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
 [node name="DashCollision" type="CollisionShape2D" parent="."]
@@ -40,16 +54,21 @@ debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 script = ExtResource("2_d2wvv")
 collisions = {
 "dash": NodePath("../DashCollision"),
+"dead": NodePath("../Dead"),
 "default": NodePath("../Collision")
 }
 current_collision = NodePath("../Collision")
 metadata/_custom_type_script = "uid://dd03qhd78hq3d"
 
 [node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("9_d2wvv")
+script = ExtResource("3_d2wvv")
 jump_force = 615.0
 player = NodePath("..")
 metadata/_custom_type_script = "uid://cj1s224kcep31"
+
+[node name="PlayerHealth" type="Node" parent="."]
+script = ExtResource("4_3v2ag")
+metadata/_custom_type_script = "uid://tjonnyktixm3"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_6t5aa")
@@ -81,6 +100,11 @@ script = ExtResource("7_y4r1p")
 dash_speed = 1350.0
 dash_timer = NodePath("../../Timers/DashTimer")
 dash_cool_down = NodePath("../../Timers/DashCoolDown")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("11_jej6c")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 

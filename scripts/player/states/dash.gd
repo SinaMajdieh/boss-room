@@ -23,6 +23,7 @@ func on_physics_process(_delta: float) -> void:
 func exit() -> void:
 	player.collision_controller.switch("default")
 	player.velocity.x = 0.0
+	dash_timer.stop()
 	dash_cool_down.start()
 
 

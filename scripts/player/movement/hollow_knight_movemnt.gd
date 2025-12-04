@@ -25,8 +25,11 @@ func apply_horizontal(delta: float) -> void:
 		var accel: float = ground_accel if player.is_on_floor() else air_accel
 		player.velocity.x = move_toward(player.velocity.x, target_speed, accel * delta)
 	else:
-		var decel: float = ground_decel if player.is_on_floor() else air_decel
-		player.velocity.x = move_toward(player.velocity.x, 0.0, decel * delta)
+		decelerate(delta)
+
+func decelerate(delta: float) -> void:
+	var decel: float = ground_decel if player.is_on_floor() else air_decel
+	player.velocity.x = move_toward(player.velocity.x, 0.0, decel * delta)
 
 func apply_gravity(delta: float) -> void:
 	if player.velocity.y < 0.0:

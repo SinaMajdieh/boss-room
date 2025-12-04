@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://e0yemhp07eov"]
+[gd_scene load_steps=8 format=3 uid="uid://e0yemhp07eov"]
 
 [ext_resource type="Script" uid="uid://bxw45vtmgp7x6" path="res://scripts/player_debug_menu/player_state.gd" id="1_1xyl6"]
 [ext_resource type="Script" uid="uid://bshjho61pkluw" path="res://scripts/player_debug_menu/jump_timer.gd" id="2_8bl0l"]
+[ext_resource type="Script" uid="uid://xhibhf685shx" path="res://scripts/player_debug_menu/health.gd" id="2_avxac"]
 [ext_resource type="Script" uid="uid://dr108mbhicaai" path="res://scripts/player_debug_menu/velocity.gd" id="2_r4825"]
 [ext_resource type="Script" uid="uid://l75vk7eqalfp" path="res://scripts/player_debug_menu/position.gd" id="3_fl6t8"]
 [ext_resource type="Script" uid="uid://wk6fb421aysx" path="res://scripts/player_debug_menu/coyote_timer.gd" id="5_fl6t8"]
@@ -28,6 +29,13 @@ theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "State: "
 script = ExtResource("1_1xyl6")
+
+[node name="Health" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
+text = "Hearts: "
+script = ExtResource("2_avxac")
 
 [node name="Velocity" type="Label" parent="VBoxContainer"]
 layout_mode = 2

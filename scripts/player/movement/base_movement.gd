@@ -10,6 +10,9 @@ func apply_movement(_delta: float) -> void:
 func apply_horizontal(_delta: float) -> void:
     pass
 
+func decelerate(_delta: float) -> void:
+    pass
+
 func apply_gravity(_delta: float) -> void:
     pass
 

@@ -18,7 +18,10 @@ func apply_horizontal(_delta: float) -> void:
 	if direction:
 		player.velocity.x = direction * speed
 	else:
-		player.velocity.x = move_toward(player.velocity.x, 0.0, speed)
+		decelerate(_delta)
+
+func decelerate(_delta: float) -> void:
+	player.velocity.x = move_toward(player.velocity.x, 0.0, speed)
 
 func apply_gravity(delta: float) -> void:
 	if player.velocity.y < 0.0:
