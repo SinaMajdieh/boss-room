@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://e5nefeqvv66d"]
+[gd_scene load_steps=24 format=3 uid="uid://e5nefeqvv66d"]
 
 [ext_resource type="Script" uid="uid://dwmje6n7m1ip" path="res://scripts/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://dd03qhd78hq3d" path="res://scripts/player/collision.gd" id="2_d2wvv"]
+[ext_resource type="PackedScene" uid="uid://c7ss0hc76jbi4" path="res://scenes/hurtbox.tscn" id="2_f1ej7"]
 [ext_resource type="Script" uid="uid://ciyeqcbv66srx" path="res://scripts/player/states/idle.gd" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://c6hexh55a2fm1" path="res://scripts/player/movement/hollow_knight_movemnt.gd" id="3_d2wvv"]
 [ext_resource type="Script" uid="uid://tjonnyktixm3" path="res://scripts/player/health.gd" id="4_3v2ag"]
@@ -13,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cjjvlrv0gh2iv" path="res://scripts/player/timers/jump.gd" id="8_8erm5"]
 [ext_resource type="Script" uid="uid://clwqpjdntciw1" path="res://scripts/player/timers/coyote.gd" id="9_ur7pv"]
 [ext_resource type="Script" uid="uid://co5piylw2y1u7" path="res://scripts/player/states/dead.gd" id="11_jej6c"]
+[ext_resource type="Script" uid="uid://bfh8p6strnncc" path="res://scripts/player/states/attack.gd" id="13_oprun"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
 height = 50.0
@@ -22,12 +24,104 @@ height = 50.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4r1p"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "jump_timer", "coyote_timer") groups=["player"]]
+[sub_resource type="Animation" id="Animation_qfm1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attacks/Attack_1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_oprun"]
+resource_name = "attack_1"
+length = 0.16
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attacks/Attack_1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attacks/Attack_1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.001, 0.16),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_a8ls1"]
+resource_name = "test_attack"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attacks/Attack_1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2, 3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attacks/Attack_1:visible")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.01, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a8ls1"]
+_data = {
+&"RESET": SubResource("Animation_qfm1y"),
+&"attack_1": SubResource("Animation_oprun"),
+&"test_attack": SubResource("Animation_a8ls1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oprun"]
+size = Vector2(26.924576, 56.034847)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "jump_timer", "coyote_timer") groups=["player"]]
 script = ExtResource("1_xhfnw")
 movement = NodePath("PlayerMovement")
 health = NodePath("PlayerHealth")
 state_machine = NodePath("StateMachine")
 collision_controller = NodePath("PlayerCollisionController")
+attack_animation_player = NodePath("Attacks/AttackAnimationPlayer")
 jump_timer = NodePath("Timers/JumpTimer")
 coyote_timer = NodePath("Timers/CoyoteTimer")
 
@@ -49,6 +143,25 @@ position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_y4r1p")
 disabled = true
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
+
+[node name="Attacks" type="Node2D" parent="."]
+
+[node name="AttackAnimationPlayer" type="AnimationPlayer" parent="Attacks"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_a8ls1")
+}
+
+[node name="Attack_1" parent="Attacks" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
+position = Vector2(29, -8)
+shape = NodePath("CollisionShape2D")
+damage = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/Attack_1"]
+position = Vector2(9.007381, 4.486225)
+rotation = 1.5726348
+shape = SubResource("RectangleShape2D_oprun")
+disabled = true
 
 [node name="PlayerCollisionController" type="Node" parent="." node_paths=PackedStringArray("collisions", "current_collision")]
 script = ExtResource("2_d2wvv")
@@ -105,6 +218,13 @@ metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
 [node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("11_jej6c")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hurt_box", "player")]
+script = ExtResource("13_oprun")
+attack_animation_name = "attack_1"
+hurt_box = NodePath("../../Attacks/Attack_1")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 

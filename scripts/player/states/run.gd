@@ -7,8 +7,9 @@ func on_process(_delta: float) -> void:
 	check_falling()
 	check_jump_input()
 	check_dash()
+	check_attack()
 	if player.velocity.x == 0:
-		transition.emit("idle")
+		transition_to("idle")
 
 func can_transition() -> bool:
 	return player.is_on_floor()

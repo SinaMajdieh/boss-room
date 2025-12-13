@@ -29,9 +29,9 @@ func exit() -> void:
 
 func _on_dash_timer_timeout() -> void:
 	if player.is_on_floor():
-		transition.emit("idle")
+		transition_to("idle")
 	else:
-		transition.emit("fall")    
+		transition_to("fall")    
 
 func can_transition() -> bool:
 	return dash_cool_down.is_stopped()

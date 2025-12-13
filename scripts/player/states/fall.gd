@@ -4,8 +4,9 @@ func on_process(_delta):
 	if not player.coyote_timer.is_stopped():
 		check_jump_input()
 	if player.is_on_floor():
-		transition.emit("idle")
+		transition_to("idle")
 	check_dash()
+	check_attack()
 
 func on_physics_process(delta: float) -> void:
 	player.movement.apply_movement(delta)

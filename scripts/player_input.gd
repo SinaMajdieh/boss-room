@@ -11,3 +11,6 @@ static func just_dashed() -> bool:
 
 static func get_direction() -> float:
     return Input.get_axis("left", "right")
+
+static func just_attacked() -> bool:
+    return Input.is_action_just_pressed("attack")
