@@ -3,7 +3,7 @@ class_name NodeState
 
 @export var debug: bool = false
 
-signal transition(state_name: String)
+signal transition(from_state_name: String, to_state_name: String)
 
 func on_process(_delta: float) -> void:
     pass
@@ -21,3 +21,6 @@ func exit() -> void:
 
 func can_transition() -> bool:
     return true
+
+func transition_to(state_name: String) -> void:
+    transition.emit(name, state_name)

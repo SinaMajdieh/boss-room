@@ -6,6 +6,7 @@ class_name Player
 @export var health: PlayerHealth
 @export var state_machine: StateMachine	 
 @export var collision_controller: PlayerCollisionController
+@export var attack_animation_player: AnimationPlayer
 
 @export_category("Timers")
 @export var jump_timer: Timer
@@ -25,4 +26,4 @@ func get_state() -> String:
 	return state_machine.get_current_state()
 
 func die() -> void:
-	state_machine.transition("dead")
+	state_machine.transition(state_machine.current_state_name, "dead")

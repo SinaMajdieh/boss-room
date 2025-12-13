@@ -40,12 +40,16 @@ func add_states(node: Node = self) -> void:
 			states[child.name.to_lower()] = child
 			child.transition.connect(transition)
 
-func transition(state_name: String) -> void:
-	state_name = state_name.to_lower()
-	if state_name == current_state_name:
+func transition(from_state_name: String, to_state_name: String) -> void:
+	to_state_name = to_state_name.to_lower()
+	from_state_name = from_state_name.to_lower()
+	
+	if current_state_name != from_state_name:
+		return
+	if to_state_name == current_state_name:
 		return
 
-	var new_state: NodeState = states.get(state_name)
+	var new_state: NodeState = states.get(to_state_name)
 	
 	if not new_state or not new_state.can_transition():
 		return
