@@ -15,6 +15,7 @@ func apply_movement(delta: float) -> void:
 
 func apply_horizontal(_delta: float) -> void:
 	var direction : float = PlayerInput.get_direction()
+	face(direction)
 	if direction:
 		player.velocity.x = direction * speed
 	else:
