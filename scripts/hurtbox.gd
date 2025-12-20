@@ -13,6 +13,7 @@ func _ready() -> void:
 	visible = false
 
 func enable() -> void:
+	entities.clear()
 	monitoring = true
 	shape.disabled = false
 	active = true
@@ -20,7 +21,6 @@ func enable() -> void:
 func disable() -> void:
 	monitoring = false
 	shape.disabled = true
-	entities.clear()
 	active = false
 
 func _on_area_entered(area: Area2D) -> void:
@@ -33,3 +33,6 @@ func _on_area_entered(area: Area2D) -> void:
 
 func is_active() -> bool:
 	return active
+
+func was_a_hit() -> bool:
+	return entities.size() > 0

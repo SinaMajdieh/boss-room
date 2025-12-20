@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://e0yemhp07eov"]
+[gd_scene load_steps=10 format=3 uid="uid://e0yemhp07eov"]
 
 [ext_resource type="Script" uid="uid://bxw45vtmgp7x6" path="res://scripts/player_debug_menu/player_state.gd" id="1_1xyl6"]
 [ext_resource type="Script" uid="uid://bshjho61pkluw" path="res://scripts/player_debug_menu/jump_timer.gd" id="2_8bl0l"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://l75vk7eqalfp" path="res://scripts/player_debug_menu/position.gd" id="3_fl6t8"]
 [ext_resource type="Script" uid="uid://wk6fb421aysx" path="res://scripts/player_debug_menu/coyote_timer.gd" id="5_fl6t8"]
 [ext_resource type="Script" uid="uid://btmo8x4etyw0w" path="res://scripts/player_debug_menu/dash_cool_down.gd" id="6_0cfry"]
+[ext_resource type="Script" uid="uid://c0wobme8s8kxw" path="res://scripts/player_debug_menu/combo_timer.gd" id="8_imwfo"]
+[ext_resource type="Script" uid="uid://b8i2h7f1uy0ac" path="res://scripts/player_debug_menu/combo_index.gd" id="9_hbebu"]
 
 [node name="PlayerDebugMenu" type="Control"]
 layout_mode = 3
@@ -71,3 +73,17 @@ theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Dash Cool Down: "
 script = ExtResource("6_0cfry")
+
+[node name="ComboTimer" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
+text = "Combo Timer: "
+script = ExtResource("8_imwfo")
+
+[node name="ComboIndex" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
+text = "Combo Index: "
+script = ExtResource("9_hbebu")

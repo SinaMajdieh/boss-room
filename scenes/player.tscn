@@ -1,12 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://e5nefeqvv66d"]
+[gd_scene load_steps=29 format=3 uid="uid://e5nefeqvv66d"]
 
 [ext_resource type="Script" uid="uid://dwmje6n7m1ip" path="res://scripts/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="2_6t5aa"]
+[ext_resource type="Script" uid="uid://4yedb32w5euq" path="res://scripts/attack.gd" id="2_a8ls1"]
 [ext_resource type="Script" uid="uid://dd03qhd78hq3d" path="res://scripts/player/collision.gd" id="2_d2wvv"]
 [ext_resource type="PackedScene" uid="uid://c7ss0hc76jbi4" path="res://scenes/hurtbox.tscn" id="2_f1ej7"]
 [ext_resource type="Script" uid="uid://ciyeqcbv66srx" path="res://scripts/player/states/idle.gd" id="3_6t5aa"]
-[ext_resource type="Script" uid="uid://c6hexh55a2fm1" path="res://scripts/player/movement/hollow_knight_movemnt.gd" id="3_d2wvv"]
 [ext_resource type="Script" uid="uid://tjonnyktixm3" path="res://scripts/player/health.gd" id="4_3v2ag"]
+[ext_resource type="Script" uid="uid://c6hexh55a2fm1" path="res://scripts/player/movement/hollow_knight_movemnt.gd" id="4_oprun"]
 [ext_resource type="Script" uid="uid://hho1luvqsprw" path="res://scripts/player/states/run.gd" id="4_vgqql"]
 [ext_resource type="Script" uid="uid://y6wiowo66kps" path="res://scripts/player/states/fall.gd" id="5_x3wgy"]
 [ext_resource type="Script" uid="uid://bibmucmc3ek0s" path="res://scripts/player/states/jump.gd" id="6_3smsa"]
@@ -29,10 +30,34 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Attacks/Attack_1:visible")
+tracks/0/path = NodePath("Attacks/HurtBoxes/Attack_1:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attacks/HurtBoxes/Attack_2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Attacks/HurtBoxes/Attack_3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -45,7 +70,7 @@ length = 0.16
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Attacks/Attack_1")
+tracks/0/path = NodePath("Attacks/HurtBoxes/Attack_1")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -62,7 +87,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Attacks/Attack_1:visible")
+tracks/1/path = NodePath("Attacks/HurtBoxes/Attack_1:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -72,13 +97,79 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_fulsm"]
+resource_name = "attack_2"
+length = 0.16
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attacks/HurtBoxes/Attack_2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attacks/HurtBoxes/Attack_2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.001, 0.16),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_4r5pv"]
+resource_name = "attack_3"
+length = 0.16
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attacks/HurtBoxes/Attack_3:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001, 0.16),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attacks/HurtBoxes/Attack_3")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_a8ls1"]
 resource_name = "test_attack"
 length = 5.0
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Attacks/Attack_1")
+tracks/0/path = NodePath("Attacks/HurtBoxes/Attack_1")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -95,7 +186,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Attacks/Attack_1:visible")
+tracks/1/path = NodePath("Attacks/HurtBoxes/Attack_1:visible")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -109,13 +200,21 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_qfm1y"),
 &"attack_1": SubResource("Animation_oprun"),
+&"attack_2": SubResource("Animation_fulsm"),
+&"attack_3": SubResource("Animation_4r5pv"),
 &"test_attack": SubResource("Animation_a8ls1")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oprun"]
 size = Vector2(26.924576, 56.034847)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "jump_timer", "coyote_timer") groups=["player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8ls1"]
+size = Vector2(65.00541, 107.99982)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a8ls1"]
+radius = 32.205048
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "jump_timer", "coyote_timer", "combo_timer") groups=["player"]]
 script = ExtResource("1_xhfnw")
 movement = NodePath("PlayerMovement")
 health = NodePath("PlayerHealth")
@@ -124,6 +223,7 @@ collision_controller = NodePath("PlayerCollisionController")
 attack_animation_player = NodePath("Attacks/AttackAnimationPlayer")
 jump_timer = NodePath("Timers/JumpTimer")
 coyote_timer = NodePath("Timers/CoyoteTimer")
+combo_timer = NodePath("Timers/Combo")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kpjcp")
@@ -152,15 +252,57 @@ libraries = {
 &"": SubResource("AnimationLibrary_a8ls1")
 }
 
-[node name="Attack_1" parent="Attacks" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
+[node name="Attack_1" type="Node" parent="Attacks" node_paths=PackedStringArray("hurt_box")]
+script = ExtResource("2_a8ls1")
+animation_name = "attack_1"
+hurt_box = NodePath("../HurtBoxes/Attack_1")
+metadata/_custom_type_script = "uid://4yedb32w5euq"
+
+[node name="Attack_2" type="Node" parent="Attacks" node_paths=PackedStringArray("hurt_box")]
+script = ExtResource("2_a8ls1")
+animation_name = "attack_2"
+hurt_box = NodePath("../HurtBoxes/Attack_2")
+metadata/_custom_type_script = "uid://4yedb32w5euq"
+
+[node name="Attack_3" type="Node" parent="Attacks" node_paths=PackedStringArray("hurt_box")]
+script = ExtResource("2_a8ls1")
+animation_name = "attack_3"
+hurt_box = NodePath("../HurtBoxes/Attack_3")
+metadata/_custom_type_script = "uid://4yedb32w5euq"
+
+[node name="HurtBoxes" type="Node2D" parent="Attacks"]
+
+[node name="Attack_1" parent="Attacks/HurtBoxes" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
 position = Vector2(29, -8)
 shape = NodePath("CollisionShape2D")
 damage = 2.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/Attack_1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HurtBoxes/Attack_1"]
 position = Vector2(9.007381, 4.486225)
 rotation = 1.5726348
 shape = SubResource("RectangleShape2D_oprun")
+disabled = true
+
+[node name="Attack_2" parent="Attacks/HurtBoxes" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
+position = Vector2(29, -8)
+shape = NodePath("CollisionShape2D")
+damage = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HurtBoxes/Attack_2"]
+position = Vector2(34.995403, 1.4990702)
+rotation = 1.5726348
+shape = SubResource("RectangleShape2D_a8ls1")
+disabled = true
+
+[node name="Attack_3" parent="Attacks/HurtBoxes" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
+position = Vector2(29, -8)
+shape = NodePath("CollisionShape2D")
+damage = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HurtBoxes/Attack_3"]
+position = Vector2(13.000004, 2)
+rotation = 1.5726348
+shape = SubResource("CircleShape2D_a8ls1")
 disabled = true
 
 [node name="PlayerCollisionController" type="Node" parent="." node_paths=PackedStringArray("collisions", "current_collision")]
@@ -174,7 +316,7 @@ current_collision = NodePath("../Collision")
 metadata/_custom_type_script = "uid://dd03qhd78hq3d"
 
 [node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("3_d2wvv")
+script = ExtResource("4_oprun")
 jump_force = 615.0
 player = NodePath("..")
 metadata/_custom_type_script = "uid://cj1s224kcep31"
@@ -221,10 +363,10 @@ script = ExtResource("11_jej6c")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("hurt_box", "player")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_sequence", "combo_timer", "player")]
 script = ExtResource("13_oprun")
-attack_animation_name = "attack_1"
-hurt_box = NodePath("../../Attacks/Attack_1")
+attack_sequence = [NodePath("../../Attacks/Attack_1"), NodePath("../../Attacks/Attack_2"), NodePath("../../Attacks/Attack_3")]
+combo_timer = NodePath("../../Timers/Combo")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
@@ -249,4 +391,8 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="Combo" type="Timer" parent="Timers"]
+one_shot = true
+
 [connection signal="timeout" from="Timers/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Timers/Combo" to="StateMachine/Attack" method="_on_combo_timer_timeout"]

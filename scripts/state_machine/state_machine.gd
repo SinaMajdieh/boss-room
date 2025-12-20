@@ -61,3 +61,6 @@ func transition(from_state_name: String, to_state_name: String) -> void:
 
 func get_current_state() -> String:
 	return current_state_name
+
+func get_node_state(state_name: String) -> NodeState:
+	return states.get(state_name)

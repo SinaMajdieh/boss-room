@@ -11,6 +11,7 @@ class_name Player
 @export_category("Timers")
 @export var jump_timer: Timer
 @export var coyote_timer: Timer
+@export var combo_timer: Timer
 
 func _ready() -> void:
 	health.health_depleted.connect(die)
