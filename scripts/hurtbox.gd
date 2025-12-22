@@ -11,6 +11,7 @@ var active: bool = false:
 func _ready() -> void:
 	disable()
 	visible = false
+	area_entered.connect(_on_area_entered)
 
 func enable() -> void:
 	entities.clear()

@@ -5,8 +5,8 @@ func _ready() -> void:
     if not player:
         push_warning("[]Player Debug Menu: Player Health]: No player was found")
         return
-    player.health.hearts_changed.connect(health_changed)
-    health_changed(player.health.get_hearts_count())
+    player.health.health_changed.connect(health_changed)
+    health_changed(player.health.get_health())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func health_changed(new_health: int) -> void:

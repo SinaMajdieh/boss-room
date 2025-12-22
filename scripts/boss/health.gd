@@ -1,0 +1,2 @@
+extends BaseHealth
+class_name BossHealth

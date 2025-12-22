@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://kybtfskr8btj"]
+
+[ext_resource type="Script" uid="uid://dja4ry3jhx1ip" path="res://scripts/boss/boss.gd" id="1_6ig5k"]
+[ext_resource type="Script" uid="uid://r5ukbyok102l" path="res://scripts/boss/health.gd" id="1_eynm2"]
+[ext_resource type="Script" uid="uid://dla3v6qu2aw2" path="res://scripts/hitbox.gd" id="3_gw42l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_my2wn"]
+radius = 20.0
+height = 100.0
+
+[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 6
+script = ExtResource("1_6ig5k")
+health = NodePath("BossHealth")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_my2wn")
+debug_color = Color(0.65882355, 0.56078434, 0.47058824, 1)
+
+[node name="BossHealth" type="Node" parent="."]
+script = ExtResource("1_eynm2")
+max_health = 1400
+metadata/_custom_type_script = "uid://r5ukbyok102l"
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("3_gw42l")
+health = NodePath("../BossHealth")
+metadata/_custom_type_script = "uid://dla3v6qu2aw2"
+
+[node name="HitBoxShape" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_my2wn")
+debug_color = Color(0.65882355, 0.56078434, 0.47058824, 1)
