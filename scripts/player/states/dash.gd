@@ -8,7 +8,7 @@ var previous_velocity: float
 var dash_direction: float = 0.0
 
 func enter(_previous_state: String) -> void:
-	player.collision_controller.switch("dash")
+	player.collision_controller.switch(PlayerCollisionController.State.DASH)
 	dash_direction = PlayerInput.get_direction()
 	previous_velocity = player.velocity.x
 	if not dash_direction:
@@ -21,7 +21,7 @@ func on_physics_process(_delta: float) -> void:
 	player.velocity.y = 0
 
 func exit() -> void:
-	player.collision_controller.switch("default")
+	player.collision_controller.switch(PlayerCollisionController.State.DEFAULT)
 	player.velocity.x = 0.0
 	dash_timer.stop()
 	dash_cool_down.start()

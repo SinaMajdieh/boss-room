@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://e5nefeqvv66d"]
+[gd_scene load_steps=30 format=3 uid="uid://e5nefeqvv66d"]
 
 [ext_resource type="Script" uid="uid://dwmje6n7m1ip" path="res://scripts/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://4yedb32w5euq" path="res://scripts/attack.gd" id="2_a8ls1"]
 [ext_resource type="Script" uid="uid://dd03qhd78hq3d" path="res://scripts/player/collision.gd" id="2_d2wvv"]
 [ext_resource type="PackedScene" uid="uid://c7ss0hc76jbi4" path="res://scenes/hurtbox.tscn" id="2_f1ej7"]
+[ext_resource type="Script" uid="uid://dla3v6qu2aw2" path="res://scripts/hitbox.gd" id="2_qfm1y"]
 [ext_resource type="Script" uid="uid://ciyeqcbv66srx" path="res://scripts/player/states/idle.gd" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://cljew3m8klo23" path="res://scripts/player/health.gd" id="4_3v2ag"]
 [ext_resource type="Script" uid="uid://c6hexh55a2fm1" path="res://scripts/player/movement/hollow_knight_movemnt.gd" id="4_oprun"]
@@ -20,10 +21,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
 height = 50.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4r1p"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
 height = 50.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4r1p"]
 
 [sub_resource type="Animation" id="Animation_qfm1y"]
 length = 0.001
@@ -215,7 +216,7 @@ size = Vector2(65.00541, 107.99982)
 radius = 32.205048
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "jump_timer", "coyote_timer", "combo_timer") groups=["player"]]
-collision_mask = 7
+collision_mask = 5
 script = ExtResource("1_xhfnw")
 movement = NodePath("PlayerMovement")
 health = NodePath("PlayerHealth")
@@ -226,11 +227,18 @@ jump_timer = NodePath("Timers/JumpTimer")
 coyote_timer = NodePath("Timers/CoyoteTimer")
 combo_timer = NodePath("Timers/Combo")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="DefaultCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kpjcp")
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
-[node name="Dead" type="CollisionShape2D" parent="."]
+[node name="DashCollision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_y4r1p")
+disabled = true
+debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
+
+[node name="DeadCollision" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(0, 15)
 rotation = 1.5707964
@@ -238,10 +246,37 @@ shape = SubResource("CapsuleShape2D_jej6c")
 disabled = true
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
-[node name="DashCollision" type="CollisionShape2D" parent="."]
+[node name="HitBoxes" type="Node2D" parent="."]
+
+[node name="Default" type="Area2D" parent="HitBoxes"]
+collision_mask = 0
+script = ExtResource("2_qfm1y")
+metadata/_custom_type_script = "uid://dla3v6qu2aw2"
+
+[node name="Collision" type="CollisionShape2D" parent="HitBoxes/Default"]
+shape = SubResource("CapsuleShape2D_kpjcp")
+debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
+
+[node name="Dash" type="Area2D" parent="HitBoxes"]
+script = ExtResource("2_qfm1y")
+metadata/_custom_type_script = "uid://dla3v6qu2aw2"
+
+[node name="Dash" type="CollisionShape2D" parent="HitBoxes/Dash"]
 visible = false
 position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_y4r1p")
+disabled = true
+debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
+
+[node name="Dead" type="Area2D" parent="HitBoxes"]
+script = ExtResource("2_qfm1y")
+metadata/_custom_type_script = "uid://dla3v6qu2aw2"
+
+[node name="Dead" type="CollisionShape2D" parent="HitBoxes/Dead"]
+visible = false
+position = Vector2(0, 15)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_jej6c")
 disabled = true
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
@@ -275,6 +310,7 @@ metadata/_custom_type_script = "uid://4yedb32w5euq"
 
 [node name="Attack_1" parent="Attacks/HurtBoxes" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
 position = Vector2(29, -8)
+collision_mask = 6
 shape = NodePath("CollisionShape2D")
 damage = 2.0
 
@@ -287,6 +323,7 @@ debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
 [node name="Attack_2" parent="Attacks/HurtBoxes" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
 position = Vector2(29, -8)
+collision_mask = 6
 shape = NodePath("CollisionShape2D")
 damage = 4.0
 
@@ -299,6 +336,7 @@ debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
 [node name="Attack_3" parent="Attacks/HurtBoxes" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
 position = Vector2(29, -8)
+collision_mask = 6
 shape = NodePath("CollisionShape2D")
 damage = 6.0
 
@@ -309,14 +347,18 @@ shape = SubResource("CircleShape2D_a8ls1")
 disabled = true
 debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
-[node name="PlayerCollisionController" type="Node" parent="." node_paths=PackedStringArray("collisions", "current_collision")]
+[node name="PlayerCollisionController" type="Node" parent="." node_paths=PackedStringArray("collisions", "hit_boxes")]
 script = ExtResource("2_d2wvv")
 collisions = {
-"dash": NodePath("../DashCollision"),
-"dead": NodePath("../Dead"),
-"default": NodePath("../Collision")
+0: NodePath("../DefaultCollision"),
+1: NodePath("../DashCollision"),
+2: NodePath("../DeadCollision")
 }
-current_collision = NodePath("../Collision")
+hit_boxes = {
+0: NodePath("../HitBoxes/Default"),
+1: NodePath("../HitBoxes/Dash"),
+2: NodePath("../HitBoxes/Dead")
+}
 metadata/_custom_type_script = "uid://dd03qhd78hq3d"
 
 [node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("player")]

@@ -10,7 +10,7 @@ height = 100.0
 
 [node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("health")]
 collision_layer = 2
-collision_mask = 6
+collision_mask = 4
 script = ExtResource("1_6ig5k")
 health = NodePath("BossHealth")
 
@@ -23,11 +23,13 @@ script = ExtResource("1_eynm2")
 max_health = 1400
 metadata/_custom_type_script = "uid://r5ukbyok102l"
 
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("health") groups=["enemy"]]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("3_gw42l")
 health = NodePath("../BossHealth")
 metadata/_custom_type_script = "uid://dla3v6qu2aw2"
 
-[node name="HitBoxShape" type="CollisionShape2D" parent="HurtBox"]
+[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CapsuleShape2D_my2wn")
 debug_color = Color(0.65882355, 0.56078434, 0.47058824, 1)

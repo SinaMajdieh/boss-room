@@ -13,11 +13,5 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity_down * delta
 	move_and_slide()
 
-func hurt(amount: float) -> void:
-	print("Ouch I got hurt %2.2f points" % amount)
-	if not health:
-		return
-	health.hurt(amount)
-
 func health_changed(new_health: float) -> void:
 	print("Now I only have %2.2f/%2.2f!" % [new_health, health.max_health])

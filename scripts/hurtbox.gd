@@ -3,6 +3,7 @@ class_name HurtBox
 
 @export var shape: CollisionShape2D
 @export var damage: float = 1.0
+@export var affected_group : String = "enemy"
 
 var entities: Array[Node] = []
 var active: bool = false:
@@ -27,7 +28,7 @@ func disable() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if not area:
 		return
-	if area in entities or not area.has_method("hurt"):
+	if area in entities or not area.has_method("hurt") or not area.is_in_group(affected_group):
 		return
 	entities.append(area)
 	area.hurt(damage)
