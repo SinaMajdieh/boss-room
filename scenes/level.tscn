@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://e5nefeqvv66d" path="res://scenes/player.tscn" id="1_u52ul"]
 [ext_resource type="PackedScene" uid="uid://e0yemhp07eov" path="res://scenes/player_debug_menu.tscn" id="2_k5f4k"]
-[ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/Boss.tscn" id="3_w8frs"]
+[ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/boss.tscn" id="3_w8frs"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vonw3"]
 
@@ -12,7 +12,7 @@ size = Vector2(88.5, 12)
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_u52ul")]
-position = Vector2(476, 189)
+position = Vector2(1094, 907)
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(960, 1080)

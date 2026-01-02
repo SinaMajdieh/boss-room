@@ -1,17 +1,20 @@
 extends Area2D
 class_name BaseHitBox
 
-@export var health: BaseHealth
+@export var entity: Node
 
-func hurt(amount: Variant) -> void:
-    if not health:
+func hurt(amount: Variant, knock_back: float = 0.0) -> void:
+    if not entity:
+        push_warning("No health component")
         return
-    health.hurt(amount)
+    entity.hurt(amount, knock_back)
 
 func disable() -> void:
     monitoring = false
+    monitorable = false
     visible = false
 
 func enable() -> void:
     monitoring = true
+    monitorable = true
     visible = true

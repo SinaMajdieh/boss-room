@@ -12,6 +12,7 @@ class_name Player
 @export var jump_timer: Timer
 @export var coyote_timer: Timer
 @export var combo_timer: Timer
+@export var hurt_timer: Timer
 
 func _ready() -> void:
 	health.health_depleted.connect(die)
@@ -28,5 +29,19 @@ func _physics_process(_delta: float) -> void:
 func get_state() -> String:
 	return state_machine.get_current_state()
 
+func can_take_damage() -> bool:
+	if not hurt_timer.is_stopped():
+		return false
+	return true
+
+func hurt(amount: Variant, knock_back: float = 800) -> void:
+	if not can_take_damage():
+		return
+	state_machine.get_node_state("hurt").set_attributes(amount, knock_back)
+	state_machine.transition(state_machine.current_state_name, "hurt")
+
 func die() -> void:
 	state_machine.transition(state_machine.current_state_name, "dead")
+
+func is_dead() -> bool:
+	return health.is_depleted()

@@ -29,9 +29,9 @@ func _physics_process(delta: float) -> void:
 func set_state(state: NodeState) -> void:
 	if not state:
 		return
-	state.enter(current_state_name)
 	current_state = state
 	current_state_name = state.name.to_lower()
+	state.enter(current_state_name)
 	state_changed.emit(current_state_name)
 
 func add_states(node: Node = self) -> void:
@@ -43,6 +43,7 @@ func add_states(node: Node = self) -> void:
 func transition(from_state_name: String, to_state_name: String) -> void:
 	to_state_name = to_state_name.to_lower()
 	from_state_name = from_state_name.to_lower()
+	print("transition request from %s to %s (current: %s)" % [from_state_name, to_state_name, current_state_name])
 	
 	if current_state_name != from_state_name:
 		return

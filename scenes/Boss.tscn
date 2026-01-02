@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dja4ry3jhx1ip" path="res://scripts/boss/boss.gd" id="1_6ig5k"]
 [ext_resource type="Script" uid="uid://r5ukbyok102l" path="res://scripts/boss/health.gd" id="1_eynm2"]
-[ext_resource type="Script" uid="uid://dla3v6qu2aw2" path="res://scripts/hitbox.gd" id="3_gw42l"]
+[ext_resource type="Script" uid="uid://duk1o6typ0tig" path="res://scripts/boss/hitbox.gd" id="3_jncid"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_my2wn"]
 radius = 20.0
@@ -23,11 +23,10 @@ script = ExtResource("1_eynm2")
 max_health = 1400
 metadata/_custom_type_script = "uid://r5ukbyok102l"
 
-[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("health") groups=["enemy"]]
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("entity") groups=["enemy"]]
 collision_layer = 2
-collision_mask = 0
-script = ExtResource("3_gw42l")
-health = NodePath("../BossHealth")
+script = ExtResource("3_jncid")
+entity = NodePath("..")
 metadata/_custom_type_script = "uid://dla3v6qu2aw2"
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="HitBox"]

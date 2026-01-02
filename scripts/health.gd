@@ -22,6 +22,9 @@ func heal(amount: Variant = 1) -> void:
 func died() -> void:
     health_depleted.emit()
 
+func is_depleted() -> bool:
+    return current_health <= 0.0
+
 func set_health(value: Variant) -> void:
     current_health = value
     health_changed.emit(current_health)
