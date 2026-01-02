@@ -29,9 +29,10 @@ func _physics_process(delta: float) -> void:
 func set_state(state: NodeState) -> void:
 	if not state:
 		return
+	var previous_state_name: String = current_state_name
 	current_state = state
 	current_state_name = state.name.to_lower()
-	state.enter(current_state_name)
+	state.enter(previous_state_name)
 	state_changed.emit(current_state_name)
 
 func add_states(node: Node = self) -> void:

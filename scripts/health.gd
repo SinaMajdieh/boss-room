@@ -13,13 +13,13 @@ signal health_changed(new_health: Variant)
 func hurt(amount: Variant = 1) -> void:
     current_health = clamp(current_health - amount, 0, max_health)
     if current_health <= 0:
-        died()
+        depleted()
 
 func heal(amount: Variant = 1) -> void:
     current_health += amount
     current_health = clamp(current_health, 0, max_health)
 
-func died() -> void:
+func depleted() -> void:
     health_depleted.emit()
 
 func is_depleted() -> bool:

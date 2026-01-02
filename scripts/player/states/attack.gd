@@ -8,10 +8,11 @@ var attack: Attack
 var combo: int = 0
 
 func enter(_previous_state: String) -> void:
-	if combo_timer.is_stopped():
+	if not in_combo():
 		reset_combo()
 	else:
 		combo_timer.stop()
+	
 	attack = attack_sequence[get_combo_index()]
 	attack_animation_player.animation_finished.connect(_on_animation_finished)
 	attack_animation_player.play(attack.animation_name)
@@ -42,6 +43,9 @@ func next_combo() -> void:
 	if combo == attack_sequence.size():
 		combo = 0
 		return
+
+func in_combo() -> bool:
+	return not combo_timer.is_stopped()
 
 func reset_combo() -> void:
 	combo = 0

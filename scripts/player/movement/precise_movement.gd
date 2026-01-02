@@ -37,3 +37,9 @@ func process_jump() -> void:
 	if not player.jump_timer.is_stopped():
 		player.velocity.y = -jump_force
 		player.jump_timer.stop()
+
+func apply_knock_back(knock_back_velocity: float) -> void:
+	if not facing_left:
+		player.velocity.x = -knock_back_velocity
+	else:
+		player.velocity.x = knock_back_velocity

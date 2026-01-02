@@ -9,6 +9,7 @@ extends BaseHitBox
 
 func _ready() -> void:
     set_player_phase_through(player_phase_through)
+
 func _on_area_entered(area: Area2D) -> void:
     if not area:
         return
@@ -19,6 +20,7 @@ func _on_area_entered(area: Area2D) -> void:
 
 func set_player_phase_through(can_phase: bool) -> void:
     player_phase_through = can_phase
+    
     if not can_phase and not area_entered.is_connected(_on_area_entered):
         area_entered.connect(_on_area_entered)
     if can_phase and area_entered.is_connected(_on_area_entered):

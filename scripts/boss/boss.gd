@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity_down * delta
 	move_and_slide()
 
-func hurt(amount: Variant) -> void:
+func hurt(amount: Variant, _knock_back: float = 0.0) -> void:
 	health.hurt(amount)
 
 func health_changed(new_health: float) -> void:

@@ -87,3 +87,13 @@ theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Combo Index: "
 script = ExtResource("9_hbebu")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Info" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
+text = "Press Right Mouse Button to take knock back
+Press Left mouse Button to take damage"
