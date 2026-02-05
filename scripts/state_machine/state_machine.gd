@@ -54,6 +54,7 @@ func transition(from_state_name: String, to_state_name: String) -> void:
 	var new_state: NodeState = states.get(to_state_name)
 	
 	if not new_state or not new_state.can_transition():
+		push_warning("Cannot transition from %s to %s" % [from_state_name, to_state_name])
 		return
 
 	if current_state:

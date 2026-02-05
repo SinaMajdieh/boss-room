@@ -13,6 +13,7 @@ class_name Player
 @export var coyote_timer: Timer
 @export var combo_timer: Timer
 @export var hurt_timer: Timer
+@export var shoot_cool_down: Timer
 
 func _ready() -> void:
 	health.health_depleted.connect(die)

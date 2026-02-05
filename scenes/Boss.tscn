@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://kybtfskr8btj"]
+[gd_scene format=3 uid="uid://kybtfskr8btj"]
 
 [ext_resource type="Script" uid="uid://dja4ry3jhx1ip" path="res://scripts/boss/boss.gd" id="1_6ig5k"]
 [ext_resource type="Script" uid="uid://r5ukbyok102l" path="res://scripts/boss/health.gd" id="1_eynm2"]
@@ -8,27 +8,27 @@
 radius = 20.0
 height = 100.0
 
-[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("health")]
+[node name="Boss" type="CharacterBody2D" unique_id=908762399 node_paths=PackedStringArray("health") groups=["enemy"]]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_6ig5k")
 health = NodePath("BossHealth")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=580089970]
 shape = SubResource("CapsuleShape2D_my2wn")
 debug_color = Color(0.65882355, 0.56078434, 0.47058824, 1)
 
-[node name="BossHealth" type="Node" parent="."]
+[node name="BossHealth" type="Node" parent="." unique_id=674924132]
 script = ExtResource("1_eynm2")
 max_health = 1400
 metadata/_custom_type_script = "uid://r5ukbyok102l"
 
-[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("entity") groups=["enemy"]]
+[node name="HitBox" type="Area2D" parent="." unique_id=876006382 node_paths=PackedStringArray("entity") groups=["enemy"]]
 collision_layer = 2
 script = ExtResource("3_jncid")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://dla3v6qu2aw2"
 
-[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox"]
+[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox" unique_id=1273456574]
 shape = SubResource("CapsuleShape2D_my2wn")
 debug_color = Color(0.65882355, 0.56078434, 0.47058824, 1)

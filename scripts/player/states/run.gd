@@ -8,6 +8,7 @@ func on_process(_delta: float) -> void:
 	check_jump_input()
 	check_dash()
 	check_attack()
+	check_shoot()
 	if player.velocity.x == 0:
 		transition_to("idle")
 

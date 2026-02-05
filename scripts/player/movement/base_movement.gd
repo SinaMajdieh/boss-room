@@ -30,3 +30,6 @@ func face(direction: float) -> void:
     if direction < 0 and not facing_left:
         player.transform.x *= -1
         facing_left = true
+
+func get_facing_direction() -> Vector2:
+    return Vector2.LEFT if facing_left else Vector2.RIGHT

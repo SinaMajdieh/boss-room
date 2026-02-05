@@ -23,3 +23,7 @@ func check_dash() -> void:
 func check_attack() -> void:
 	if PlayerInput.just_attacked():
 		transition_to("attack")
+
+func check_shoot() -> void:
+	if PlayerInput.is_shooting() and player.shoot_cool_down.is_stopped():
+		transition_to("shoot")

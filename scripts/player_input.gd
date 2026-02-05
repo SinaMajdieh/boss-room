@@ -14,3 +14,9 @@ static func get_direction() -> float:
 
 static func just_attacked() -> bool:
     return Input.is_action_just_pressed("attack")
+
+static func just_shot() -> bool:
+    return Input.is_action_just_pressed("shoot")
+
+static func is_shooting() -> bool:
+    return Input.is_action_pressed("shoot")
