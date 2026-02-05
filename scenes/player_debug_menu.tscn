@@ -1,16 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://e0yemhp07eov"]
+[gd_scene format=3 uid="uid://e0yemhp07eov"]
 
 [ext_resource type="Script" uid="uid://bxw45vtmgp7x6" path="res://scripts/player_debug_menu/player_state.gd" id="1_1xyl6"]
 [ext_resource type="Script" uid="uid://bshjho61pkluw" path="res://scripts/player_debug_menu/jump_timer.gd" id="2_8bl0l"]
 [ext_resource type="Script" uid="uid://xhibhf685shx" path="res://scripts/player_debug_menu/health.gd" id="2_avxac"]
 [ext_resource type="Script" uid="uid://dr108mbhicaai" path="res://scripts/player_debug_menu/velocity.gd" id="2_r4825"]
 [ext_resource type="Script" uid="uid://l75vk7eqalfp" path="res://scripts/player_debug_menu/position.gd" id="3_fl6t8"]
+[ext_resource type="Script" uid="uid://c12es5mc3ga5g" path="res://scripts/player_debug_menu/range_attack.gd" id="5_3a78k"]
 [ext_resource type="Script" uid="uid://wk6fb421aysx" path="res://scripts/player_debug_menu/coyote_timer.gd" id="5_fl6t8"]
 [ext_resource type="Script" uid="uid://btmo8x4etyw0w" path="res://scripts/player_debug_menu/dash_cool_down.gd" id="6_0cfry"]
 [ext_resource type="Script" uid="uid://c0wobme8s8kxw" path="res://scripts/player_debug_menu/combo_timer.gd" id="8_imwfo"]
 [ext_resource type="Script" uid="uid://b8i2h7f1uy0ac" path="res://scripts/player_debug_menu/combo_index.gd" id="9_hbebu"]
 
-[node name="PlayerDebugMenu" type="Control"]
+[node name="PlayerDebugMenu" type="Control" unique_id=1921750732]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,78 +21,85 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=11153017]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="State" type="Label" parent="VBoxContainer"]
+[node name="State" type="Label" parent="VBoxContainer" unique_id=1654638368]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "State: "
 script = ExtResource("1_1xyl6")
 
-[node name="Health" type="Label" parent="VBoxContainer"]
+[node name="Health" type="Label" parent="VBoxContainer" unique_id=1006264622]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Hearts: "
 script = ExtResource("2_avxac")
 
-[node name="Velocity" type="Label" parent="VBoxContainer"]
+[node name="Velocity" type="Label" parent="VBoxContainer" unique_id=1671053926]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Velocity: "
 script = ExtResource("2_r4825")
 
-[node name="Position" type="Label" parent="VBoxContainer"]
+[node name="Position" type="Label" parent="VBoxContainer" unique_id=1957335914]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Position: "
 script = ExtResource("3_fl6t8")
 
-[node name="JumpTimer" type="Label" parent="VBoxContainer"]
+[node name="RangeAttack" type="Label" parent="VBoxContainer" unique_id=139898032]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
+theme_override_font_sizes/font_size = 22
+text = "Range Attack: "
+script = ExtResource("5_3a78k")
+
+[node name="JumpTimer" type="Label" parent="VBoxContainer" unique_id=734393690]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Jump Timer: "
 script = ExtResource("2_8bl0l")
 
-[node name="CoyoteTimer" type="Label" parent="VBoxContainer"]
+[node name="CoyoteTimer" type="Label" parent="VBoxContainer" unique_id=1034790163]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Coyote Timer: "
 script = ExtResource("5_fl6t8")
 
-[node name="DashCoolDown" type="Label" parent="VBoxContainer"]
+[node name="DashCoolDown" type="Label" parent="VBoxContainer" unique_id=1366814897]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Dash Cool Down: "
 script = ExtResource("6_0cfry")
 
-[node name="ComboTimer" type="Label" parent="VBoxContainer"]
+[node name="ComboTimer" type="Label" parent="VBoxContainer" unique_id=498570352]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Combo Timer: "
 script = ExtResource("8_imwfo")
 
-[node name="ComboIndex" type="Label" parent="VBoxContainer"]
+[node name="ComboIndex" type="Label" parent="VBoxContainer" unique_id=817900932]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Combo Index: "
 script = ExtResource("9_hbebu")
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1028999273]
 layout_mode = 2
 
-[node name="Info" type="Label" parent="VBoxContainer"]
+[node name="Info" type="Label" parent="VBoxContainer" unique_id=2046936105]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22

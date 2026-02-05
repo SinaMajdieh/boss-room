@@ -7,6 +7,7 @@ class_name Player
 @export var state_machine: StateMachine
 @export var collision_controller: PlayerCollisionController
 @export var attack_animation_player: AnimationPlayer
+@export var range_attacks: PlayerRangeAttacks
 
 @export_category("Timers")
 @export var jump_timer: Timer

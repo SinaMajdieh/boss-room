@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cljew3m8klo23" path="res://scripts/player/health.gd" id="4_3v2ag"]
 [ext_resource type="Script" uid="uid://c6hexh55a2fm1" path="res://scripts/player/movement/hollow_knight_movemnt.gd" id="4_oprun"]
 [ext_resource type="Script" uid="uid://hho1luvqsprw" path="res://scripts/player/states/run.gd" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://jsuplbx4pun" path="res://scripts/player/range_attacks.gd" id="5_4ni07"]
 [ext_resource type="Script" uid="uid://y6wiowo66kps" path="res://scripts/player/states/fall.gd" id="5_x3wgy"]
 [ext_resource type="Script" uid="uid://bibmucmc3ek0s" path="res://scripts/player/states/jump.gd" id="6_3smsa"]
 [ext_resource type="Script" uid="uid://ds6sl1fngx7d2" path="res://scripts/player/states/dash.gd" id="7_y4r1p"]
@@ -19,8 +20,10 @@
 [ext_resource type="Script" uid="uid://bfh8p6strnncc" path="res://scripts/player/states/attack.gd" id="13_oprun"]
 [ext_resource type="Script" uid="uid://wcdeyv42a46g" path="res://scripts/player/states/hurt.gd" id="16_fulsm"]
 [ext_resource type="Script" uid="uid://l42xhwl3ax14" path="res://scripts/player/states/shoot.gd" id="17_4r5pv"]
-[ext_resource type="PackedScene" uid="uid://cd37l1vht40qa" path="res://scenes/bullet/player_bullet.tscn" id="18_60mlk"]
+[ext_resource type="PackedScene" uid="uid://cd37l1vht40qa" path="res://scenes/bullet/player_base_bullet.tscn" id="18_60mlk"]
 [ext_resource type="Script" uid="uid://cs0da4yxpnw6y" path="res://scripts/player/states/fall_no_coyote.gd" id="19_i4ail"]
+[ext_resource type="Script" uid="uid://nvenrkkutn2i" path="res://scripts/player/states/spread_shot.gd" id="20_4ni07"]
+[ext_resource type="PackedScene" uid="uid://cg6nb2553020a" path="res://scenes/bullet/player_spread_bullet.tscn" id="21_l71n6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
 height = 50.0
@@ -219,7 +222,7 @@ size = Vector2(65.00541, 107.99982)
 [sub_resource type="CircleShape2D" id="CircleShape2D_a8ls1"]
 radius = 32.205048
 
-[node name="Player" type="CharacterBody2D" unique_id=1670544063 node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "jump_timer", "coyote_timer", "combo_timer", "hurt_timer", "shoot_cool_down") groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1670544063 node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "range_attacks", "jump_timer", "coyote_timer", "combo_timer", "hurt_timer", "shoot_cool_down") groups=["player"]]
 z_index = 1
 collision_mask = 5
 script = ExtResource("1_xhfnw")
@@ -228,6 +231,7 @@ health = NodePath("PlayerHealth")
 state_machine = NodePath("StateMachine")
 collision_controller = NodePath("PlayerCollisionController")
 attack_animation_player = NodePath("Attacks/AttackAnimationPlayer")
+range_attacks = NodePath("PlayerRangeAttacks")
 jump_timer = NodePath("Timers/JumpTimer")
 coyote_timer = NodePath("Timers/CoyoteTimer")
 combo_timer = NodePath("Timers/Combo")
@@ -343,6 +347,10 @@ shape = SubResource("CircleShape2D_a8ls1")
 disabled = true
 debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
+[node name="PlayerRangeAttacks" type="Node" parent="." unique_id=133369786 node_paths=PackedStringArray("attack_states")]
+script = ExtResource("5_4ni07")
+attack_states = [NodePath("../StateMachine/Shoot"), NodePath("../StateMachine/SpreadShot")]
+
 [node name="PlayerCollisionController" type="Node" parent="." unique_id=708365361 node_paths=PackedStringArray("collisions", "hit_boxes")]
 script = ExtResource("2_d2wvv")
 collisions = {
@@ -420,6 +428,12 @@ metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 script = ExtResource("17_4r5pv")
 player_bullet_scene = ExtResource("18_60mlk")
 shoot_cool_down_time = 0.15
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="SpreadShot" type="Node" parent="StateMachine" unique_id=1317234253 node_paths=PackedStringArray("player")]
+script = ExtResource("20_4ni07")
+player_bullet_scene = ExtResource("21_l71n6")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 

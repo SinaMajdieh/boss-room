@@ -4,7 +4,7 @@ class_name BaseBullet
 @export var speed: float = 800.0
 @export var direction: Vector2 = Vector2.RIGHT
 @export var damage: int = 1
-@export var lifetime: float = 2.0
+@export var life_time: float = 2.0
 
 func _ready() -> void:
     area_entered.connect(on_hit)
@@ -12,8 +12,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
     position += direction.normalized() * speed * delta
-    lifetime -= delta
-    if lifetime <= 0.0:
+    life_time -= delta
+    if life_time <= 0.0:
         queue_free()
 
 ## Handles collision with targets and applies damage.
