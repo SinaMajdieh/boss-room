@@ -8,6 +8,7 @@ class_name BaseBullet
 
 func _ready() -> void:
     area_entered.connect(on_hit)
+    rotate_to_direction()
 
 func _process(delta: float) -> void:
     position += direction.normalized() * speed * delta
@@ -21,3 +22,6 @@ func on_hit(target: Area2D) -> void:
     if target.has_method("hurt"):
         target.hurt(damage)
     queue_free()
+
+func rotate_to_direction() -> void:
+    rotation = direction.angle()

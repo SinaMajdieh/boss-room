@@ -20,9 +20,9 @@ func apply_movement(delta: float) -> void:
 func apply_horizontal(delta: float) -> void:
 	var direction : float = PlayerInput.get_direction()
 	face(direction)
-	var target_speed: float = direction * speed
 	
 	if direction:
+		var target_speed: float = direction * speed
 		var accel: float = ground_accel if player.is_on_floor() else air_accel
 		player.velocity.x = move_toward(player.velocity.x, target_speed, accel * delta)
 	else:
