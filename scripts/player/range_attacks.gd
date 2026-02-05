@@ -3,7 +3,7 @@ class_name PlayerRangeAttacks
 
 @export var attack_states: Array[PlayerState] = []
 
-var current_attack_index: int = 0
+@export var current_attack_index: int = 0
 
 ## Cycles to the advance_attack attack state in the array.
 func advance_attack() -> void:
