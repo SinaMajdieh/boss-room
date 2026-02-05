@@ -9,3 +9,7 @@
 ### Dashing
 
 ![Dashing](assets/media/dash.gif)
+
+### Shooting
+
+[Shooting footage](assets/media/shooting.mp4)

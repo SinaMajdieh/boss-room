@@ -1,31 +1,37 @@
 extends Node
 class_name StateMachine
 
+## Emitted when the state machine transitions to a new state
 signal state_changed(new_state)
 
 @export var initial_state: NodeState
 
-var states: Dictionary[String,NodeState]
+var states: Dictionary[String, NodeState]
 var current_state: NodeState
 var current_state_name: String :
 	get = get_current_state
 
 var process: bool = true
 
+
 func _ready() -> void:
 	add_states()
 	set_state(initial_state)
+
 
 func _process(delta: float) -> void:
 	if not current_state or not process:
 		return
 	current_state.on_process(delta)
 
+
 func _physics_process(delta: float) -> void:
 	if not current_state or not process:
 		return
 	current_state.on_physics_process(delta)
 
+
+## Sets the current state and triggers its enter callback
 func set_state(state: NodeState) -> void:
 	if not state:
 		return
@@ -35,12 +41,17 @@ func set_state(state: NodeState) -> void:
 	state.enter(previous_state_name)
 	state_changed.emit(current_state_name)
 
+
+## Recursively collects all NodeState children and connects their transition signals
 func add_states(node: Node = self) -> void:
 	for child in node.get_children():
 		if child is NodeState:
 			states[child.name.to_lower()] = child
 			child.transition.connect(transition)
 
+
+## Handles state transitions with validation
+## Called when a state requests a transition via its transition signal
 func transition(from_state_name: String, to_state_name: String) -> void:
 	to_state_name = to_state_name.to_lower()
 	from_state_name = from_state_name.to_lower()
@@ -62,8 +73,12 @@ func transition(from_state_name: String, to_state_name: String) -> void:
 	
 	set_state(new_state)
 
+
+## Returns the name of the current state
 func get_current_state() -> String:
 	return current_state_name
 
+
+## Retrieves a state node by name
 func get_node_state(state_name: String) -> NodeState:
 	return states.get(state_name)

@@ -423,7 +423,7 @@ shoot_cool_down_time = 0.15
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Fall_no_coyote" type="Node" parent="StateMachine" unique_id=1613873980]
+[node name="Fall_No_Coyote" type="Node" parent="StateMachine" unique_id=27932359]
 script = ExtResource("19_i4ail")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 

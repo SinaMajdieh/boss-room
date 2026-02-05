@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
     if lifetime <= 0.0:
         queue_free()
 
+## Handles collision with targets and applies damage.
 func on_hit(target: Area2D) -> void:
     if not target:
         return
@@ -23,5 +24,6 @@ func on_hit(target: Area2D) -> void:
         target.hurt(damage)
     queue_free()
 
+## Rotates the bullet sprite to face the direction it's moving.
 func rotate_to_direction() -> void:
     rotation = direction.angle()
