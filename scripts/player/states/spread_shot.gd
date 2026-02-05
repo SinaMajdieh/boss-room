@@ -12,7 +12,9 @@ func enter(_previous_state: String) -> void:
 	var spread_shot_angles: Array = [-15, 0, 15]
 	for angle in spread_shot_angles:
 		var bullet_instance: BaseBullet = player_bullet_scene.instantiate() as BaseBullet
-		var shoot_direction: Vector2 = PlayerInput.get_looking_direction().rotated(
+		var shoot_direction: Vector2 = PlayerInput.get_looking_direction(
+			player.movement.get_facing_direction()
+		).rotated(
 			deg_to_rad(angle)
 		)
 		bullet_instance.position = player.global_position + shoot_direction * 16.0

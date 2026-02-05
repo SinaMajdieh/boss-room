@@ -12,7 +12,9 @@ extends PlayerState
 func enter(_previous_state: String) -> void:
 	# Create bullet instance and configure its properties
 	var bullet_instance: BaseBullet = player_bullet_scene.instantiate() as BaseBullet
-	var shoot_direction: Vector2 = PlayerInput.get_looking_direction()
+	var shoot_direction: Vector2 = PlayerInput.get_looking_direction(
+		player.movement.get_facing_direction()
+	)
 	bullet_instance.position = player.global_position + shoot_direction * 16.0
 	bullet_instance.direction = shoot_direction
 

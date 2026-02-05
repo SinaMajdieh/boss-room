@@ -21,7 +21,7 @@ func apply_movement(delta: float) -> void:
 ## Handles horizontal acceleration/deceleration based on input and ground state
 func apply_horizontal(delta: float) -> void:
 	var direction : float = PlayerInput.get_direction()
-	face(direction)
+	face(PlayerInput.get_looking_direction(Vector2.ZERO).x)
 	
 	if direction:
 		var target_speed: float = direction * speed
