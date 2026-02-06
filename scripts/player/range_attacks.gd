@@ -5,7 +5,7 @@ class_name PlayerRangeAttacks
 
 @export var current_attack_index: int = 0
 
-## Cycles to the advance_attack attack state in the array.
+## Manages the player's range attack states, allowing cycling through different attacks and handling input for attack selection.
 func advance_attack() -> void:
     if attack_states.is_empty():
         return

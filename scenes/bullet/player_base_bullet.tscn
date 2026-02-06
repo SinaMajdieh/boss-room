@@ -11,7 +11,6 @@ collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_3q2vn")
 damage = 100
-lifetime = 20.0
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=656665598]
 scale = Vector2(0.3, 0.3)

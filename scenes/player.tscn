@@ -22,10 +22,10 @@
 [ext_resource type="Script" uid="uid://l42xhwl3ax14" path="res://scripts/player/states/shoot.gd" id="17_4r5pv"]
 [ext_resource type="PackedScene" uid="uid://cd37l1vht40qa" path="res://scenes/bullet/player_base_bullet.tscn" id="18_60mlk"]
 [ext_resource type="Script" uid="uid://cs0da4yxpnw6y" path="res://scripts/player/states/fall_no_coyote.gd" id="19_i4ail"]
-[ext_resource type="Script" uid="uid://nvenrkkutn2i" path="res://scripts/player/states/spread_shot.gd" id="20_4ni07"]
+[ext_resource type="Script" uid="uid://nvenrkkutn2i" path="res://scripts/player/states/shoot_spread.gd" id="20_4ni07"]
 [ext_resource type="PackedScene" uid="uid://cg6nb2553020a" path="res://scenes/bullet/player_spread_bullet.tscn" id="21_l71n6"]
 [ext_resource type="PackedScene" uid="uid://cvw5s7owa3ey1" path="res://scenes/bullet/player_round_about_bullet.tscn" id="23_31cv2"]
-[ext_resource type="Script" uid="uid://bmb0ux2kha0f4" path="res://scripts/player/states/charge_shot.gd" id="24_ujl30"]
+[ext_resource type="Script" uid="uid://bmb0ux2kha0f4" path="res://scripts/player/states/shoot_charged.gd" id="24_ujl30"]
 [ext_resource type="PackedScene" uid="uid://ckf7wrtan8x6q" path="res://scenes/bullet/player_charged_bullet_undercharged.tscn" id="25_dt7fs"]
 [ext_resource type="PackedScene" uid="uid://wr48uowejft3" path="res://scenes/bullet/player_charged_bullet_charged.tscn" id="26_wqfne"]
 [ext_resource type="PackedScene" uid="uid://d1er3hs53jmln" path="res://scenes/bullet/player_charged_bullet_explosive.tscn" id="27_wnwbv"]
@@ -231,12 +231,12 @@ radius = 32.205048
 z_index = 1
 collision_mask = 5
 script = ExtResource("1_xhfnw")
-movement = NodePath("PlayerMovement")
-health = NodePath("PlayerHealth")
+movement = NodePath("Movement")
+health = NodePath("Health")
 state_machine = NodePath("StateMachine")
-collision_controller = NodePath("PlayerCollisionController")
+collision_controller = NodePath("CollisionController")
 attack_animation_player = NodePath("Attacks/AttackAnimationPlayer")
-range_attacks = NodePath("PlayerRangeAttacks")
+range_attacks = NodePath("RangeAttacks")
 jump_timer = NodePath("Timers/JumpTimer")
 coyote_timer = NodePath("Timers/CoyoteTimer")
 combo_timer = NodePath("Timers/Combo")
@@ -352,12 +352,11 @@ shape = SubResource("CircleShape2D_a8ls1")
 disabled = true
 debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
-[node name="PlayerRangeAttacks" type="Node" parent="." unique_id=133369786 node_paths=PackedStringArray("attack_states")]
+[node name="RangeAttacks" type="Node" parent="." unique_id=133369786 node_paths=PackedStringArray("attack_states")]
 script = ExtResource("5_4ni07")
-attack_states = [NodePath("../StateMachine/Shoot"), NodePath("../StateMachine/SpreadShot"), NodePath("../StateMachine/RoundAbout"), NodePath("../StateMachine/ChargedShot")]
-current_attack_index = 3
+attack_states = [NodePath("../StateMachine/ShootNormal"), NodePath("../StateMachine/ShootSpread"), NodePath("../StateMachine/ShootRoundAbout"), NodePath("../StateMachine/ShootCharged")]
 
-[node name="PlayerCollisionController" type="Node" parent="." unique_id=708365361 node_paths=PackedStringArray("collisions", "hit_boxes")]
+[node name="CollisionController" type="Node" parent="." unique_id=708365361 node_paths=PackedStringArray("collisions", "hit_boxes")]
 script = ExtResource("2_d2wvv")
 collisions = {
 0: NodePath("../DefaultCollision"),
@@ -371,13 +370,13 @@ hit_boxes = {
 }
 metadata/_custom_type_script = "uid://dd03qhd78hq3d"
 
-[node name="PlayerMovement" type="Node" parent="." unique_id=196140328 node_paths=PackedStringArray("player")]
+[node name="Movement" type="Node" parent="." unique_id=196140328 node_paths=PackedStringArray("player")]
 script = ExtResource("4_oprun")
 jump_force = 615.0
 player = NodePath("..")
 metadata/_custom_type_script = "uid://cj1s224kcep31"
 
-[node name="PlayerHealth" type="Node" parent="." unique_id=576709222]
+[node name="Health" type="Node" parent="." unique_id=576709222]
 script = ExtResource("4_3v2ag")
 
 [node name="StateMachine" type="Node" parent="." unique_id=543931232 node_paths=PackedStringArray("initial_state")]
@@ -430,31 +429,31 @@ script = ExtResource("16_fulsm")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Shoot" type="Node" parent="StateMachine" unique_id=2108704928 node_paths=PackedStringArray("player")]
+[node name="Fall_No_Coyote" type="Node" parent="StateMachine" unique_id=27932359]
+script = ExtResource("19_i4ail")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="ShootNormal" type="Node" parent="StateMachine" unique_id=2108704928 node_paths=PackedStringArray("player")]
 script = ExtResource("17_4r5pv")
 player_bullet_scene = ExtResource("18_60mlk")
 shoot_cool_down_time = 0.15
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="SpreadShot" type="Node" parent="StateMachine" unique_id=1317234253 node_paths=PackedStringArray("player")]
+[node name="ShootSpread" type="Node" parent="StateMachine" unique_id=1317234253 node_paths=PackedStringArray("player")]
 script = ExtResource("20_4ni07")
 player_bullet_scene = ExtResource("21_l71n6")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Fall_No_Coyote" type="Node" parent="StateMachine" unique_id=27932359]
-script = ExtResource("19_i4ail")
-metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
-
-[node name="RoundAbout" type="Node" parent="StateMachine" unique_id=134697461 node_paths=PackedStringArray("player")]
+[node name="ShootRoundAbout" type="Node" parent="StateMachine" unique_id=134697461 node_paths=PackedStringArray("player")]
 script = ExtResource("17_4r5pv")
 player_bullet_scene = ExtResource("23_31cv2")
 shoot_cool_down_time = 0.3
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="ChargedShot" type="Node" parent="StateMachine" unique_id=1842968557 node_paths=PackedStringArray("player")]
+[node name="ShootCharged" type="Node" parent="StateMachine" unique_id=1842968557 node_paths=PackedStringArray("player")]
 script = ExtResource("24_ujl30")
 player_bullet_scene = Array[PackedScene]([ExtResource("25_dt7fs"), ExtResource("26_wqfne"), ExtResource("27_wnwbv")])
 player = NodePath("../..")
