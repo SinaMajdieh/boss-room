@@ -3,7 +3,7 @@ class_name BaseBullet
 
 @export var speed: float = 800.0
 @export var direction: Vector2 = Vector2.RIGHT
-@export var damage: int = 1
+@export var damage: float = 1.0
 @export var life_time: float = 2.0
 
 func _ready() -> void:

@@ -24,7 +24,11 @@
 [ext_resource type="Script" uid="uid://cs0da4yxpnw6y" path="res://scripts/player/states/fall_no_coyote.gd" id="19_i4ail"]
 [ext_resource type="Script" uid="uid://nvenrkkutn2i" path="res://scripts/player/states/spread_shot.gd" id="20_4ni07"]
 [ext_resource type="PackedScene" uid="uid://cg6nb2553020a" path="res://scenes/bullet/player_spread_bullet.tscn" id="21_l71n6"]
-[ext_resource type="PackedScene" uid="uid://ckf7wrtan8x6q" path="res://scenes/bullet/player_round_about_bullet.tscn" id="23_ke2ow"]
+[ext_resource type="PackedScene" uid="uid://cvw5s7owa3ey1" path="res://scenes/bullet/player_round_about_bullet.tscn" id="23_31cv2"]
+[ext_resource type="Script" uid="uid://bmb0ux2kha0f4" path="res://scripts/player/states/charge_shot.gd" id="24_ujl30"]
+[ext_resource type="PackedScene" uid="uid://ckf7wrtan8x6q" path="res://scenes/bullet/player_charged_bullet_undercharged.tscn" id="25_dt7fs"]
+[ext_resource type="PackedScene" uid="uid://wr48uowejft3" path="res://scenes/bullet/player_charged_bullet_charged.tscn" id="26_wqfne"]
+[ext_resource type="PackedScene" uid="uid://d1er3hs53jmln" path="res://scenes/bullet/player_charged_bullet_explosive.tscn" id="27_wnwbv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
 height = 50.0
@@ -350,8 +354,8 @@ debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
 [node name="PlayerRangeAttacks" type="Node" parent="." unique_id=133369786 node_paths=PackedStringArray("attack_states")]
 script = ExtResource("5_4ni07")
-attack_states = [NodePath("../StateMachine/Shoot"), NodePath("../StateMachine/SpreadShot"), NodePath("../StateMachine/RoundAbout")]
-current_attack_index = 2
+attack_states = [NodePath("../StateMachine/Shoot"), NodePath("../StateMachine/SpreadShot"), NodePath("../StateMachine/RoundAbout"), NodePath("../StateMachine/ChargedShot")]
+current_attack_index = 3
 
 [node name="PlayerCollisionController" type="Node" parent="." unique_id=708365361 node_paths=PackedStringArray("collisions", "hit_boxes")]
 script = ExtResource("2_d2wvv")
@@ -445,8 +449,14 @@ metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
 [node name="RoundAbout" type="Node" parent="StateMachine" unique_id=134697461 node_paths=PackedStringArray("player")]
 script = ExtResource("17_4r5pv")
-player_bullet_scene = ExtResource("23_ke2ow")
+player_bullet_scene = ExtResource("23_31cv2")
 shoot_cool_down_time = 0.3
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="ChargedShot" type="Node" parent="StateMachine" unique_id=1842968557 node_paths=PackedStringArray("player")]
+script = ExtResource("24_ujl30")
+player_bullet_scene = Array[PackedScene]([ExtResource("25_dt7fs"), ExtResource("26_wqfne"), ExtResource("27_wnwbv")])
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 

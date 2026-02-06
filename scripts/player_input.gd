@@ -39,6 +39,10 @@ static func just_shot() -> bool:
 static func is_shooting() -> bool:
     return Input.is_action_pressed("shoot")
 
+## Returns true when the shoot action is released.
+static func shot_released() -> bool:
+    return Input.is_action_just_released("shoot")
+
 ## Returns true while the lock-on action is held down.
 static func is_locked() -> bool:
     return Input.is_action_pressed("lock")

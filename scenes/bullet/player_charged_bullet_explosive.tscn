@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://d1er3hs53jmln"]
+
+[ext_resource type="Script" uid="uid://cef8cv220o1d5" path="res://scripts/bullet/charge_bullet.gd" id="1_hxaab"]
+[ext_resource type="Texture2D" uid="uid://cukso4rdmf0aw" path="res://assets/icon.svg" id="2_do40w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bnjno"]
+radius = 25.079872
+
+[node name="Bullet" type="Area2D" unique_id=716996682]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_hxaab")
+charge_time = 0.0
+damage = 200.0
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=656665598]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_do40w")
+region_rect = Rect2(0, 0, 100, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1646836112]
+shape = SubResource("CircleShape2D_bnjno")
+debug_color = Color(0.7427149, 0.46829474, 9.62615e-07, 0.41960785)
