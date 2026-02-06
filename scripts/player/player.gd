@@ -61,3 +61,10 @@ func die() -> void:
 ## Returns whether the player is currently dead
 func is_dead() -> bool:
 	return health.is_depleted()
+
+## Action checks for state transitions. These can be used by states to determine if certain actions are currently possible.
+func can(action: String) -> bool:
+	var action_state: PlayerState = state_machine.get_node_state(action)
+	if not action_state:
+		return false
+	return action_state.can_transition()

@@ -41,6 +41,8 @@ func next_stage() -> void:
 
 ## Handles player movement and bullet charging input during the charge shot state.
 func on_process(delta: float) -> void:
+	if player.can("jump"):
+		player.movement.process_jump()
 	player.movement.apply_movement(delta)
 	if PlayerInput.is_shooting() and bullet_instance:
 		update_bullet_position()
