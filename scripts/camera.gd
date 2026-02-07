@@ -17,6 +17,7 @@ var smoothing_distance: int = 3
 @export var look_ahead_enabled: bool = true
 @export var look_ahead_distance: float = 50.0
 
+var look_ahead_direction: Vector2 = Vector2.ZERO
 var smoothing_weight: float
 var target_position: Vector2
 
@@ -45,13 +46,18 @@ func update_position() -> void:
 func apply_look_ahead_if_enabled(target: Vector2) -> Vector2:
     if not look_ahead_enabled:
         return target
-    return target + player.movement.get_facing_direction() * look_ahead_distance
+    _update_look_ahead_direction()
+    return target + look_ahead_direction * look_ahead_distance
 
 
 func apply_smoothing_if_enabled(target: Vector2) -> Vector2:
     if not smoothing_enabled:
         return target
     return lerp(global_position, target, smoothing_weight)
+
+func _update_look_ahead_direction() -> void:
+    if player.is_on_floor():
+        look_ahead_direction = player.movement.get_facing_direction()
 
 func _update_smoothing_weight() -> void:
     smoothing_weight = float(smoothing_distance) / SMOOTHING_SCALE

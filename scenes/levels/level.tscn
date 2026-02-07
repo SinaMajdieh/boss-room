@@ -78,6 +78,7 @@ one_way_collision = true
 debug_color = Color(0.28627452, 0.27450982, 0.30980393, 1)
 
 [node name="Boss" parent="." unique_id=188225108 instance=ExtResource("3_w8frs")]
+process_mode = 4
 position = Vector2(1312, 642)
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=397250722]
