@@ -9,6 +9,7 @@ func on_process(_delta: float) -> void:
 	check_falling()
 	check_dash()
 	check_attack()
+	check_shoot()
 
 func can_transition() -> bool:
 	return true

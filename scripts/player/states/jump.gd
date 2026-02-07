@@ -7,10 +7,9 @@ func on_process(_delta: float) -> void:
     check_falling()
     check_dash()
     check_attack()
+    check_shoot()
 
 func enter(_previous_state: String) -> void:
-    if debug:
-        print_rich("[color=green]Entered %s State" % name)
     # Handle jump.
     player.movement.process_jump()
 

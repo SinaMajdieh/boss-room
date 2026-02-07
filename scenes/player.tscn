@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cljew3m8klo23" path="res://scripts/player/health.gd" id="4_3v2ag"]
 [ext_resource type="Script" uid="uid://c6hexh55a2fm1" path="res://scripts/player/movement/hollow_knight_movemnt.gd" id="4_oprun"]
 [ext_resource type="Script" uid="uid://hho1luvqsprw" path="res://scripts/player/states/run.gd" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://jsuplbx4pun" path="res://scripts/player/range_attacks.gd" id="5_4ni07"]
 [ext_resource type="Script" uid="uid://y6wiowo66kps" path="res://scripts/player/states/fall.gd" id="5_x3wgy"]
 [ext_resource type="Script" uid="uid://bibmucmc3ek0s" path="res://scripts/player/states/jump.gd" id="6_3smsa"]
 [ext_resource type="Script" uid="uid://ds6sl1fngx7d2" path="res://scripts/player/states/dash.gd" id="7_y4r1p"]
@@ -18,6 +19,16 @@
 [ext_resource type="Script" uid="uid://co5piylw2y1u7" path="res://scripts/player/states/dead.gd" id="11_jej6c"]
 [ext_resource type="Script" uid="uid://bfh8p6strnncc" path="res://scripts/player/states/attack.gd" id="13_oprun"]
 [ext_resource type="Script" uid="uid://wcdeyv42a46g" path="res://scripts/player/states/hurt.gd" id="16_fulsm"]
+[ext_resource type="Script" uid="uid://l42xhwl3ax14" path="res://scripts/player/states/shoot.gd" id="17_4r5pv"]
+[ext_resource type="PackedScene" uid="uid://cd37l1vht40qa" path="res://scenes/bullet/player_base_bullet.tscn" id="18_60mlk"]
+[ext_resource type="Script" uid="uid://cs0da4yxpnw6y" path="res://scripts/player/states/fall_no_coyote.gd" id="19_i4ail"]
+[ext_resource type="Script" uid="uid://nvenrkkutn2i" path="res://scripts/player/states/shoot_spread.gd" id="20_4ni07"]
+[ext_resource type="PackedScene" uid="uid://cg6nb2553020a" path="res://scenes/bullet/player_spread_bullet.tscn" id="21_l71n6"]
+[ext_resource type="PackedScene" uid="uid://cvw5s7owa3ey1" path="res://scenes/bullet/player_round_about_bullet.tscn" id="23_31cv2"]
+[ext_resource type="Script" uid="uid://bmb0ux2kha0f4" path="res://scripts/player/states/shoot_charged.gd" id="24_ujl30"]
+[ext_resource type="PackedScene" uid="uid://ckf7wrtan8x6q" path="res://scenes/bullet/player_charged_bullet_undercharged.tscn" id="25_dt7fs"]
+[ext_resource type="PackedScene" uid="uid://wr48uowejft3" path="res://scenes/bullet/player_charged_bullet_charged.tscn" id="26_wqfne"]
+[ext_resource type="PackedScene" uid="uid://d1er3hs53jmln" path="res://scenes/bullet/player_charged_bullet_explosive.tscn" id="27_wnwbv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
 height = 50.0
@@ -216,19 +227,21 @@ size = Vector2(65.00541, 107.99982)
 [sub_resource type="CircleShape2D" id="CircleShape2D_a8ls1"]
 radius = 32.205048
 
-[node name="Player" type="CharacterBody2D" unique_id=1801386028 node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "jump_timer", "coyote_timer", "combo_timer", "hurt_timer") groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1670544063 node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "range_attacks", "jump_timer", "coyote_timer", "combo_timer", "hurt_timer", "shoot_cool_down") groups=["player"]]
 z_index = 1
 collision_mask = 5
 script = ExtResource("1_xhfnw")
-movement = NodePath("PlayerMovement")
-health = NodePath("PlayerHealth")
+movement = NodePath("Movement")
+health = NodePath("Health")
 state_machine = NodePath("StateMachine")
-collision_controller = NodePath("PlayerCollisionController")
+collision_controller = NodePath("CollisionController")
 attack_animation_player = NodePath("Attacks/AttackAnimationPlayer")
+range_attacks = NodePath("RangeAttacks")
 jump_timer = NodePath("Timers/JumpTimer")
 coyote_timer = NodePath("Timers/CoyoteTimer")
 combo_timer = NodePath("Timers/Combo")
 hurt_timer = NodePath("Timers/Hurt")
+shoot_cool_down = NodePath("Timers/ShootCoolDown")
 
 [node name="DefaultCollision" type="CollisionShape2D" parent="." unique_id=1669862400]
 shape = SubResource("CapsuleShape2D_kpjcp")
@@ -339,7 +352,11 @@ shape = SubResource("CircleShape2D_a8ls1")
 disabled = true
 debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
-[node name="PlayerCollisionController" type="Node" parent="." unique_id=1544625506 node_paths=PackedStringArray("collisions", "hit_boxes")]
+[node name="RangeAttacks" type="Node" parent="." unique_id=133369786 node_paths=PackedStringArray("attack_states")]
+script = ExtResource("5_4ni07")
+attack_states = [NodePath("../StateMachine/ShootNormal"), NodePath("../StateMachine/ShootSpread"), NodePath("../StateMachine/ShootRoundAbout"), NodePath("../StateMachine/ShootCharged")]
+
+[node name="CollisionController" type="Node" parent="." unique_id=708365361 node_paths=PackedStringArray("collisions", "hit_boxes")]
 script = ExtResource("2_d2wvv")
 collisions = {
 0: NodePath("../DefaultCollision"),
@@ -353,42 +370,42 @@ hit_boxes = {
 }
 metadata/_custom_type_script = "uid://dd03qhd78hq3d"
 
-[node name="PlayerMovement" type="Node" parent="." unique_id=1423767971 node_paths=PackedStringArray("player")]
+[node name="Movement" type="Node" parent="." unique_id=196140328 node_paths=PackedStringArray("player")]
 script = ExtResource("4_oprun")
 jump_force = 615.0
 player = NodePath("..")
 metadata/_custom_type_script = "uid://cj1s224kcep31"
 
-[node name="PlayerHealth" type="Node" parent="." unique_id=1410748964]
+[node name="Health" type="Node" parent="." unique_id=576709222]
 script = ExtResource("4_3v2ag")
 invincible = true
 
-[node name="StateMachine" type="Node" parent="." unique_id=1837007802 node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=543931232 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_6t5aa")
 initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://c5h6mtgbt70v4"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1231714046 node_paths=PackedStringArray("player")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=347260772 node_paths=PackedStringArray("player")]
 script = ExtResource("3_6t5aa")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://ceuck38er24x7"
 
-[node name="Run" type="Node" parent="StateMachine" unique_id=1564586363 node_paths=PackedStringArray("player")]
+[node name="Run" type="Node" parent="StateMachine" unique_id=1689839288 node_paths=PackedStringArray("player")]
 script = ExtResource("4_vgqql")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://ceuck38er24x7"
 
-[node name="Fall" type="Node" parent="StateMachine" unique_id=611767400 node_paths=PackedStringArray("player")]
+[node name="Fall" type="Node" parent="StateMachine" unique_id=1314801619 node_paths=PackedStringArray("player")]
 script = ExtResource("5_x3wgy")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Jump" type="Node" parent="StateMachine" unique_id=183104627 node_paths=PackedStringArray("player")]
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1348366301 node_paths=PackedStringArray("player")]
 script = ExtResource("6_3smsa")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Dash" type="Node" parent="StateMachine" unique_id=990117428 node_paths=PackedStringArray("dash_timer", "dash_cool_down", "player")]
+[node name="Dash" type="Node" parent="StateMachine" unique_id=1751237948 node_paths=PackedStringArray("dash_timer", "dash_cool_down", "player")]
 script = ExtResource("7_y4r1p")
 dash_speed = 2700.0
 dash_timer = NodePath("../../Timers/DashTimer")
@@ -396,31 +413,61 @@ dash_cool_down = NodePath("../../Timers/DashCoolDown")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Dead" type="Node" parent="StateMachine" unique_id=2039689750 node_paths=PackedStringArray("player")]
+[node name="Dead" type="Node" parent="StateMachine" unique_id=1134492197 node_paths=PackedStringArray("player")]
 script = ExtResource("11_jej6c")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=516868858 node_paths=PackedStringArray("attack_sequence", "combo_timer", "player")]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=946608258 node_paths=PackedStringArray("attack_sequence", "combo_timer", "player")]
 script = ExtResource("13_oprun")
 attack_sequence = [NodePath("../../Attacks/Attack_1"), NodePath("../../Attacks/Attack_2"), NodePath("../../Attacks/Attack_3")]
 combo_timer = NodePath("../../Timers/Combo")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Hurt" type="Node" parent="StateMachine" unique_id=1027643497 node_paths=PackedStringArray("player")]
+[node name="Hurt" type="Node" parent="StateMachine" unique_id=1455619502 node_paths=PackedStringArray("player")]
 script = ExtResource("16_fulsm")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Timers" type="Node" parent="." unique_id=1326718702]
+[node name="Fall_No_Coyote" type="Node" parent="StateMachine" unique_id=27932359]
+script = ExtResource("19_i4ail")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="JumpTimer" type="Timer" parent="Timers" unique_id=1370180584]
+[node name="ShootNormal" type="Node" parent="StateMachine" unique_id=2108704928 node_paths=PackedStringArray("player")]
+script = ExtResource("17_4r5pv")
+player_bullet_scene = ExtResource("18_60mlk")
+shoot_cool_down_time = 0.15
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="ShootSpread" type="Node" parent="StateMachine" unique_id=1317234253 node_paths=PackedStringArray("player")]
+script = ExtResource("20_4ni07")
+player_bullet_scene = ExtResource("21_l71n6")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="ShootRoundAbout" type="Node" parent="StateMachine" unique_id=134697461 node_paths=PackedStringArray("player")]
+script = ExtResource("17_4r5pv")
+player_bullet_scene = ExtResource("23_31cv2")
+shoot_cool_down_time = 0.3
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="ShootCharged" type="Node" parent="StateMachine" unique_id=1842968557 node_paths=PackedStringArray("player")]
+script = ExtResource("24_ujl30")
+player_bullet_scene = Array[PackedScene]([ExtResource("25_dt7fs"), ExtResource("26_wqfne"), ExtResource("27_wnwbv")])
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="Timers" type="Node" parent="." unique_id=881266517]
+
+[node name="JumpTimer" type="Timer" parent="Timers" unique_id=2028828387]
 wait_time = 0.2
 one_shot = true
 script = ExtResource("8_8erm5")
 
-[node name="CoyoteTimer" type="Timer" parent="Timers" unique_id=612764559 node_paths=PackedStringArray("player")]
+[node name="CoyoteTimer" type="Timer" parent="Timers" unique_id=582168050 node_paths=PackedStringArray("player")]
 wait_time = 0.12
 one_shot = true
 script = ExtResource("9_ur7pv")
@@ -439,6 +486,10 @@ one_shot = true
 
 [node name="Hurt" type="Timer" parent="Timers" unique_id=1611772560]
 wait_time = 0.1
+one_shot = true
+
+[node name="ShootCoolDown" type="Timer" parent="Timers" unique_id=1718591927]
+wait_time = 0.2
 one_shot = true
 
 [connection signal="timeout" from="Timers/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
