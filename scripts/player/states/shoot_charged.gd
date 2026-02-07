@@ -41,6 +41,8 @@ func next_stage() -> void:
 
 ## Handles player movement and bullet charging input during the charge shot state.
 func on_process(delta: float) -> void:
+	if player.range_attacks.get_attack_name() != name.to_lower():
+		release_bullet()
 	if player.can("jump"):
 		player.movement.process_jump()
 	player.movement.apply_movement(delta)
@@ -85,6 +87,7 @@ func exit() -> void:
 ## Returns whether state transitions are allowed. Prevents transitions during cooldown.
 func can_transition() -> bool:
 	return player.shoot_cool_down.is_stopped()
+
 
 ## Frees the current bullet instance if it exists. Used for cleanup when exiting the state.
 func _free_bullet() -> void:
