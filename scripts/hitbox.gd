@@ -3,11 +3,11 @@ class_name BaseHitBox
 
 @export var entity: Node
 
-func hurt(amount: Variant, knock_back: float = 0.0) -> void:
+func hurt(amount: Variant, direction: Vector2, knock_back: float = 0.0) -> void:
 	if not entity:
 		push_warning("No health component")
 		return
-	entity.hurt(amount, knock_back)
+	entity.hurt(amount, direction, knock_back)
 
 func disable() -> void:
 	monitoring = false

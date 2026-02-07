@@ -1,27 +1,80 @@
-[gd_scene load_steps=5 format=3 uid="uid://kybtfskr8btj"]
+[gd_scene load_steps=13 format=3 uid="uid://kybtfskr8btj"]
 
 [ext_resource type="Script" uid="uid://dja4ry3jhx1ip" path="res://scripts/boss/boss.gd" id="1_6ig5k"]
 [ext_resource type="Script" uid="uid://r5ukbyok102l" path="res://scripts/boss/health.gd" id="1_eynm2"]
+[ext_resource type="Script" uid="uid://b8qshsmsa476h" path="res://scripts/boss/movement.gd" id="3_edv8j"]
 [ext_resource type="Script" uid="uid://duk1o6typ0tig" path="res://scripts/boss/hitbox.gd" id="3_jncid"]
+[ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="4_pfyq2"]
+[ext_resource type="Script" uid="uid://mxp3wvos4w1r" path="res://scripts/boss/states/idle.gd" id="5_85kei"]
+[ext_resource type="Script" uid="uid://d4gu13vc16efs" path="res://scripts/pivots/pivots.gd" id="5_cs582"]
+[ext_resource type="Script" uid="uid://bdthf4tj3g0vd" path="res://scripts/boss/states/roll.gd" id="6_kitqk"]
+[ext_resource type="Script" uid="uid://cww6du7tx4w7l" path="res://scripts/pivots/pivot.gd" id="6_pfyq2"]
+[ext_resource type="Script" uid="uid://drh4ucg5q7egl" path="res://scripts/boss/states/spin.gd" id="7_gfnkn"]
+[ext_resource type="Script" uid="uid://bn3kw4kg1qpwf" path="res://scripts/boss/states/attack.gd" id="8_0onds"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_my2wn"]
-radius = 20.0
-height = 100.0
+radius = 37.5
+height = 250.0
 
-[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("health")]
+[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("health", "movement", "pivots", "state_machine", "collision")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_6ig5k")
 health = NodePath("BossHealth")
+movement = NodePath("BaseMovement")
+pivots = NodePath("Pivots")
+state_machine = NodePath("StateMachine")
+collision = NodePath("CollisionShape2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["shapes"]]
 shape = SubResource("CapsuleShape2D_my2wn")
 debug_color = Color(0.65882355, 0.56078434, 0.47058824, 1)
 
 [node name="BossHealth" type="Node" parent="."]
 script = ExtResource("1_eynm2")
-max_health = 1400
+max_health = 200
 metadata/_custom_type_script = "uid://r5ukbyok102l"
+
+[node name="BaseMovement" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("3_edv8j")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://cj1s224kcep31"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_pfyq2")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://c5h6mtgbt70v4"
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_timer", "boss")]
+script = ExtResource("5_85kei")
+attack_timer = NodePath("AttackTimer")
+boss = NodePath("../..")
+debug = true
+metadata/_custom_type_script = "uid://b60lnang87dpn"
+
+[node name="AttackTimer" type="Timer" parent="StateMachine/Idle"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Roll" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
+script = ExtResource("6_kitqk")
+collapse_transition_type = 6
+collapse_duration = 1.0
+stand_ease_type = 2
+stand_duration = 0.5
+boss = NodePath("../..")
+debug = true
+metadata/_custom_type_script = "uid://b60lnang87dpn"
+
+[node name="Spin" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
+script = ExtResource("7_gfnkn")
+boss = NodePath("../..")
+metadata/_custom_type_script = "uid://b60lnang87dpn"
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
+script = ExtResource("8_0onds")
+boss = NodePath("../..")
+metadata/_custom_type_script = "uid://b60lnang87dpn"
 
 [node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("entity") groups=["enemy"]]
 collision_layer = 2
@@ -29,6 +82,24 @@ script = ExtResource("3_jncid")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://dla3v6qu2aw2"
 
-[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox"]
+[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox" groups=["shapes"]]
 shape = SubResource("CapsuleShape2D_my2wn")
 debug_color = Color(0.65882355, 0.56078434, 0.47058824, 1)
+
+[node name="Pivots" type="Node2D" parent="."]
+script = ExtResource("5_cs582")
+metadata/_custom_type_script = "uid://d4gu13vc16efs"
+
+[node name="Center" type="Node2D" parent="Pivots"]
+script = ExtResource("6_pfyq2")
+metadata/_custom_type_script = "uid://cww6du7tx4w7l"
+
+[node name="Top" type="Node2D" parent="Pivots"]
+position = Vector2(0, -125)
+script = ExtResource("6_pfyq2")
+metadata/_custom_type_script = "uid://cww6du7tx4w7l"
+
+[node name="Bottom" type="Node2D" parent="Pivots"]
+position = Vector2(0, 125)
+script = ExtResource("6_pfyq2")
+metadata/_custom_type_script = "uid://cww6du7tx4w7l"

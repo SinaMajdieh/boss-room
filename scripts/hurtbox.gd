@@ -31,7 +31,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area in entities or not area.has_method("hurt") or not area.is_in_group(affected_group):
 		return
 	entities.append(area)
-	area.hurt(damage)
+	area.hurt(damage, global_position)
 
 func is_active() -> bool:
 	return active

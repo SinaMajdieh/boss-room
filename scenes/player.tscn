@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://e5nefeqvv66d"]
+[gd_scene format=3 uid="uid://e5nefeqvv66d"]
 
 [ext_resource type="Script" uid="uid://dwmje6n7m1ip" path="res://scripts/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="2_6t5aa"]
@@ -216,7 +216,7 @@ size = Vector2(65.00541, 107.99982)
 [sub_resource type="CircleShape2D" id="CircleShape2D_a8ls1"]
 radius = 32.205048
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "jump_timer", "coyote_timer", "combo_timer", "hurt_timer") groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1801386028 node_paths=PackedStringArray("movement", "health", "state_machine", "collision_controller", "attack_animation_player", "jump_timer", "coyote_timer", "combo_timer", "hurt_timer") groups=["player"]]
 z_index = 1
 collision_mask = 5
 script = ExtResource("1_xhfnw")
@@ -230,18 +230,18 @@ coyote_timer = NodePath("Timers/CoyoteTimer")
 combo_timer = NodePath("Timers/Combo")
 hurt_timer = NodePath("Timers/Hurt")
 
-[node name="DefaultCollision" type="CollisionShape2D" parent="."]
+[node name="DefaultCollision" type="CollisionShape2D" parent="." unique_id=1669862400]
 shape = SubResource("CapsuleShape2D_kpjcp")
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
-[node name="DashCollision" type="CollisionShape2D" parent="."]
+[node name="DashCollision" type="CollisionShape2D" parent="." unique_id=1662983728]
 visible = false
 position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_y4r1p")
 disabled = true
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
-[node name="DeadCollision" type="CollisionShape2D" parent="."]
+[node name="DeadCollision" type="CollisionShape2D" parent="." unique_id=233530321]
 visible = false
 position = Vector2(0, 15)
 rotation = 1.5707964
@@ -249,24 +249,24 @@ shape = SubResource("CapsuleShape2D_jej6c")
 disabled = true
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
-[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("entity") groups=["player"]]
+[node name="HitBox" type="Area2D" parent="." unique_id=1158421890 node_paths=PackedStringArray("entity") groups=["player"]]
 collision_mask = 0
 script = ExtResource("2_qfm1y")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://dla3v6qu2aw2"
 
-[node name="Collision" type="CollisionShape2D" parent="HitBox"]
+[node name="Collision" type="CollisionShape2D" parent="HitBox" unique_id=2101346292]
 shape = SubResource("CapsuleShape2D_kpjcp")
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
-[node name="Dash" type="CollisionShape2D" parent="HitBox"]
+[node name="Dash" type="CollisionShape2D" parent="HitBox" unique_id=1810110629]
 visible = false
 position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_y4r1p")
 disabled = true
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
-[node name="Dead" type="CollisionShape2D" parent="HitBox"]
+[node name="Dead" type="CollisionShape2D" parent="HitBox" unique_id=454549636]
 visible = false
 position = Vector2(0, 15)
 rotation = 1.5707964
@@ -274,74 +274,72 @@ shape = SubResource("CapsuleShape2D_jej6c")
 disabled = true
 debug_color = Color(0.23921569, 0.12156863, 0.15686275, 1)
 
-[node name="Attacks" type="Node2D" parent="."]
+[node name="Attacks" type="Node2D" parent="." unique_id=1960456489]
 
-[node name="AttackAnimationPlayer" type="AnimationPlayer" parent="Attacks"]
+[node name="AttackAnimationPlayer" type="AnimationPlayer" parent="Attacks" unique_id=379449727]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_a8ls1")
-}
+libraries/ = SubResource("AnimationLibrary_a8ls1")
 
-[node name="Attack_1" type="Node" parent="Attacks" node_paths=PackedStringArray("hurt_box")]
+[node name="Attack_1" type="Node" parent="Attacks" unique_id=353836623 node_paths=PackedStringArray("hurt_box")]
 script = ExtResource("2_a8ls1")
 animation_name = "attack_1"
 hurt_box = NodePath("../HurtBoxes/Attack_1")
 metadata/_custom_type_script = "uid://4yedb32w5euq"
 
-[node name="Attack_2" type="Node" parent="Attacks" node_paths=PackedStringArray("hurt_box")]
+[node name="Attack_2" type="Node" parent="Attacks" unique_id=820246562 node_paths=PackedStringArray("hurt_box")]
 script = ExtResource("2_a8ls1")
 animation_name = "attack_2"
 hurt_box = NodePath("../HurtBoxes/Attack_2")
 metadata/_custom_type_script = "uid://4yedb32w5euq"
 
-[node name="Attack_3" type="Node" parent="Attacks" node_paths=PackedStringArray("hurt_box")]
+[node name="Attack_3" type="Node" parent="Attacks" unique_id=699689804 node_paths=PackedStringArray("hurt_box")]
 script = ExtResource("2_a8ls1")
 animation_name = "attack_3"
 hurt_box = NodePath("../HurtBoxes/Attack_3")
 metadata/_custom_type_script = "uid://4yedb32w5euq"
 
-[node name="HurtBoxes" type="Node2D" parent="Attacks"]
+[node name="HurtBoxes" type="Node2D" parent="Attacks" unique_id=915636156]
 
-[node name="Attack_1" parent="Attacks/HurtBoxes" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
+[node name="Attack_1" parent="Attacks/HurtBoxes" unique_id=242721518 node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
 position = Vector2(29, -8)
 collision_mask = 6
 shape = NodePath("CollisionShape2D")
 damage = 2.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HurtBoxes/Attack_1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HurtBoxes/Attack_1" unique_id=1998930157]
 position = Vector2(9.007381, 4.486225)
 rotation = 1.5726348
 shape = SubResource("RectangleShape2D_oprun")
 disabled = true
 debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
-[node name="Attack_2" parent="Attacks/HurtBoxes" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
+[node name="Attack_2" parent="Attacks/HurtBoxes" unique_id=1277541954 node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
 position = Vector2(29, -8)
 collision_mask = 6
 shape = NodePath("CollisionShape2D")
 damage = 4.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HurtBoxes/Attack_2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HurtBoxes/Attack_2" unique_id=675547411]
 position = Vector2(34.995403, 1.4990702)
 rotation = 1.5726348
 shape = SubResource("RectangleShape2D_a8ls1")
 disabled = true
 debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
-[node name="Attack_3" parent="Attacks/HurtBoxes" node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
+[node name="Attack_3" parent="Attacks/HurtBoxes" unique_id=934210026 node_paths=PackedStringArray("shape") instance=ExtResource("2_f1ej7")]
 position = Vector2(29, -8)
 collision_mask = 6
 shape = NodePath("CollisionShape2D")
 damage = 6.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HurtBoxes/Attack_3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attacks/HurtBoxes/Attack_3" unique_id=1675024259]
 position = Vector2(13.000004, 2)
 rotation = 1.5726348
 shape = SubResource("CircleShape2D_a8ls1")
 disabled = true
 debug_color = Color(0.35686275, 0.17254902, 0.2, 1)
 
-[node name="PlayerCollisionController" type="Node" parent="." node_paths=PackedStringArray("collisions", "hit_boxes")]
+[node name="PlayerCollisionController" type="Node" parent="." unique_id=1544625506 node_paths=PackedStringArray("collisions", "hit_boxes")]
 script = ExtResource("2_d2wvv")
 collisions = {
 0: NodePath("../DefaultCollision"),
@@ -355,90 +353,91 @@ hit_boxes = {
 }
 metadata/_custom_type_script = "uid://dd03qhd78hq3d"
 
-[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("player")]
+[node name="PlayerMovement" type="Node" parent="." unique_id=1423767971 node_paths=PackedStringArray("player")]
 script = ExtResource("4_oprun")
 jump_force = 615.0
 player = NodePath("..")
 metadata/_custom_type_script = "uid://cj1s224kcep31"
 
-[node name="PlayerHealth" type="Node" parent="."]
+[node name="PlayerHealth" type="Node" parent="." unique_id=1410748964]
 script = ExtResource("4_3v2ag")
+invincible = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=1837007802 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_6t5aa")
 initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://c5h6mtgbt70v4"
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1231714046 node_paths=PackedStringArray("player")]
 script = ExtResource("3_6t5aa")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://ceuck38er24x7"
 
-[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Run" type="Node" parent="StateMachine" unique_id=1564586363 node_paths=PackedStringArray("player")]
 script = ExtResource("4_vgqql")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://ceuck38er24x7"
 
-[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Fall" type="Node" parent="StateMachine" unique_id=611767400 node_paths=PackedStringArray("player")]
 script = ExtResource("5_x3wgy")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Jump" type="Node" parent="StateMachine" unique_id=183104627 node_paths=PackedStringArray("player")]
 script = ExtResource("6_3smsa")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("dash_timer", "dash_cool_down", "player")]
+[node name="Dash" type="Node" parent="StateMachine" unique_id=990117428 node_paths=PackedStringArray("dash_timer", "dash_cool_down", "player")]
 script = ExtResource("7_y4r1p")
-dash_speed = 1350.0
+dash_speed = 2700.0
 dash_timer = NodePath("../../Timers/DashTimer")
 dash_cool_down = NodePath("../../Timers/DashCoolDown")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Dead" type="Node" parent="StateMachine" unique_id=2039689750 node_paths=PackedStringArray("player")]
 script = ExtResource("11_jej6c")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_sequence", "combo_timer", "player")]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=516868858 node_paths=PackedStringArray("attack_sequence", "combo_timer", "player")]
 script = ExtResource("13_oprun")
 attack_sequence = [NodePath("../../Attacks/Attack_1"), NodePath("../../Attacks/Attack_2"), NodePath("../../Attacks/Attack_3")]
 combo_timer = NodePath("../../Timers/Combo")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Hurt" type="Node" parent="StateMachine" unique_id=1027643497 node_paths=PackedStringArray("player")]
 script = ExtResource("16_fulsm")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Timers" type="Node" parent="."]
+[node name="Timers" type="Node" parent="." unique_id=1326718702]
 
-[node name="JumpTimer" type="Timer" parent="Timers"]
+[node name="JumpTimer" type="Timer" parent="Timers" unique_id=1370180584]
 wait_time = 0.2
 one_shot = true
 script = ExtResource("8_8erm5")
 
-[node name="CoyoteTimer" type="Timer" parent="Timers" node_paths=PackedStringArray("player")]
+[node name="CoyoteTimer" type="Timer" parent="Timers" unique_id=612764559 node_paths=PackedStringArray("player")]
 wait_time = 0.12
 one_shot = true
 script = ExtResource("9_ur7pv")
 player = NodePath("../..")
 
-[node name="DashTimer" type="Timer" parent="Timers"]
+[node name="DashTimer" type="Timer" parent="Timers" unique_id=735738962]
 wait_time = 0.12
 one_shot = true
 
-[node name="DashCoolDown" type="Timer" parent="Timers"]
+[node name="DashCoolDown" type="Timer" parent="Timers" unique_id=1223274591]
 wait_time = 0.5
 one_shot = true
 
-[node name="Combo" type="Timer" parent="Timers"]
+[node name="Combo" type="Timer" parent="Timers" unique_id=164712789]
 one_shot = true
 
-[node name="Hurt" type="Timer" parent="Timers"]
+[node name="Hurt" type="Timer" parent="Timers" unique_id=1611772560]
 wait_time = 0.1
 one_shot = true
 

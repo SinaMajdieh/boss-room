@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export_category("Components")
-@export var movement: PlayerMovement
+@export var movement: BaseMovement
 @export var health: PlayerHealth
 @export var state_machine: StateMachine	 
 @export var collision_controller: PlayerCollisionController
@@ -34,10 +34,11 @@ func can_take_damage() -> bool:
 		return false
 	return true
 
-func hurt(amount: Variant, knock_back: float = 800) -> void:
+func hurt(amount: Variant, direction: Vector2, knock_back: float = 800) -> void:
 	if not can_take_damage():
 		return
-	state_machine.get_node_state("hurt").set_attributes(amount, knock_back)
+	var knock_back_direction: float = -1.0 if direction.direction_to(global_position).x < 0 else 1.0
+	state_machine.get_node_state("hurt").set_attributes(amount, knock_back_direction * knock_back)
 	state_machine.transition(state_machine.current_state_name, "hurt")
 
 func die() -> void:

@@ -16,7 +16,7 @@ func _on_area_entered(area: Area2D) -> void:
     if not area.is_in_group("player"):
         return
     if area.has_method("hurt"):
-        area.hurt(damage_points, knock_back)
+        area.hurt(damage_points, global_position, knock_back)
 
 func set_player_phase_through(can_phase: bool) -> void:
     player_phase_through = can_phase

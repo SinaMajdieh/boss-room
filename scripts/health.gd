@@ -4,6 +4,7 @@ class_name BaseHealth
 signal health_depleted()
 signal health_changed(new_health: Variant)
 
+@export var invincible: bool = false
 @export var max_health: Variant = 3
 
 @onready var current_health: Variant = max_health:
@@ -11,6 +12,8 @@ signal health_changed(new_health: Variant)
     get = get_health
 
 func hurt(amount: Variant = 1) -> void:
+    if invincible:
+        return
     current_health = clamp(current_health - amount, 0, max_health)
     if current_health <= 0:
         depleted()
