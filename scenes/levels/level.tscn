@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://e5nefeqvv66d" path="res://scenes/player.tscn" id="1_u52ul"]
 [ext_resource type="PackedScene" uid="uid://e0yemhp07eov" path="res://scenes/ui/player_debug_menu.tscn" id="2_k5f4k"]
 [ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/Boss.tscn" id="3_w8frs"]
+[ext_resource type="Script" uid="uid://dgisv6munbcap" path="res://scripts/camera.gd" id="4_xb4v1"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vonw3"]
 
@@ -22,8 +23,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=697939201]
 position = Vector2(1, 0)
 shape = SubResource("WorldBoundaryShape2D_vonw3")
-
-[node name="PlayerDebugMenu" parent="." unique_id=1072898247 instance=ExtResource("2_k5f4k")]
 
 [node name="Platforms" type="Node2D" parent="." unique_id=1496771707]
 position = Vector2(0, 900)
@@ -80,3 +79,16 @@ debug_color = Color(0.28627452, 0.27450982, 0.30980393, 1)
 
 [node name="Boss" parent="." unique_id=188225108 instance=ExtResource("3_w8frs")]
 position = Vector2(1312, 642)
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=397250722]
+position = Vector2(1094, 907)
+limit_top = 0
+limit_bottom = 1080
+script = ExtResource("4_xb4v1")
+smoothing_distance = 25
+look_ahead_distance = 96.0
+metadata/_custom_type_script = "uid://dgisv6munbcap"
+
+[node name="DebugScreen" type="CanvasLayer" parent="." unique_id=1543888468]
+
+[node name="PlayerDebugMenu" parent="DebugScreen" unique_id=1072898247 instance=ExtResource("2_k5f4k")]
