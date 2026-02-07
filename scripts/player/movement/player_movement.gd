@@ -4,6 +4,8 @@ class_name PlayerMovement
 @export_category("Components")
 @export var player: Player
 
+
+## Faces the player in the specified direction.
 func face(direction: float) -> void:
     if direction > 0 and facing_left:
         player.transform.x *= -1

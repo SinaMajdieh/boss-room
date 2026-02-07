@@ -9,7 +9,7 @@
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_swatm")
-damage = 150
+damage = 1.5
 life_time = 0.4
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=656665598]

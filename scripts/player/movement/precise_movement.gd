@@ -19,7 +19,7 @@ func apply_movement(delta: float) -> void:
 ## Handles horizontal movement based on input direction.
 func apply_horizontal(_delta: float) -> void:
 	var direction: float = PlayerInput.get_direction()
-	face(direction)
+	face(PlayerInput.get_looking_direction(Vector2.ZERO).x)
 	if direction:
 		player.velocity.x = direction * speed
 	else:

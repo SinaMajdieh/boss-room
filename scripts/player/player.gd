@@ -44,7 +44,7 @@ func can_take_damage() -> bool:
 	return hurt_timer.is_stopped()
 
 
-func hurt(amount: Variant, direction: Vector2, knock_back: float = 800) -> void:
+func hurt(amount: Variant, direction: Vector2 = Vector2.ZERO, knock_back: float = 800) -> void:
 	if not can_take_damage():
 		return
 	var knock_back_direction: float = -1.0 if direction.direction_to(global_position).x < 0 else 1.0

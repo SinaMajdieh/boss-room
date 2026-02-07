@@ -4,7 +4,6 @@ extends BaseHitBox
 ## Controls whether the player can pass through this hitbox without taking damage.
 @export var player_phase_through: bool = false:
     set = set_player_phase_through
-
 @export var damage_points: float = 1
 @export var knock_back: float = 800.0
 

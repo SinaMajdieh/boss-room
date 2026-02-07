@@ -378,7 +378,6 @@ metadata/_custom_type_script = "uid://cj1s224kcep31"
 
 [node name="Health" type="Node" parent="." unique_id=576709222]
 script = ExtResource("4_3v2ag")
-invincible = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=543931232 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_6t5aa")

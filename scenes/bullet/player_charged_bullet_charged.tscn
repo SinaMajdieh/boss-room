@@ -10,7 +10,7 @@ radius = 17.262676
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_rm2aw")
-damage = 120.0
+damage = 6.0
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=656665598]
 scale = Vector2(0.2, 0.2)

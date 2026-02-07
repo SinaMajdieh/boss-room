@@ -1,50 +1,50 @@
-[gd_scene load_steps=7 format=3 uid="uid://svnqmtdjey5a"]
+[gd_scene format=3 uid="uid://svnqmtdjey5a"]
 
 [ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/boss.tscn" id="1_1g87t"]
-[ext_resource type="Script" uid="uid://da37u6qibow2s" path="res://scripts/boss_debug_menu/tranform_label.gd" id="2_bgc3o"]
-[ext_resource type="Script" uid="uid://vohrrg236b6r" path="res://scripts/boss_debug_menu/rotation_label.gd" id="3_kgeu2"]
-[ext_resource type="Script" uid="uid://d1gd24lrljqe7" path="res://scripts/boss_debug_menu/state_label.gd" id="4_tdmd3"]
+[ext_resource type="Script" uid="uid://da37u6qibow2s" path="res://scripts/ui/boss_debug_menu/tranform_label.gd" id="2_bgc3o"]
+[ext_resource type="Script" uid="uid://vohrrg236b6r" path="res://scripts/ui/boss_debug_menu/rotation_label.gd" id="3_kgeu2"]
+[ext_resource type="Script" uid="uid://d1gd24lrljqe7" path="res://scripts/ui/boss_debug_menu/state_label.gd" id="4_tdmd3"]
 [ext_resource type="PackedScene" uid="uid://e5nefeqvv66d" path="res://scenes/player.tscn" id="5_tdmd3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bgc3o"]
 
-[node name="BossTest" type="Node2D"]
+[node name="BossTest" type="Node2D" unique_id=2129439248]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1650841066]
 position = Vector2(937, 988)
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1419028880]
 shape = SubResource("WorldBoundaryShape2D_bgc3o")
 
-[node name="Boss" parent="." groups=["boss", "enemy"] instance=ExtResource("1_1g87t")]
+[node name="Boss" parent="." unique_id=861824725 groups=["boss", "enemy"] instance=ExtResource("1_1g87t")]
 position = Vector2(972, 760)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1595852027]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Transform" type="Label" parent="VBoxContainer"]
+[node name="Transform" type="Label" parent="VBoxContainer" unique_id=811316868]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Transform: "
 script = ExtResource("2_bgc3o")
 
-[node name="Rotation" type="Label" parent="VBoxContainer"]
+[node name="Rotation" type="Label" parent="VBoxContainer" unique_id=1261897196]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Rotation: "
 script = ExtResource("3_kgeu2")
 
-[node name="State" type="Label" parent="VBoxContainer"]
+[node name="State" type="Label" parent="VBoxContainer" unique_id=1810873457]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "State: "
 script = ExtResource("4_tdmd3")
 
-[node name="Player" parent="." instance=ExtResource("5_tdmd3")]
+[node name="Player" parent="." unique_id=222750031 instance=ExtResource("5_tdmd3")]
 position = Vector2(395, 356)
