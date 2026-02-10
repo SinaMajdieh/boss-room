@@ -3,12 +3,22 @@
 [ext_resource type="PackedScene" uid="uid://e5nefeqvv66d" path="res://scenes/player.tscn" id="1_u52ul"]
 [ext_resource type="PackedScene" uid="uid://e0yemhp07eov" path="res://scenes/ui/player_debug_menu.tscn" id="2_k5f4k"]
 [ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/Boss.tscn" id="3_w8frs"]
+[ext_resource type="Script" uid="uid://8am05irgtlwv" path="res://scripts/camera/smoothing.gd" id="4_d4w6o"]
 [ext_resource type="Script" uid="uid://dgisv6munbcap" path="res://scripts/camera.gd" id="4_xb4v1"]
+[ext_resource type="Script" uid="uid://c1c1mc4pkt2rm" path="res://scripts/camera/look_ahead.gd" id="5_mbbpy"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vonw3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7c3h"]
 size = Vector2(88.5, 12)
+
+[sub_resource type="Resource" id="Resource_d4w6o"]
+script = ExtResource("4_d4w6o")
+metadata/_custom_type_script = "uid://8am05irgtlwv"
+
+[sub_resource type="Resource" id="Resource_mbbpy"]
+script = ExtResource("5_mbbpy")
+metadata/_custom_type_script = "uid://c1c1mc4pkt2rm"
 
 [node name="Level" type="Node2D" unique_id=1831028117]
 
@@ -78,7 +88,6 @@ one_way_collision = true
 debug_color = Color(0.28627452, 0.27450982, 0.30980393, 1)
 
 [node name="Boss" parent="." unique_id=188225108 instance=ExtResource("3_w8frs")]
-process_mode = 4
 position = Vector2(1312, 642)
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=397250722]
@@ -86,8 +95,8 @@ position = Vector2(1094, 907)
 limit_top = 0
 limit_bottom = 1080
 script = ExtResource("4_xb4v1")
-smoothing_distance = 25
-look_ahead_distance = 96.0
+smoothing = SubResource("Resource_d4w6o")
+look_ahead = SubResource("Resource_mbbpy")
 metadata/_custom_type_script = "uid://dgisv6munbcap"
 
 [node name="DebugScreen" type="CanvasLayer" parent="." unique_id=1543888468]

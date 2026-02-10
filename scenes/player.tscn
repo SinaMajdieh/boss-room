@@ -484,7 +484,6 @@ one_shot = true
 one_shot = true
 
 [node name="Hurt" type="Timer" parent="Timers" unique_id=1611772560]
-wait_time = 0.1
 one_shot = true
 
 [node name="ShootCoolDown" type="Timer" parent="Timers" unique_id=1718591927]
