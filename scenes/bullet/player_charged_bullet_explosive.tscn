@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://d1er3hs53jmln"]
 
 [ext_resource type="Script" uid="uid://cef8cv220o1d5" path="res://scripts/bullet/charge_bullet.gd" id="1_hxaab"]
-[ext_resource type="Texture2D" uid="uid://cukso4rdmf0aw" path="res://assets/icon.svg" id="2_do40w"]
+[ext_resource type="Texture2D" uid="uid://d15ijf7ytd8g" path="res://assets/sprites/bullets/explosive_bullet.png" id="2_hxaab"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bnjno"]
-radius = 25.079872
+radius = 25.0
 
 [node name="Bullet" type="Area2D" unique_id=716996682]
 collision_layer = 0
@@ -14,8 +14,7 @@ charge_time = 0.0
 damage = 10.0
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=656665598]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_do40w")
+texture = ExtResource("2_hxaab")
 region_rect = Rect2(0, 0, 100, 40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1646836112]

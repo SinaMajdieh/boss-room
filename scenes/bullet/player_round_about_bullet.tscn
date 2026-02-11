@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cvw5s7owa3ey1"]
 
 [ext_resource type="Script" uid="uid://moxydn66hajr" path="res://scripts/bullet/round_about.gd" id="1_vuj5a"]
-[ext_resource type="Texture2D" uid="uid://cukso4rdmf0aw" path="res://assets/icon.svg" id="2_wktlh"]
+[ext_resource type="Texture2D" uid="uid://bnkgllwoexetl" path="res://assets/sprites/bullets/round_about_bullet.png" id="2_bnjno"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
 size = Vector2(30, 12)
@@ -15,9 +15,7 @@ damage = 3.0
 life_time = 5.0
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=656665598]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_wktlh")
-region_enabled = true
+texture = ExtResource("2_bnjno")
 region_rect = Rect2(0, 0, 100, 40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1646836112]

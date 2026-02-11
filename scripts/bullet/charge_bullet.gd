@@ -12,6 +12,8 @@ var shot: bool = false
 
 
 func _ready() -> void:
+    super()
+    monitoring = false
     timer = charge_time
 
 
@@ -29,7 +31,7 @@ func advance_charge(delta: float) -> void:
 ## Call this after charging is complete to release the projectile.
 func release() -> void:
     shot = true
-    area_entered.connect(on_hit)
+    monitoring = true
 
 
 ## Moves the bullet along its direction vector and removes it when life_time expires.

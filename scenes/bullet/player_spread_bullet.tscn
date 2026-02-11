@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cg6nb2553020a"]
 
 [ext_resource type="Script" uid="uid://ujfgegord43b" path="res://scripts/bullet/base_bullet.gd" id="1_swatm"]
-[ext_resource type="Texture2D" uid="uid://cukso4rdmf0aw" path="res://assets/icon.svg" id="2_4jieq"]
+[ext_resource type="Texture2D" uid="uid://for2006db4it" path="res://assets/sprites/bullets/spread_bullet.png" id="2_swatm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
 
@@ -13,8 +13,7 @@ damage = 1.5
 life_time = 0.4
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=656665598]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_4jieq")
+texture = ExtResource("2_swatm")
 region_rect = Rect2(0, 0, 100, 20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1646836112]

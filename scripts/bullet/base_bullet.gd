@@ -9,6 +9,7 @@ class_name BaseBullet
 
 func _ready() -> void:
 	area_entered.connect(on_hit)
+	body_entered.connect(on_hit)
 	rotate_to_direction()
 
 
@@ -20,7 +21,7 @@ func _process(delta: float) -> void:
 
 
 ## Handles collision with targets and applies damage.
-func on_hit(target: Area2D) -> void:
+func on_hit(target: Variant) -> void:
 	if not target:
 		return
 	if target.has_method("hurt"):
