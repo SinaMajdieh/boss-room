@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://e5nefeqvv66d" path="res://scenes/player.tscn" id="2_1r3rq"]
 [ext_resource type="Script" uid="uid://dgisv6munbcap" path="res://scripts/camera.gd" id="3_1r3rq"]
 [ext_resource type="PackedScene" uid="uid://8oiwdwkr0l0n" path="res://scenes/dead_zone.tscn" id="4_u4f7j"]
-[ext_resource type="PackedScene" uid="uid://e0yemhp07eov" path="res://scenes/ui/player_debug_menu.tscn" id="5_1wklo"]
-[ext_resource type="PackedScene" uid="uid://ij2thayasijt" path="res://scenes/tutorial_hint.tscn" id="7_4a02d"]
+[ext_resource type="PackedScene" uid="uid://e0yemhp07eov" path="res://scenes/ui/screens/player_debug_menu.tscn" id="5_1wklo"]
+[ext_resource type="PackedScene" uid="uid://ij2thayasijt" path="res://scenes/ui/tutorial_hint.tscn" id="7_4a02d"]
 [ext_resource type="Script" uid="uid://dxodqm7wjc7f2" path="res://scripts/tutorial/tutorial_area.gd" id="7_g7bfq"]
 [ext_resource type="Script" uid="uid://bj7vi8g85jnri" path="res://resources/hint_resource.gd" id="8_4a02d"]
 [ext_resource type="Script" uid="uid://boqh06f7nhsxg" path="res://scripts/tutorial/tutorial_controller.gd" id="9_g7bfq"]
@@ -88,6 +88,7 @@ position = Vector2(1, 1080)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1770364352]
 
 [node name="PlayerDebugMenu" parent="CanvasLayer" unique_id=1921750732 instance=ExtResource("5_1wklo")]
+visible = false
 offset_top = -1.0
 offset_bottom = -1.0
 

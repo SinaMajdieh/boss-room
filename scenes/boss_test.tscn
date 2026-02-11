@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://svnqmtdjey5a"]
 
 [ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/boss.tscn" id="1_1g87t"]
-[ext_resource type="Script" uid="uid://da37u6qibow2s" path="res://scripts/ui/boss_debug_menu/tranform_label.gd" id="2_bgc3o"]
-[ext_resource type="Script" uid="uid://vohrrg236b6r" path="res://scripts/ui/boss_debug_menu/rotation_label.gd" id="3_kgeu2"]
-[ext_resource type="Script" uid="uid://d1gd24lrljqe7" path="res://scripts/ui/boss_debug_menu/state_label.gd" id="4_tdmd3"]
+[ext_resource type="Script" uid="uid://da37u6qibow2s" path="res://scripts/ui/screens/boss_debug_screen/tranform_label.gd" id="2_bgc3o"]
+[ext_resource type="Script" uid="uid://vohrrg236b6r" path="res://scripts/ui/screens/boss_debug_screen/rotation_label.gd" id="3_kgeu2"]
+[ext_resource type="Script" uid="uid://d1gd24lrljqe7" path="res://scripts/ui/screens/boss_debug_screen/state_label.gd" id="4_tdmd3"]
 [ext_resource type="PackedScene" uid="uid://e5nefeqvv66d" path="res://scenes/player.tscn" id="5_tdmd3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bgc3o"]

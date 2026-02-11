@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c7ckbmjdylh0p"]
+
+[ext_resource type="PackedScene" uid="uid://cunr23ue1b60d" path="res://scenes/ui/ui_layer.tscn" id="1_78s5d"]
+[ext_resource type="Script" uid="uid://yyicrw334w76" path="res://scripts/game_root.gd" id="1_ni5ms"]
+[ext_resource type="PackedScene" uid="uid://csp8h5et47o8t" path="res://scenes/levels/tutorial.tscn" id="2_uebra"]
+
+[node name="GameRoot" type="Node" unique_id=307200108 node_paths=PackedStringArray("level_root", "screen_manager")]
+process_mode = 3
+script = ExtResource("1_ni5ms")
+level_root = NodePath("LevelRoot")
+screen_manager = NodePath("Control/ScreenManager")
+tutorial_level = ExtResource("2_uebra")
+
+[node name="LevelRoot" type="Node" parent="." unique_id=1599446802]
+
+[node name="Control" parent="." unique_id=38670458 instance=ExtResource("1_78s5d")]
+
+[node name="ScreenManager" parent="Control" index="0" unique_id=702543298 node_paths=PackedStringArray("screens")]
+screens = {
+1: NodePath("StartScreen"),
+2: NodePath("PauseScreen")
+}
+
+[editable path="Control"]

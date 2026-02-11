@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bju6odsd6u31m"]
 
 [ext_resource type="PackedScene" uid="uid://e5nefeqvv66d" path="res://scenes/player.tscn" id="1_u52ul"]
-[ext_resource type="PackedScene" uid="uid://e0yemhp07eov" path="res://scenes/ui/player_debug_menu.tscn" id="2_k5f4k"]
-[ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/Boss.tscn" id="3_w8frs"]
+[ext_resource type="PackedScene" uid="uid://e0yemhp07eov" path="res://scenes/ui/screens/player_debug_menu.tscn" id="2_k5f4k"]
+[ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/boss.tscn" id="3_w8frs"]
 [ext_resource type="Script" uid="uid://8am05irgtlwv" path="res://resources/camera/smoothing.gd" id="4_d4w6o"]
 [ext_resource type="Script" uid="uid://dgisv6munbcap" path="res://scripts/camera.gd" id="4_xb4v1"]
 [ext_resource type="Script" uid="uid://c1c1mc4pkt2rm" path="res://resources/camera/look_ahead.gd" id="5_mbbpy"]
