@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bcm2yelyfhv4q"]
+
+[ext_resource type="Script" uid="uid://ciuy1woo1prjp" path="res://scripts/ui/screens/start_screen.gd" id="1_yeyj0"]
+
+[node name="StartScreen" type="Control" unique_id=573403005 node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("1_yeyj0")
+label = NodePath("CenterContainer/Label")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1272334577]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CenterContainer" unique_id=415711788]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "press any key to start"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

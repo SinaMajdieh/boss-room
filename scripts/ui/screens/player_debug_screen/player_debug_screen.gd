@@ -1,0 +1,29 @@
+extends Control
+class_name PlayerDebugScreen
+
+@export var labels_container: Control
+
+var player: Player
+
+func _ready() -> void:
+    try_get_player()
+
+
+func _process(_delta: float) -> void:
+    if not player and visible:
+        hide()
+
+
+func try_get_player() -> void:
+    player = get_tree().get_first_node_in_group("player")
+    if player and not visible:
+        set_labels_player()
+        show()
+
+
+func set_labels_player() -> void:
+    for label: Node in labels_container.get_children():
+        if not label is PlayerDebugLabel:
+            continue
+        label = label as PlayerDebugLabel
+        label.set_player(player)

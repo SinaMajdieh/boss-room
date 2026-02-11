@@ -1,17 +1,18 @@
 [gd_scene format=3 uid="uid://e0yemhp07eov"]
 
-[ext_resource type="Script" uid="uid://bxw45vtmgp7x6" path="res://scripts/ui/player_debug_menu/player_state.gd" id="1_1xyl6"]
-[ext_resource type="Script" uid="uid://bshjho61pkluw" path="res://scripts/ui/player_debug_menu/jump_timer.gd" id="2_8bl0l"]
-[ext_resource type="Script" uid="uid://xhibhf685shx" path="res://scripts/ui/player_debug_menu/health.gd" id="2_avxac"]
-[ext_resource type="Script" uid="uid://dr108mbhicaai" path="res://scripts/ui/player_debug_menu/velocity.gd" id="2_r4825"]
-[ext_resource type="Script" uid="uid://l75vk7eqalfp" path="res://scripts/ui/player_debug_menu/position.gd" id="3_fl6t8"]
-[ext_resource type="Script" uid="uid://c12es5mc3ga5g" path="res://scripts/ui/player_debug_menu/range_attack.gd" id="5_3a78k"]
-[ext_resource type="Script" uid="uid://wk6fb421aysx" path="res://scripts/ui/player_debug_menu/coyote_timer.gd" id="5_fl6t8"]
-[ext_resource type="Script" uid="uid://btmo8x4etyw0w" path="res://scripts/ui/player_debug_menu/dash_cool_down.gd" id="6_0cfry"]
-[ext_resource type="Script" uid="uid://c0wobme8s8kxw" path="res://scripts/ui/player_debug_menu/combo_timer.gd" id="8_imwfo"]
-[ext_resource type="Script" uid="uid://b8i2h7f1uy0ac" path="res://scripts/ui/player_debug_menu/combo_index.gd" id="9_hbebu"]
+[ext_resource type="Script" uid="uid://bxw45vtmgp7x6" path="res://scripts/ui/screens/player_debug_screen/player_state.gd" id="1_1xyl6"]
+[ext_resource type="Script" uid="uid://nqn3fqtym37u" path="res://scripts/ui/screens/player_debug_screen/player_debug_screen.gd" id="1_k8uit"]
+[ext_resource type="Script" uid="uid://bshjho61pkluw" path="res://scripts/ui/screens/player_debug_screen/jump_timer.gd" id="2_8bl0l"]
+[ext_resource type="Script" uid="uid://xhibhf685shx" path="res://scripts/ui/screens/player_debug_screen/health.gd" id="2_avxac"]
+[ext_resource type="Script" uid="uid://dr108mbhicaai" path="res://scripts/ui/screens/player_debug_screen/velocity.gd" id="2_r4825"]
+[ext_resource type="Script" uid="uid://l75vk7eqalfp" path="res://scripts/ui/screens/player_debug_screen/position.gd" id="3_fl6t8"]
+[ext_resource type="Script" uid="uid://c12es5mc3ga5g" path="res://scripts/ui/screens/player_debug_screen/range_attack.gd" id="5_3a78k"]
+[ext_resource type="Script" uid="uid://wk6fb421aysx" path="res://scripts/ui/screens/player_debug_screen/coyote_timer.gd" id="5_fl6t8"]
+[ext_resource type="Script" uid="uid://btmo8x4etyw0w" path="res://scripts/ui/screens/player_debug_screen/dash_cool_down.gd" id="6_0cfry"]
+[ext_resource type="Script" uid="uid://c0wobme8s8kxw" path="res://scripts/ui/screens/player_debug_screen/combo_timer.gd" id="8_imwfo"]
+[ext_resource type="Script" uid="uid://b8i2h7f1uy0ac" path="res://scripts/ui/screens/player_debug_screen/combo_index.gd" id="9_hbebu"]
 
-[node name="PlayerDebugMenu" type="Control" unique_id=1921750732]
+[node name="PlayerDebugMenu" type="Control" unique_id=1921750732 node_paths=PackedStringArray("labels_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +21,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_k8uit")
+labels_container = NodePath("VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=11153017]
 layout_mode = 0
@@ -95,13 +98,3 @@ theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
 theme_override_font_sizes/font_size = 22
 text = "Combo Index: "
 script = ExtResource("9_hbebu")
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1028999273]
-layout_mode = 2
-
-[node name="Info" type="Label" parent="VBoxContainer" unique_id=2046936105]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.65882355, 0.62352943, 0.6862745, 1)
-theme_override_font_sizes/font_size = 22
-text = "Press Right Mouse Button to take knock back
-Press Left mouse Button to take damage"
