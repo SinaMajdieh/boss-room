@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ij2thayasijt"]
 
 [ext_resource type="Script" uid="uid://cbcepfhsyf5lw" path="res://scripts/ui/tutorial/tutorial_hint.gd" id="1_v0hd3"]
-[ext_resource type="Script" uid="uid://cltxfyj6clo2f" path="res://scripts/animators/base_animator.gd" id="2_7ck24"]
+[ext_resource type="Script" uid="uid://dd65e40jk5la6" path="res://scripts/animators/base_ui_animator.gd" id="2_7ck24"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0hd3"]
 
@@ -14,11 +14,11 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_v0hd3")
 script = ExtResource("1_v0hd3")
 label = NodePath("MarginContainer/Label")
-animator = NodePath("BaseUIAnimator")
+animator = NodePath("")
 
-[node name="BaseUIAnimator" type="Node" parent="." unique_id=1853936692]
+[node name="BaseUIAnimator" type="Node" parent="." unique_id=716579871]
 script = ExtResource("2_7ck24")
-metadata/_custom_type_script = "uid://cltxfyj6clo2f"
+metadata/_custom_type_script = "uid://dd65e40jk5la6"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1254571863]
 layout_mode = 1

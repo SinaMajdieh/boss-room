@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b2k6lcgfywio"]
 
 [ext_resource type="Script" uid="uid://cjvym5m8sei8p" path="res://scripts/ui/screens/pause_screen.gd" id="1_6g2nm"]
-[ext_resource type="Script" path="res://scripts/animators/base_animator.gd" id="2_me20o"]
+[ext_resource type="Script" uid="uid://dd65e40jk5la6" path="res://scripts/animators/base_ui_animator.gd" id="2_me20o"]
 
 [node name="PauseScreen" type="Control" unique_id=1469721406 node_paths=PackedStringArray("resume_button", "menu_button", "animator")]
 layout_mode = 3
@@ -60,6 +60,6 @@ theme_override_font_sizes/font_size = 25
 text = "Main Menue"
 flat = true
 
-[node name="BaseUIAnimator" type="Node" parent="." unique_id=538633952]
+[node name="BaseUIAnimator" type="Node" parent="." unique_id=769773310]
 script = ExtResource("2_me20o")
-metadata/_custom_type_script = "uid://cltxfyj6clo2f"
+metadata/_custom_type_script = "uid://dd65e40jk5la6"
