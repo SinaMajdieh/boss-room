@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c2gwgmbv5vuk6" path="res://assets/sprites/tileset/tileset.png" id="1_ub0e1"]
 [ext_resource type="PackedScene" uid="uid://e5nefeqvv66d" path="res://scenes/player.tscn" id="2_1r3rq"]
-[ext_resource type="Script" path="res://scripts/camera.gd" id="3_1r3rq"]
+[ext_resource type="Script" uid="uid://dgisv6munbcap" path="res://scripts/camera.gd" id="3_1r3rq"]
 [ext_resource type="PackedScene" uid="uid://8oiwdwkr0l0n" path="res://scenes/dead_zone.tscn" id="4_u4f7j"]
 [ext_resource type="PackedScene" uid="uid://ij2thayasijt" path="res://scenes/ui/tutorial_hint.tscn" id="7_4a02d"]
 [ext_resource type="Script" uid="uid://dxodqm7wjc7f2" path="res://scripts/tutorial/tutorial_area.gd" id="7_g7bfq"]
@@ -26,7 +26,6 @@ script = ExtResource("8_4a02d")
 id = &"move"
 text = "Press {move_left} and {move_right} to move left and right"
 input_actions = Array[String](["move_left", "move_right"])
-show_once = false
 metadata/_custom_type_script = "uid://bj7vi8g85jnri"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irnc0"]
@@ -38,7 +37,6 @@ id = &"jump"
 text = "Jump using {jump}
 Holding {jump} will let you jump higher"
 input_actions = Array[String](["jump"])
-show_once = false
 metadata/_custom_type_script = "uid://bj7vi8g85jnri"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a02d"]
@@ -50,7 +48,6 @@ id = &"dash"
 text = "Dash with {dash}
 Dashing will give you a speed boost for a short period of time"
 input_actions = Array[String](["dash"])
-show_once = false
 metadata/_custom_type_script = "uid://bj7vi8g85jnri"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uu0hj"]

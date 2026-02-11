@@ -5,7 +5,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0hd3"]
 
-[node name="Control" type="Panel" unique_id=859014493 node_paths=PackedStringArray("label", "animator")]
+[node name="Control2" type="Panel" unique_id=859014493 node_paths=PackedStringArray("label", "animator")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,7 +14,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_v0hd3")
 script = ExtResource("1_v0hd3")
 label = NodePath("MarginContainer/Label")
-animator = NodePath("")
+animator = NodePath("BaseUIAnimator")
 
 [node name="BaseUIAnimator" type="Node" parent="." unique_id=716579871]
 script = ExtResource("2_7ck24")

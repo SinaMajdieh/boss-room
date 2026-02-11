@@ -21,4 +21,8 @@ metadata/_custom_type_script = "uid://caq45nbtbdupp"
 [node name="PauseScreen" parent="ScreenManager" unique_id=1469721406 instance=ExtResource("3_nhiu8")]
 
 [node name="PlayerDebugMenu" parent="." unique_id=1921750732 instance=ExtResource("1_mvntu")]
-visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1

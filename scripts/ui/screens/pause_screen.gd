@@ -23,8 +23,9 @@ func _ready():
 func show_screen() -> void:
 	if animator:
 		animator.animate_in(self)
-		return
-	show()
+	else:
+		show()
+	resume_button.call_deferred("grab_focus")
 
 
 func hide_screen() -> void:
