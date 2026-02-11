@@ -1,11 +1,15 @@
 extends PlayerState
 
-@export var dash_speed: float = 900.0
+@export var dash_speed: float = 2700.0
 @export var dash_timer: Timer
 @export var dash_cool_down: Timer
 
 var previous_velocity: float
 var dash_direction: float = 0.0
+
+
+func _ready() -> void:
+	dash_timer.timeout.connect(_on_dash_timer_timeout)
 
 
 ## Called when entering the dash state. Sets up collision, direction, and starts the dash timer.

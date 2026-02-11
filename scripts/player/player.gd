@@ -29,10 +29,11 @@ func _process(_delta: float) -> void:
 		health.hurt()
 	if Input.is_action_just_pressed("apply_knock_back"):
 		movement.apply_knock_back(5 * movement.speed)
-
-
-func _physics_process(_delta: float) -> void:
 	move_and_slide()
+
+
+# func _physics_process(_delta: float) -> void:
+# 	move_and_slide()
 
 
 ## Returns the current state name from the state machine
