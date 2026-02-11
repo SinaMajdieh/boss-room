@@ -432,7 +432,7 @@ metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
 [node name="Dash" type="Node" parent="StateMachine" unique_id=1751237948 node_paths=PackedStringArray("dash_timer", "dash_cool_down", "player")]
 script = ExtResource("7_y4r1p")
-dash_speed = 2700.0
+dash_speed = 1500.0
 dash_timer = NodePath("../../Timers/DashTimer")
 dash_cool_down = NodePath("../../Timers/DashCoolDown")
 player = NodePath("../..")
@@ -499,7 +499,7 @@ script = ExtResource("9_ur7pv")
 player = NodePath("../..")
 
 [node name="DashTimer" type="Timer" parent="Timers" unique_id=735738962]
-wait_time = 0.12
+wait_time = 0.2
 one_shot = true
 
 [node name="DashCoolDown" type="Timer" parent="Timers" unique_id=1223274591]
@@ -516,5 +516,4 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[connection signal="timeout" from="Timers/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/Combo" to="StateMachine/Attack" method="_on_combo_timer_timeout"]

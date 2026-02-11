@@ -2,23 +2,25 @@
 
 [ext_resource type="Script" uid="uid://cbcepfhsyf5lw" path="res://scripts/ui/tutorial/hint.gd" id="1_ryic1"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryic1"]
+
 [node name="Control" type="Panel" unique_id=859014493 node_paths=PackedStringArray("label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ryic1")
 script = ExtResource("1_ryic1")
 label = NodePath("MarginContainer/Label")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1254571863]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -297.0
-offset_bottom = 60.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -27,5 +29,6 @@ theme_override_constants/margin_bottom = 20
 [node name="Label" type="Label" parent="MarginContainer" unique_id=1523596234]
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 40
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 30
+autowrap_mode = 2
+clip_text = true
