@@ -12,4 +12,5 @@
 *.godot/
 .editorconfig
 .vscode/
+export_presets.cfg
 prompts.md
