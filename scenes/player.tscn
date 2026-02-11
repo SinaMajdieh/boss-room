@@ -265,7 +265,7 @@ shoot_cool_down = NodePath("Timers/ShootCoolDown")
 sprite_frames = SubResource("SpriteFrames_487ah")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.7714301
+frame_progress = 0.86396927
 script = ExtResource("3_wnwbv")
 metadata/_custom_type_script = "uid://2bnqxjsoja2i"
 
