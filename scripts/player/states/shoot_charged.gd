@@ -31,13 +31,12 @@ func next_stage() -> void:
 	if charge_state_index < player_bullet_scene.size() - 1:
 		charge_state_index += 1
 		var new_bullet = player_bullet_scene[charge_state_index].instantiate() as ChargeBullet
-		update_bullet_position()
 		new_bullet.charged.connect(_on_bullet_charged)
 
 		get_tree().current_scene.add_child(new_bullet)
-
 		_free_bullet()
 		bullet_instance = new_bullet
+		update_bullet_position()
 
 
 ## Handles player movement and bullet charging input during the charge shot state.
@@ -48,8 +47,8 @@ func on_process(delta: float) -> void:
 		player.movement.process_jump()
 	player.movement.apply_movement(delta)
 	if PlayerInput.is_shooting() and bullet_instance:
-		update_bullet_position()
 		bullet_instance.advance_charge(delta)
+		update_bullet_position()
 	elif PlayerInput.shot_released() and bullet_instance:
 		release_bullet()
 
