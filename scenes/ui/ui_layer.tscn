@@ -7,8 +7,6 @@
 
 [node name="Control" type="CanvasLayer" unique_id=38670458]
 
-[node name="PlayerDebugMenu" parent="." unique_id=1921750732 instance=ExtResource("1_mvntu")]
-
 [node name="ScreenManager" type="Node" parent="." unique_id=702543298 node_paths=PackedStringArray("screens")]
 process_mode = 3
 script = ExtResource("1_0d208")
@@ -21,3 +19,6 @@ metadata/_custom_type_script = "uid://caq45nbtbdupp"
 [node name="StartScreen" parent="ScreenManager" unique_id=573403005 instance=ExtResource("2_nhiu8")]
 
 [node name="PauseScreen" parent="ScreenManager" unique_id=1469721406 instance=ExtResource("3_nhiu8")]
+
+[node name="PlayerDebugMenu" parent="." unique_id=1921750732 instance=ExtResource("1_mvntu")]
+visible = false

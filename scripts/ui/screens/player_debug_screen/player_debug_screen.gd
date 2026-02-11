@@ -12,6 +12,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
     if not player and visible:
         hide()
+        try_get_player()
 
 
 func try_get_player() -> void:
@@ -26,6 +27,7 @@ func set_labels_player() -> void:
             continue
         label = label as PlayerDebugLabel
         label.set_player(player)
+
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("debug_screen"):
