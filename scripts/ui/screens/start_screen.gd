@@ -1,4 +1,4 @@
-extends Control
+extends BaseScreen
 
 signal start_requested()
 

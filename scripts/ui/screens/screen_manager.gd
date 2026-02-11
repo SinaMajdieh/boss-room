@@ -5,7 +5,7 @@ signal start_game_requested()
 signal resume_requested()
 signal main_menu_requested()
 
-@export var screens: Dictionary[Screen, Control]
+@export var screens: Dictionary[Screen, BaseScreen]
 @export var current_screen: Screen = Screen.NONE:
 	set(value):
 		current_screen = value
@@ -53,15 +53,15 @@ func show(screen: Screen) -> void:
 	if screen == Screen.NONE:
 		return
 	
-	var screen_node: Control = screens.get(screen)
+	var screen_node: BaseScreen = screens.get(screen)
 	if screen_node:
-		screen_node.show()
+		screen_node.show_screen()
 		screen_node.grab_focus()
 
 
 func hide_all() -> void:
-	for screen in screens.values():
-		screen.hide()
+	for screen: BaseScreen in screens.values():
+		screen.hide_screen()
 	current_screen = Screen.NONE
 
 

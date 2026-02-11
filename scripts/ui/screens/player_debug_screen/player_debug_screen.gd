@@ -5,12 +5,13 @@ class_name PlayerDebugScreen
 
 var player: Player
 
+
 func _ready() -> void:
     try_get_player()
 
 
 func _process(_delta: float) -> void:
-    if not player and visible:
+    if not player:
         hide()
         try_get_player()
 
