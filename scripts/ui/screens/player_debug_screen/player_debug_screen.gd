@@ -18,7 +18,6 @@ func try_get_player() -> void:
     player = get_tree().get_first_node_in_group("player")
     if player and not visible:
         set_labels_player()
-        show()
 
 
 func set_labels_player() -> void:
@@ -27,3 +26,7 @@ func set_labels_player() -> void:
             continue
         label = label as PlayerDebugLabel
         label.set_player(player)
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("debug_screen"):
+        visible = not visible
