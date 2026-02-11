@@ -10,6 +10,7 @@ var combo: int = 0
 
 # Initializes the attack state, handling combo continuation or reset
 func enter(_previous_state: String) -> void:
+	super(_previous_state)
 	if not in_combo():
 		reset_combo()
 	else:
@@ -38,8 +39,8 @@ func exit() -> void:
 
 
 # Transitions to idle state when animation completes
-func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == attack.animation_name:
+func _on_animation_finished(animation_name_: String) -> void:
+	if animation_name_ == attack.animation_name:
 		transition_to("idle")
 
 

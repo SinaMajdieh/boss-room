@@ -10,6 +10,7 @@ var dash_direction: float = 0.0
 
 ## Called when entering the dash state. Sets up collision, direction, and starts the dash timer.
 func enter(_previous_state: String) -> void:
+	super(_previous_state)
 	player.collision_controller.switch(PlayerCollisionController.State.DASH)
 	dash_direction = player.movement.get_facing_direction().x
 	previous_velocity = player.velocity.x

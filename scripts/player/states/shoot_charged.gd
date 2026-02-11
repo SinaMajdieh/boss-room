@@ -13,6 +13,7 @@ var charge_state_index: int = 0
 
 ## Called when entering the charge shot state. Initializes the first charge stage.
 func enter(_previous_state: String) -> void:
+	super(_previous_state)
 	charge_state_index = -1
 	next_stage()
 

@@ -18,6 +18,7 @@ func on_physics_process(delta: float) -> void:
 
 ## Initializes fall state and starts coyote timer if transitioning from certain states.
 func enter(previous_state: String) -> void:
+	super(previous_state)
 	if previous_state not in ["jump", "dash", "fall_no_coyote"]:
 		player.coyote_timer.start()
 

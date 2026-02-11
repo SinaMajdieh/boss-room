@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export_category("Components")
+@export var animations: AnimatedSprite
 @export var movement: BaseMovement
 @export var health: PlayerHealth
 @export var state_machine: StateMachine
@@ -50,6 +51,11 @@ func hurt(amount: Variant, direction: Vector2 = Vector2.ZERO, knock_back: float 
 	var knock_back_direction: float = -1.0 if direction.direction_to(global_position).x < 0 else 1.0
 	state_machine.get_node_state("hurt").set_attributes(amount, knock_back_direction * knock_back)
 	state_machine.transition(state_machine.current_state_name, "hurt")
+
+
+## Kill the player
+func kill() -> void:
+	health.hurt(health.current_health)
 
 
 ## Transitions the player to the dead state when health reaches zero

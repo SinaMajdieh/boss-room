@@ -3,6 +3,19 @@ class_name PlayerState
 
 @export_category("Components")
 @export var player: Player
+@export var animation_name: String = ""
+
+var animations: AnimatedSprite
+
+
+func play_animation() -> void:
+	if animations.has_animation(animation_name):
+		animations.play(animation_name)
+
+
+func enter(_previous_state: String) -> void:
+	animations = player.animations
+	play_animation()
 
 
 ## Checks if the player is moving and on the floor, transitions to run state if true.

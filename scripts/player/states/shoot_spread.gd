@@ -9,6 +9,7 @@ extends PlayerState
 
 ## Creates and fires three bullets in a spread pattern, then transitions to idle or fall state.
 func enter(_previous_state: String) -> void:
+	super(_previous_state)
 	var spread_shot_angles: Array = [-15, 0, 15]
 	for angle in spread_shot_angles:
 		var bullet_instance: BaseBullet = player_bullet_scene.instantiate() as BaseBullet

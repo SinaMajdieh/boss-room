@@ -12,6 +12,7 @@ func set_attributes(damage_: Variant = 1, knock_back_: float = 0.0) -> void:
 
 ## Enters the hurt state and applies damage and knockback.
 func enter(_previous_state: String) -> void:
+	super(_previous_state)
 	player.hurt_timer.start()
 	player.movement.apply_knock_back(knock_back)
 	player.health.hurt(damage)

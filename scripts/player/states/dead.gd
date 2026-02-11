@@ -1,6 +1,7 @@
 extends PlayerState
 
 func enter(_previous_state: String) -> void:
+	super(_previous_state)
 	player.collision_controller.switch(PlayerCollisionController.State.DEAD)
 
 

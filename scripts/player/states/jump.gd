@@ -13,6 +13,7 @@ func on_process(_delta: float) -> void:
 
 
 func enter(_previous_state: String) -> void:
+    super(_previous_state)
     # Handle jump.
     player.movement.process_jump()
 
