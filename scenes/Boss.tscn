@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://kybtfskr8btj"]
 
 [ext_resource type="Script" uid="uid://dja4ry3jhx1ip" path="res://scripts/boss/boss.gd" id="1_0onds"]
+[ext_resource type="Texture2D" uid="uid://362qc7symdu1" path="res://assets/sprites/boss/boss_sheet.png" id="2_8eiau"]
 [ext_resource type="Script" uid="uid://r5ukbyok102l" path="res://scripts/boss/health.gd" id="2_lfs1x"]
 [ext_resource type="Script" uid="uid://b8qshsmsa476h" path="res://scripts/boss/movement.gd" id="3_8eiau"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="4_vn2fc"]
@@ -14,7 +15,7 @@
 [ext_resource type="Script" uid="uid://cww6du7tx4w7l" path="res://scripts/pivots/pivot.gd" id="11_25au8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_my2wn"]
-radius = 37.5
+radius = 35.0
 height = 250.0
 
 [node name="Boss" type="CharacterBody2D" unique_id=1571949760 node_paths=PackedStringArray("health", "movement", "pivots", "state_machine", "collision")]
@@ -26,6 +27,9 @@ movement = NodePath("Movement")
 pivots = NodePath("Pivots")
 state_machine = NodePath("StateMachine")
 collision = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=743684209]
+texture = ExtResource("2_8eiau")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1732270648 groups=["shapes"]]
 shape = SubResource("CapsuleShape2D_my2wn")
