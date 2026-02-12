@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dwmje6n7m1ip" path="res://scripts/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="2_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://nwh6bbmnqna" path="res://assets/sprites/player/player-sheet.png" id="2_487ah"]
 [ext_resource type="Script" uid="uid://4yedb32w5euq" path="res://scripts/attack.gd" id="2_a8ls1"]
 [ext_resource type="Script" uid="uid://dd03qhd78hq3d" path="res://scripts/player/collision.gd" id="2_d2wvv"]
 [ext_resource type="PackedScene" uid="uid://c7ss0hc76jbi4" path="res://scenes/hurtbox.tscn" id="2_f1ej7"]
 [ext_resource type="Script" uid="uid://dla3v6qu2aw2" path="res://scripts/hitbox.gd" id="2_qfm1y"]
-[ext_resource type="Texture2D" uid="uid://cnshd1x8hols4" path="res://assets/sprites/player/player.png" id="2_wqfne"]
 [ext_resource type="Script" uid="uid://ciyeqcbv66srx" path="res://scripts/player/states/idle.gd" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://2bnqxjsoja2i" path="res://scripts/animated_sprite.gd" id="3_wnwbv"]
 [ext_resource type="Script" uid="uid://cljew3m8klo23" path="res://scripts/player/health.gd" id="4_3v2ag"]
@@ -33,15 +33,27 @@
 [ext_resource type="PackedScene" uid="uid://wr48uowejft3" path="res://scenes/bullet/player_charged_bullet_charged.tscn" id="26_wqfne"]
 [ext_resource type="PackedScene" uid="uid://d1er3hs53jmln" path="res://scenes/bullet/player_charged_bullet_explosive.tscn" id="27_wnwbv"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gl8cc"]
-atlas = ExtResource("2_wqfne")
-region = Rect2(0, 0, 20, 50)
+[sub_resource type="AtlasTexture" id="AtlasTexture_md1ol"]
+atlas = ExtResource("2_487ah")
+region = Rect2(0, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnwbv"]
+atlas = ExtResource("2_487ah")
+region = Rect2(0, 0, 50, 50)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_487ah"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gl8cc")
+"texture": SubResource("AtlasTexture_md1ol")
+}],
+"loop": false,
+"name": &"death",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnwbv")
 }],
 "loop": true,
 "name": &"idle",
@@ -271,7 +283,6 @@ shoot_cool_down = NodePath("Timers/ShootCoolDown")
 sprite_frames = SubResource("SpriteFrames_487ah")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.86396927
 script = ExtResource("3_wnwbv")
 metadata/_custom_type_script = "uid://2bnqxjsoja2i"
 
@@ -445,11 +456,6 @@ dash_cool_down = NodePath("../../Timers/DashCoolDown")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
-[node name="Dead" type="Node" parent="PlayerStateMachine" unique_id=1134492197 node_paths=PackedStringArray("player")]
-script = ExtResource("11_jej6c")
-player = NodePath("../..")
-metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
-
 [node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=946608258 node_paths=PackedStringArray("attack_sequence", "combo_timer", "player")]
 script = ExtResource("13_oprun")
 attack_sequence = [NodePath("../../Attacks/Attack_1"), NodePath("../../Attacks/Attack_2"), NodePath("../../Attacks/Attack_3")]
@@ -490,6 +496,12 @@ metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 script = ExtResource("24_ujl30")
 player_bullet_scene = Array[PackedScene]([ExtResource("25_dt7fs"), ExtResource("26_wqfne"), ExtResource("27_wnwbv")])
 player = NodePath("../..")
+metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
+
+[node name="Dead" type="Node" parent="PlayerStateMachine" unique_id=588456102 node_paths=PackedStringArray("player")]
+script = ExtResource("11_jej6c")
+player = NodePath("../..")
+animation_name = "death"
 metadata/_custom_type_script = "uid://dg6fyq3asbqgo"
 
 [node name="Timers" type="Node" parent="." unique_id=881266517]
