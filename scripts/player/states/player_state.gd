@@ -8,13 +8,21 @@ class_name PlayerState
 var animations: AnimatedSprite
 
 
+func play_transition_animation(previous_state: String) -> void:
+	var transition_animation_name: String = "%s_%s" % [previous_state, name.to_lower()]
+	if animations.has_animation(transition_animation_name):
+		animations.play(transition_animation_name)
+		await animations.animation_finished
+
+
 func play_animation() -> void:
 	if animations.has_animation(animation_name):
 		animations.play(animation_name)
 
 
-func enter(_previous_state: String) -> void:
+func enter(previous_state: String) -> void:
 	animations = player.animations
+	await play_transition_animation(previous_state)
 	play_animation()
 
 
