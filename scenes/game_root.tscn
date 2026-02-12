@@ -1,15 +1,54 @@
 [gd_scene format=3 uid="uid://c7ckbmjdylh0p"]
 
 [ext_resource type="PackedScene" uid="uid://cunr23ue1b60d" path="res://scenes/ui/ui_layer.tscn" id="1_78s5d"]
-[ext_resource type="Script" uid="uid://yyicrw334w76" path="res://scripts/game_root.gd" id="1_ni5ms"]
+[ext_resource type="Script" uid="uid://yyicrw334w76" path="res://scripts/root/game_root.gd" id="1_ni5ms"]
 [ext_resource type="PackedScene" uid="uid://csp8h5et47o8t" path="res://scenes/levels/tutorial.tscn" id="2_uebra"]
+[ext_resource type="Script" uid="uid://bteogiun258he" path="res://resources/consol_debug.gd" id="3_6v30a"]
+[ext_resource type="Script" uid="uid://bslgg0p7qqrqc" path="res://scripts/root/states/start.gd" id="3_iusj4"]
+[ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://scripts/state_machine/state_machine.gd" id="3_jb3nc"]
+[ext_resource type="Script" uid="uid://chb7ttupp3pcx" path="res://scripts/root/states/playing.gd" id="4_a1rh6"]
+[ext_resource type="Script" uid="uid://bdia8jlihthok" path="res://scripts/root/states/load.gd" id="4_ylec3"]
+[ext_resource type="Script" uid="uid://cnkmybsdw1m3k" path="res://scripts/root/states/pause.gd" id="7_6v30a"]
 
-[node name="GameRoot" type="Node" unique_id=307200108 node_paths=PackedStringArray("level_root", "screen_manager")]
+[sub_resource type="Resource" id="Resource_1brn0"]
+script = ExtResource("3_6v30a")
+enabled = true
+color = "green"
+metadata/_custom_type_script = "uid://bteogiun258he"
+
+[node name="GameRoot" type="Node" unique_id=307200108 node_paths=PackedStringArray("level_root", "screen_manager", "state_machine")]
 process_mode = 3
 script = ExtResource("1_ni5ms")
 level_root = NodePath("LevelRoot")
 screen_manager = NodePath("Control/ScreenManager")
+state_machine = NodePath("GameStateMachine")
+
+[node name="GameStateMachine" type="Node" parent="." unique_id=1192097728 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_jb3nc")
+initial_state = NodePath("Start")
+debug = SubResource("Resource_1brn0")
+metadata/_custom_type_script = "uid://c5h6mtgbt70v4"
+
+[node name="Start" type="Node" parent="GameStateMachine" unique_id=1226833688 node_paths=PackedStringArray("game_root")]
+script = ExtResource("3_iusj4")
+game_root = NodePath("../..")
+metadata/_custom_type_script = "uid://b85jat36iiy3g"
+
+[node name="Load" type="Node" parent="GameStateMachine" unique_id=1095626194 node_paths=PackedStringArray("game_root")]
+script = ExtResource("4_ylec3")
 tutorial_level = ExtResource("2_uebra")
+game_root = NodePath("../..")
+metadata/_custom_type_script = "uid://b85jat36iiy3g"
+
+[node name="Playing" type="Node" parent="GameStateMachine" unique_id=1322584379 node_paths=PackedStringArray("game_root")]
+script = ExtResource("4_a1rh6")
+game_root = NodePath("../..")
+metadata/_custom_type_script = "uid://b85jat36iiy3g"
+
+[node name="Pause" type="Node" parent="GameStateMachine" unique_id=1846259792 node_paths=PackedStringArray("game_root")]
+script = ExtResource("7_6v30a")
+game_root = NodePath("../..")
+metadata/_custom_type_script = "uid://b85jat36iiy3g"
 
 [node name="LevelRoot" type="Node" parent="." unique_id=1599446802]
 
