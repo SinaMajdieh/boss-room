@@ -5,6 +5,7 @@ class_name StateMachine
 signal state_changed(new_state)
 
 @export var initial_state: NodeState
+@export var debug: ConsolDebug = ConsolDebug.new()
 
 var states: Dictionary[String, NodeState]
 var current_state: NodeState
@@ -55,7 +56,11 @@ func add_states(node: Node = self) -> void:
 func transition(from_state_name: String, to_state_name: String) -> void:
 	to_state_name = to_state_name.to_lower()
 	from_state_name = from_state_name.to_lower()
-	print("transition request from %s to %s (current: %s)" % [from_state_name, to_state_name, current_state_name])
+	debug.log_message(
+		"[%s] transition request from %s to %s (current: %s)" % 
+		[name,from_state_name, to_state_name, current_state_name]
+	)
+	
 	
 	if current_state_name != from_state_name:
 		return
@@ -65,7 +70,7 @@ func transition(from_state_name: String, to_state_name: String) -> void:
 	var new_state: NodeState = states.get(to_state_name)
 	
 	if not new_state or not new_state.can_transition():
-		push_warning("Cannot transition from %s to %s" % [from_state_name, to_state_name])
+		debug.log_warning("[%s] Cannot transition from %s to %s" % [name, from_state_name, to_state_name])
 		return
 
 	if current_state:
