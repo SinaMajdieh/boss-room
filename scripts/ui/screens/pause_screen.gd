@@ -16,20 +16,22 @@ func _ready():
 			resume_requested.emit()
 	)
 	menu_button.pressed.connect(
-		func(): main_menu_requested.emit()
+		func(): 
+			main_menu_requested.emit()
 	)
 
 
-func show_screen() -> void:
+func show_screen_animated() -> void:
 	if animator:
 		animator.animate_in(self)
-	else:
-		show()
+	
+	show_screen()
 	resume_button.call_deferred("grab_focus")
 
 
-func hide_screen() -> void:
+func hide_screen_animated() -> void:
 	if animator:
 		animator.animate_out(self)
-		return
-	hide()
+		await animator.tween.finished
+
+	hide_screen()

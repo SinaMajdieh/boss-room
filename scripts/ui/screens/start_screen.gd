@@ -1,7 +1,5 @@
 extends BaseScreen
 
-signal start_requested()
-
 @export var label: Label
 @export var blink_animation: TweenProperty = TweenProperty.new(0.9)
 
@@ -9,17 +7,7 @@ var tween: Tween
 
 
 func _ready() -> void:
-	visibility_changed.connect(_on_visibility_changed)
 	set_process_input(true)
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not visible:
-		return
-	
-	if event is InputEventKey and event.is_pressed():
-		accept_event()
-		start_requested.emit()
 
 
 func start_blink() -> void:
@@ -41,9 +29,13 @@ func stop_blink() -> void:
 		tween.kill()
 
 
-func _on_visibility_changed() -> void:
-	if visible:
-		start_blink()
-		return
+func show_screen() -> void:
+	start_blink()
+	show()
+	show_finished.emit()
+
+
+func hide_screen() -> void:
 	stop_blink()
-	
+	hide()
+	hide_finished.emit()

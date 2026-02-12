@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bcm2yelyfhv4q" path="res://scenes/ui/screens/start_screen.tscn" id="2_nhiu8"]
 [ext_resource type="PackedScene" uid="uid://b2k6lcgfywio" path="res://scenes/ui/screens/pause_screen.tscn" id="3_nhiu8"]
 
-[node name="Control" type="CanvasLayer" unique_id=38670458]
+[node name="UILayer" type="CanvasLayer" unique_id=38670458]
 
 [node name="ScreenManager" type="Node" parent="." unique_id=702543298 node_paths=PackedStringArray("screens")]
 process_mode = 3
