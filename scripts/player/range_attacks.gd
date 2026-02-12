@@ -2,6 +2,7 @@ extends Node
 class_name PlayerRangeAttacks
 
 @export var attack_states: Array[PlayerState] = []
+@export var bullet_spawn_points: Dictionary[PlayerShootState.VerticalState, Node2D]
 
 @export var current_attack_index: int = 0
 
@@ -24,6 +25,13 @@ func get_current_attack_state() -> PlayerState:
 func get_attack_name() -> String:
     var current_state = get_current_attack_state()
     return current_state.name.to_lower() if current_state else "none"
+
+
+func get_bullet_spawn_point(vertical_state: PlayerShootState.VerticalState) -> Vector2:
+    var spawn_point: Node2D = bullet_spawn_points.get(vertical_state)
+    if not spawn_point:
+        return Vector2.ZERO
+    return spawn_point.global_position
 
 
 ## Handles input to cycle to the advance_attack attack when the "next_attack" action is pressed.
