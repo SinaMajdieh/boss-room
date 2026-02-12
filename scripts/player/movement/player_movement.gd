@@ -10,6 +10,8 @@ func face(direction: float) -> void:
     if direction > 0 and facing_left:
         player.transform.x *= -1
         facing_left = false
-    if direction < 0 and not facing_left:
+        turn_around.emit()
+    elif direction < 0 and not facing_left:
         player.transform.x *= -1
         facing_left = true
+        turn_around.emit()

@@ -3,7 +3,7 @@ class_name Player
 
 @export_category("Components")
 @export var animations: AnimatedSprite
-@export var movement: BaseMovement
+@export var movement: PlayerMovement
 @export var health: PlayerHealth
 @export var state_machine: StateMachine
 @export var collision_controller: PlayerCollisionController

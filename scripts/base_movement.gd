@@ -1,6 +1,8 @@
 extends Node
 class_name BaseMovement
 
+signal turn_around()
+
 @export var can_take_knock_back: bool = true
 
 var facing_left: bool = false
