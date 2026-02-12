@@ -21,7 +21,7 @@ func hurt(amount: Variant = 1) -> void:
         return
     current_health = clamp(current_health - amount, 0, max_health)
     if current_health <= 0:
-        depleted()
+        _depleted()
 
 
 ## Increases health by the specified amount, clamped to max_health
@@ -31,11 +31,11 @@ func heal(amount: Variant = 1) -> void:
 
 
 ## Emits the health_depleted signal
-func depleted() -> void:
+func _depleted() -> void:
     health_depleted.emit()
 
 
-## Returns true if current health is depleted
+## Returns true if current health is _depleted
 func is_depleted() -> bool:
     return current_health <= 0.0
 

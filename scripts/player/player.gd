@@ -20,7 +20,7 @@ class_name Player
 
 func _ready() -> void:
 	## Connect health depletion signal to trigger death state
-	health.health_depleted.connect(die)
+	health.health_depleted.connect(_on_killed)
 
 
 func _process(_delta: float) -> void:
@@ -60,7 +60,7 @@ func kill() -> void:
 
 
 ## Transitions the player to the dead state when health reaches zero
-func die() -> void:
+func _on_killed() -> void:
 	state_machine.transition(state_machine.current_state_name, "dead")
 
 
