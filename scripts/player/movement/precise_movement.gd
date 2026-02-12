@@ -50,9 +50,8 @@ func process_jump() -> void:
 		player.jump_timer.stop()
 
 
-## Applies knockback velocity in the opposite direction the player is facing.
+## Applies knockback velocity in the opposite direction of player facing
 func apply_knock_back(knock_back_velocity: float) -> void:
-	if not facing_left:
-		player.velocity.x = -knock_back_velocity
-	else:
-		player.velocity.x = knock_back_velocity
+	if not can_take_knock_back:
+		return
+	player.velocity.x = knock_back_velocity

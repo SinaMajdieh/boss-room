@@ -67,6 +67,8 @@ func process_jump() -> void:
 
 ## Applies knockback to the boss.
 func apply_knock_back(knock_back_velocity: float) -> void:
+	if not can_take_knock_back:
+		return
 	if not facing_left:
 		entity.velocity.x = -knock_back_velocity
 	else:

@@ -1,6 +1,8 @@
 extends Node
 class_name BaseMovement
 
+@export var can_take_knock_back: bool = true
+
 var facing_left: bool = false
 
 # Base methods to be overridden by subclasses
