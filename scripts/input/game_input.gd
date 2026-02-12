@@ -6,7 +6,10 @@ enum InputMode {
     UI
 }
 
-static var modes: Dictionary[InputMode, bool] = {}
+static var modes: Dictionary[InputMode, bool] = {
+    InputMode.PLAYER: true,
+    InputMode.UI: true,
+}
 
 
 static func enable_player_input(exclusive: bool = false) -> void:

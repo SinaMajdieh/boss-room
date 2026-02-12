@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 
 func try_get_player() -> void:
     player = get_tree().get_first_node_in_group("player")
-    if player and not visible:
+    if player:
         set_labels_player()
 
 

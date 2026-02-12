@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bju6odsd6u31m"]
 
 [ext_resource type="PackedScene" uid="uid://e5nefeqvv66d" path="res://scenes/player.tscn" id="1_u52ul"]
-[ext_resource type="PackedScene" uid="uid://e0yemhp07eov" path="res://scenes/ui/screens/player_debug_menu.tscn" id="2_k5f4k"]
 [ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/boss.tscn" id="3_w8frs"]
 [ext_resource type="Script" uid="uid://8am05irgtlwv" path="res://resources/camera/smoothing.gd" id="4_d4w6o"]
 [ext_resource type="Script" uid="uid://dgisv6munbcap" path="res://scripts/camera.gd" id="4_xb4v1"]
 [ext_resource type="Script" uid="uid://c1c1mc4pkt2rm" path="res://resources/camera/look_ahead.gd" id="5_mbbpy"]
+[ext_resource type="PackedScene" uid="uid://cunr23ue1b60d" path="res://scenes/ui/ui_layer.tscn" id="6_d4w6o"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vonw3"]
 
@@ -99,6 +99,18 @@ smoothing = SubResource("Resource_d4w6o")
 look_ahead = SubResource("Resource_mbbpy")
 metadata/_custom_type_script = "uid://dgisv6munbcap"
 
-[node name="DebugScreen" type="CanvasLayer" parent="." unique_id=1543888468]
+[node name="UILayer" parent="." unique_id=38670458 instance=ExtResource("6_d4w6o")]
 
-[node name="PlayerDebugMenu" parent="DebugScreen" unique_id=1072898247 instance=ExtResource("2_k5f4k")]
+[node name="ScreenManager" parent="UILayer" index="0" unique_id=702543298 node_paths=PackedStringArray("screens")]
+screens = {
+1: NodePath("StartScreen"),
+2: NodePath("PauseScreen")
+}
+
+[node name="StartScreen" parent="UILayer/ScreenManager" index="0" unique_id=573403005]
+visible = false
+
+[node name="PauseScreen" parent="UILayer/ScreenManager" index="1" unique_id=1469721406]
+visible = false
+
+[editable path="UILayer"]
