@@ -7,6 +7,8 @@ class_name PlayerMovement
 
 ## Faces the player in the specified direction.
 func face(direction: float) -> void:
+    if is_zero_approx(direction):
+        return
     if direction > 0 and facing_left:
         player.transform.x *= -1
         facing_left = false

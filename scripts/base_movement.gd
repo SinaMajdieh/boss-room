@@ -27,6 +27,7 @@ func process_jump() -> void:
 	pass
 
 func face(_direction: float) -> void:
+	turn_around.emit()
 	pass
 
 func get_facing_direction() -> Vector2:
