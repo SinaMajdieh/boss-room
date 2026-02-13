@@ -1,9 +1,47 @@
 [gd_scene format=3 uid="uid://cg6nb2553020a"]
 
 [ext_resource type="Script" uid="uid://ujfgegord43b" path="res://scripts/bullet/base_bullet.gd" id="1_swatm"]
-[ext_resource type="Texture2D" uid="uid://for2006db4it" path="res://assets/sprites/bullets/spread_bullet.png" id="2_swatm"]
+[ext_resource type="Texture2D" uid="uid://g3wy2sxilfal" path="res://assets/cuphead_sprites/Edited/Weapons/Spread/spread.png" id="2_4jieq"]
+[ext_resource type="Script" uid="uid://2bnqxjsoja2i" path="res://scripts/animated_sprite.gd" id="3_ekw6d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywrum"]
+atlas = ExtResource("2_4jieq")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4h3m"]
+atlas = ExtResource("2_4jieq")
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tohkd"]
+atlas = ExtResource("2_4jieq")
+region = Rect2(0, 60, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpmow"]
+atlas = ExtResource("2_4jieq")
+region = Rect2(60, 60, 60, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dfhwb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywrum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4h3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tohkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpmow")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
+size = Vector2(42, 20)
 
 [node name="Bullet" type="Area2D" unique_id=716996682]
 collision_layer = 0
@@ -12,9 +50,12 @@ script = ExtResource("1_swatm")
 damage = 1.5
 life_time = 0.4
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=656665598]
-texture = ExtResource("2_swatm")
-region_rect = Rect2(0, 0, 100, 20)
+[node name="Icon" type="AnimatedSprite2D" parent="." unique_id=1955253850]
+sprite_frames = SubResource("SpriteFrames_dfhwb")
+autoplay = "default"
+frame_progress = 0.52081347
+script = ExtResource("3_ekw6d")
+metadata/_custom_type_script = "uid://2bnqxjsoja2i"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1646836112]
 shape = SubResource("RectangleShape2D_y25gk")

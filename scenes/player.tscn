@@ -908,7 +908,6 @@ metadata/_custom_type_script = "uid://bk2phoru8ej1m"
 [sub_resource type="Resource" id="Resource_oxcmq"]
 script = ExtResource("110_tlhxf")
 bullet_scene = ExtResource("21_l71n6")
-shoot_cool_down_time = 0.3
 metadata/_custom_type_script = "uid://bk2phoru8ej1m"
 
 [sub_resource type="Resource" id="Resource_wylla"]
@@ -1074,7 +1073,7 @@ position = Vector2(24, 80)
 
 [node name="RangeAttacks" type="Node" parent="." unique_id=133369786 node_paths=PackedStringArray("attack_states", "bullet_spawn_points")]
 script = ExtResource("5_4ni07")
-attack_states = [NodePath("../PlayerStateMachine/ShootNormal"), NodePath("../PlayerStateMachine/ShootSpread"), NodePath("../PlayerStateMachine/ShootRoundAbout"), NodePath("../PlayerStateMachine/ShootCharged")]
+attack_states = [NodePath("../PlayerStateMachine/ShootNormal"), NodePath("../PlayerStateMachine/ShootSpread"), NodePath("../PlayerStateMachine/ShootRoundAbout")]
 bullet_spawn_points = {
 0: NodePath("../BulletSpawnPoints/Up"),
 1: NodePath("../BulletSpawnPoints/UpDiagonal"),

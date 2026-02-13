@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://ij2thayasijt" path="res://scenes/ui/tutorial_hint.tscn" id="7_4a02d"]
 [ext_resource type="Script" uid="uid://dxodqm7wjc7f2" path="res://scripts/tutorial/tutorial_area.gd" id="7_g7bfq"]
 [ext_resource type="Script" uid="uid://bj7vi8g85jnri" path="res://resources/hint_resource.gd" id="8_4a02d"]
-[ext_resource type="PackedScene" uid="uid://kybtfskr8btj" path="res://scenes/boss.tscn" id="9_4a02d"]
 [ext_resource type="Script" uid="uid://boqh06f7nhsxg" path="res://scripts/tutorial/tutorial_controller.gd" id="9_g7bfq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rnyxf"]
@@ -147,6 +146,3 @@ grow_horizontal = 0
 grow_vertical = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Boss" parent="." unique_id=1571949760 instance=ExtResource("9_4a02d")]
-position = Vector2(6073, 482)
