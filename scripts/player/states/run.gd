@@ -15,7 +15,7 @@ func on_process(_delta: float) -> void:
 	check_dash()
 	check_attack()
 	check_shoot()
-	if not PlayerInput.get_direction() and player.velocity.x == 0:
+	if not player.movement.is_moving():
 		transition_to("idle")
 
 

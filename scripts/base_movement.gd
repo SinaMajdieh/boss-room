@@ -32,3 +32,7 @@ func face(_direction: float) -> void:
 
 func get_facing_direction() -> Vector2:
 	return Vector2.LEFT if facing_left else Vector2.RIGHT
+
+func is_moving() -> bool:
+	return false
+	

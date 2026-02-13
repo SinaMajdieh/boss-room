@@ -32,10 +32,6 @@ func _process(_delta: float) -> void:
 	move_and_slide()
 
 
-# func _physics_process(_delta: float) -> void:
-# 	move_and_slide()
-
-
 ## Returns the current state name from the state machine
 func get_state() -> String:
 	return state_machine.get_current_state()

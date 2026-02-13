@@ -17,3 +17,7 @@ func face(direction: float) -> void:
         player.transform.x *= -1
         facing_left = true
         turn_around.emit()
+
+
+func is_moving() -> bool:
+    return PlayerInput.get_direction() or not is_zero_approx(player.velocity.x)
