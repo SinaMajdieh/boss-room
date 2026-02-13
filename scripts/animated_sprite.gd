@@ -4,7 +4,7 @@ class_name AnimatedSprite
 @export var base: Node2D
 
 
-func play_animation(name_: StringName, speed: float = 1) -> void:
+func play_animation(name_: StringName = animation, speed: float = 1) -> void:
 	offset_to_base(name_)
 	play(name_, speed)
 

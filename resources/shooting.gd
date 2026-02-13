@@ -1,9 +1,6 @@
 extends Resource
 class_name ShootingResource
 
-@export_category("Components")
-@export var bullet_scene: PackedScene
-
 @export_category("Parameters")
 @export var shoot_cool_down_time: float = 0.1
 

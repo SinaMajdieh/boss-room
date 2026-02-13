@@ -1,16 +1,18 @@
 extends Area2D
 class_name BaseBullet
 
+@export var animation: AnimatedSprite
+
 @export var speed: float = 800.0
 @export var direction: Vector2 = Vector2.RIGHT
 @export var damage: float = 1.0
 @export var life_time: float = 2.0
 
-
 func _ready() -> void:
 	area_entered.connect(on_hit)
 	body_entered.connect(on_hit)
 	rotate_to_direction()
+	_play_animation()
 
 
 func _process(delta: float) -> void:
@@ -32,3 +34,11 @@ func on_hit(target: Variant) -> void:
 ## Rotates the bullet sprite to face the direction it's moving.
 func rotate_to_direction() -> void:
 	rotation = direction.angle()
+
+
+func _play_animation() -> void:
+	if animation.has_animation("intro"):
+		animation.play_animation("intro")
+	await animation.animation_finished
+	if animation.has_animation("default"):
+		animation.play_animation("default")

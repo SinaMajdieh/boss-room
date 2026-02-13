@@ -85,11 +85,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
 size = Vector2(92, 42)
 
-[node name="Bullet" type="Area2D" unique_id=716996682]
+[node name="Bullet" type="Area2D" unique_id=716996682 node_paths=PackedStringArray("animation")]
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_vuj5a")
 decel_time = 1.0
+animation = NodePath("Icon")
 damage = 3.0
 life_time = 5.0
 

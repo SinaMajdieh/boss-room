@@ -43,10 +43,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
 size = Vector2(42, 20)
 
-[node name="Bullet" type="Area2D" unique_id=716996682]
+[node name="Bullet" type="Area2D" unique_id=716996682 node_paths=PackedStringArray("animation")]
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_swatm")
+animation = NodePath("Icon")
 damage = 1.5
 life_time = 0.6
 

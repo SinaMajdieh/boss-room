@@ -1,10 +1,19 @@
 extends PlayerShootState
 
+@export_category("Components")
+@export var bullet_scene: PackedScene
+
 @export var stream_angles: Array[float] = [-15.0, 0.0, 15.0]
+
+
+func enter(previous_state: String) -> void:
+	super(previous_state)
+	shoot()
+
 
 func shoot() -> void:	
 	for angle in stream_angles:
-		var bullet_instance: BaseBullet = resource.bullet_scene.instantiate() as BaseBullet
+		var bullet_instance: BaseBullet = bullet_scene.instantiate() as BaseBullet
 		var shoot_direction: Vector2 = PlayerInput.get_looking_direction(
 			player.movement.get_facing_direction()
 		).rotated(
@@ -16,3 +25,24 @@ func shoot() -> void:
 		get_tree().current_scene.add_child(bullet_instance)
 
 	player.shoot_cool_down.start(resource.shoot_cool_down_time)
+
+
+# Handles player movement while in shoot state
+func on_process(delta: float) -> void:
+	play_animation()
+
+	if weapon_changed():
+		exit_shooting()
+
+	if player.can("jump"):
+		player.movement.process_jump()
+	check_dash()
+
+	player.movement.apply_movement(delta)
+
+
+func _on_shoot_timeout() -> void:
+	if PlayerInput.is_shooting():
+		shoot()
+	else:
+		exit_shooting()

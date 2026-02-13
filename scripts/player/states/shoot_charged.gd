@@ -1,14 +1,25 @@
-extends PlayerState
+extends PlayerShootState
 ## Manages the charge shot mechanic, allowing the player to charge bullets through stages.
 
 @export_category("Components")
 @export var player_bullet_scene: Array[PackedScene]
 
-@export_category("Parameters")
-@export var shoot_cool_down_time: float = 0.1
-
 var bullet_instance: ChargeBullet
 var charge_state_index: int = 0
+
+
+func play_animation() -> void:
+	if animations.is_animation_playing(resource.shoot_turn_animation):
+		return
+
+	if player.is_on_floor():
+		if is_zero_approx(player.velocity.x):
+			animations.play_animation(resource.shoot_animation[aim_direction])
+			animations.set_frame_and_progress(0 ,0.0)
+		else:
+			play_shoot_animation(resource.shoot_run_animation)
+	else:
+		play_shoot_animation(resource.air_shoot_animation)
 
 
 ## Called when entering the charge shot state. Initializes the first charge stage.
@@ -41,16 +52,23 @@ func next_stage() -> void:
 
 ## Handles player movement and bullet charging input during the charge shot state.
 func on_process(delta: float) -> void:
-	if player.range_attacks.get_attack_name() != name.to_lower():
+	play_animation()
+
+	if weapon_changed():
 		release_bullet()
-	if player.can("jump"):
-		player.movement.process_jump()
-	player.movement.apply_movement(delta)
+	
 	if PlayerInput.is_shooting() and bullet_instance:
 		bullet_instance.advance_charge(delta)
 		update_bullet_position()
 	elif PlayerInput.shot_released() and bullet_instance:
 		release_bullet()
+	
+	if player.can("jump"):
+		player.movement.process_jump()
+
+	check_dash()
+
+	player.movement.apply_movement(delta)
 
 
 ## Releases the charged bullet and initiates cooldown before transitioning to the appropriate state.
@@ -58,29 +76,24 @@ func release_bullet() -> void:
 	if bullet_instance:
 		bullet_instance.release()
 		bullet_instance = null
-	
-	player.shoot_cool_down.start(shoot_cool_down_time)
+	player.shoot_cool_down.start(resource.shoot_cool_down_time)
 
-	if player.is_on_floor():
-		transition_to("idle")
-	else:
-		transition_to("fall_no_coyote")
+	exit_shooting()
 
 
 ## Updates the bullet position and direction based on player input and facing direction.
 func update_bullet_position() -> void:
 	if not bullet_instance:
 		return
-	var shoot_direction: Vector2 = PlayerInput.get_looking_direction(
-		player.movement.get_facing_direction()
-	)
-	bullet_instance.position = player.global_position + shoot_direction * 16.0
-	bullet_instance.direction = shoot_direction
+	update_aim_direction()
+	bullet_instance.position = player.range_attacks.get_bullet_spawn_point(aim_direction)
+	bullet_instance.direction = bullet_direction
 	bullet_instance.rotate_to_direction()
 
 
 ## Cleans up the bullet when exiting the charge shot state.
 func exit() -> void:
+	super()
 	_free_bullet()
 
 

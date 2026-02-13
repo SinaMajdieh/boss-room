@@ -7,10 +7,11 @@ enum VerticalState {
 	DOWN, DOWN_DIAGONAL
 }
 
-@export var resource: ShootingResource
+@export var resource: ShootingResource = ShootingResource.new()
 
 var bullet_direction: Vector2 = Vector2.ZERO
 var aim_direction: VerticalState = VerticalState.STRAIGHT
+
 
 func play_shoot_animation(animation: StringName, speed: float = 1.0) -> void:
 	if animations.is_animation_playing(animation):
@@ -31,21 +32,6 @@ func play_animation() -> void:
 		play_shoot_animation(resource.air_shoot_animation)
 
 
-func shoot() -> void:	
-	update_aim_direction()
-	# Create bullet instance and configure its properties
-	var bullet_instance: BaseBullet = resource.bullet_scene.instantiate() as BaseBullet
-
-	bullet_instance.position = player.range_attacks.get_bullet_spawn_point(aim_direction)
-	bullet_instance.direction = bullet_direction
-
-	# Add bullet to the scene
-	get_tree().current_scene.add_child(bullet_instance)
-
-	# Start cooldown to prevent rapid firing
-	player.shoot_cool_down.start(resource.shoot_cool_down_time)
-
-
 func update_aim_direction() -> void:
 	bullet_direction = PlayerInput.get_looking_direction(
 		player.movement.get_facing_direction()
@@ -59,28 +45,10 @@ func enter(_previous_state: String) -> void:
 	super(_previous_state)
 	player.movement.turn_around.connect(_on_turn_around)
 	player.shoot_cool_down.timeout.connect(_on_shoot_timeout)
-	shoot()
-
-
-# Handles player movement while in shoot state
-func on_process(delta: float) -> void:
-	play_animation()
-
-	if weapon_changed():
-		exit_shooting()
-	
-	if player.can("jump"):
-		player.movement.process_jump()
-	check_dash()
-	
-	player.movement.apply_movement(delta)
 
 
 func _on_shoot_timeout() -> void:
-	if PlayerInput.is_shooting():
-		shoot()
-	else:
-		exit_shooting()
+	exit_shooting()
 
 
 # Transition based on player's grounded state
@@ -89,7 +57,6 @@ func exit_shooting() -> void:
 		transition_to("idle")
 	else:
 		transition_to("fall_no_coyote")
-
 
 
 func exit() -> void:
