@@ -1,9 +1,9 @@
 extends PlayerShootState
 
+@export var stream_angles: Array[float] = [-15.0, 0.0, 15.0]
 
 func shoot() -> void:	
-	var spread_shot_angles: Array = [-15, 0, 15]
-	for angle in spread_shot_angles:
+	for angle in stream_angles:
 		var bullet_instance: BaseBullet = resource.bullet_scene.instantiate() as BaseBullet
 		var shoot_direction: Vector2 = PlayerInput.get_looking_direction(
 			player.movement.get_facing_direction()

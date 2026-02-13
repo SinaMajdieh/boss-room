@@ -96,8 +96,7 @@ life_time = 5.0
 [node name="Icon" type="AnimatedSprite2D" parent="." unique_id=545080587]
 sprite_frames = SubResource("SpriteFrames_1kqx4")
 autoplay = "default"
-frame = 3
-frame_progress = 0.6619385
+frame_progress = 0.92487586
 script = ExtResource("3_7fivw")
 metadata/_custom_type_script = "uid://2bnqxjsoja2i"
 
