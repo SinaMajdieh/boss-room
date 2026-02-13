@@ -56,17 +56,21 @@ func on_process(delta: float) -> void:
 
 	if weapon_changed():
 		release_bullet()
+		exit_shooting()
 	
 	if PlayerInput.is_shooting() and bullet_instance:
 		bullet_instance.advance_charge(delta)
 		update_bullet_position()
 	elif PlayerInput.shot_released() and bullet_instance:
 		release_bullet()
+		exit_shooting()
 	
 	if player.can("jump"):
 		player.movement.process_jump()
 
-	check_dash()
+	if PlayerInput.just_dashed():
+		release_bullet()
+		transition_to("dash")
 
 	player.movement.apply_movement(delta)
 
@@ -77,8 +81,6 @@ func release_bullet() -> void:
 		bullet_instance.release()
 		bullet_instance = null
 	player.shoot_cool_down.start(resource.shoot_cool_down_time)
-
-	exit_shooting()
 
 
 ## Updates the bullet position and direction based on player input and facing direction.
