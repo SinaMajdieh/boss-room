@@ -10,8 +10,8 @@ func shoot() -> void:
 		).rotated(
 			deg_to_rad(angle)
 		)
-		aim_animation_direction = direction_to_vertical_states(shoot_direction)
-		bullet_instance.position = player.range_attacks.get_bullet_spawn_point(aim_animation_direction)
+		aim_direction = vertical_states(shoot_direction)
+		bullet_instance.position = player.range_attacks.get_bullet_spawn_point(aim_direction)
 		bullet_instance.direction = shoot_direction
 		get_tree().current_scene.add_child(bullet_instance)
 
