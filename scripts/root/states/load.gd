@@ -4,5 +4,5 @@ extends GameState
 
 
 func enter(_previous_state: String) -> void:
-    game_root.load_level(tutorial_level)
-    transition_to("playing")
+	game_root.load_level(tutorial_level)
+	transition_to("playing")

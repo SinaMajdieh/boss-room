@@ -16,7 +16,7 @@ func play_shoot_animation(animation: StringName, speed: float = 1.0) -> void:
 	if animations.is_animation_playing(animation):
 		return
 	if animations.sprite_frames.has_animation(animation):
-		animations.play(animation, speed)
+		animations.play_animation(animation, speed)
 
 
 func play_animation() -> void:
@@ -105,7 +105,7 @@ func can_transition() -> bool:
 func _on_turn_around() -> void:
 	if not player.is_on_floor():
 		return
-	animations.play(resource.shoot_turn_animation)
+	animations.play_animation(resource.shoot_turn_animation)
 	await animations.animation_finished
 	play_animation()
 

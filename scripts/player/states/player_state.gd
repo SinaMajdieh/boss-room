@@ -17,7 +17,7 @@ func play_transition_animation(previous_state: String) -> void:
 
 func play_animation() -> void:
 	if animations.has_animation(animation_name):
-		animations.play(animation_name)
+		animations.play_animation(animation_name)
 
 
 func enter(previous_state: String) -> void:
