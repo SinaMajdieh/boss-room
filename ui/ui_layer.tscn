@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cunr23ue1b60d"]
+
+[ext_resource type="Script" uid="uid://caq45nbtbdupp" path="res://ui/screens/screen_manager.gd" id="1_gjtyb"]
+[ext_resource type="PackedScene" uid="uid://bcm2yelyfhv4q" path="res://ui/screens/start/start_screen.tscn" id="2_vu3t1"]
+[ext_resource type="PackedScene" uid="uid://b2k6lcgfywio" path="res://ui/screens/pause/pause_screen.tscn" id="3_8aggs"]
+[ext_resource type="PackedScene" uid="uid://e0yemhp07eov" path="res://tools/player_debug_menu.tscn" id="4_15oer"]
+
+[node name="UILayer" type="CanvasLayer" unique_id=38670458]
+
+[node name="ScreenManager" type="Node" parent="." unique_id=702543298 node_paths=PackedStringArray("screens")]
+process_mode = 3
+script = ExtResource("1_gjtyb")
+screens = {
+1: NodePath("StartScreen"),
+2: NodePath("PauseScreen")
+}
+metadata/_custom_type_script = "uid://caq45nbtbdupp"
+
+[node name="StartScreen" parent="ScreenManager" unique_id=573403005 instance=ExtResource("2_vu3t1")]
+
+[node name="PauseScreen" parent="ScreenManager" unique_id=1469721406 instance=ExtResource("3_8aggs")]
+
+[node name="PlayerDebugMenu" parent="." unique_id=1921750732 instance=ExtResource("4_15oer")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
