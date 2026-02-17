@@ -85,5 +85,9 @@ func get_current_state() -> String:
 
 
 ## Retrieves a state node by name
-func get_node_state(state_name: String) -> NodeState:
+func get_node_state(state_name: String = current_state_name) -> NodeState:
 	return states.get(state_name)
+
+
+func is_in_state(state_name: StringName) -> bool:
+	return current_state_name == state_name

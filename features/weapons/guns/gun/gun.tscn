@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://buxcyn8m50qg5"]
+
+[ext_resource type="Script" uid="uid://c3gdemvfi8hvw" path="res://features/weapons/guns/gun/gun.gd" id="1_eu2ky"]
+[ext_resource type="Script" uid="uid://2bnqxjsoja2i" path="res://systems/animated_sprite.gd" id="2_eu2ky"]
+
+[node name="Gun" type="Node2D" unique_id=849602943 node_paths=PackedStringArray("vfx", "muzzle", "cool_down_timer")]
+script = ExtResource("1_eu2ky")
+vfx = NodePath("vfx")
+muzzle = NodePath("muzzle")
+cool_down_timer = NodePath("CoolDown")
+
+[node name="vfx" type="AnimatedSprite2D" parent="." unique_id=850927479]
+script = ExtResource("2_eu2ky")
+metadata/_custom_type_script = "uid://2bnqxjsoja2i"
+
+[node name="muzzle" type="Marker2D" parent="." unique_id=1437973624]
+
+[node name="CoolDown" type="Timer" parent="." unique_id=1996732577]
+one_shot = true

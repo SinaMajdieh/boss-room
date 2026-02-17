@@ -72,6 +72,13 @@ static func shot_released() -> bool:
 	return Input.is_action_just_released("shoot")
 
 
+## Returns true if the player is cycling through guns.
+static func is_cycling_guns() -> bool:
+	if not input_enabled():
+		return false
+	return Input.is_action_just_pressed("cycle_attack")
+
+
 ## Returns true while the lock-on action is held down.
 static func is_locked() -> bool:
 	if not input_enabled():

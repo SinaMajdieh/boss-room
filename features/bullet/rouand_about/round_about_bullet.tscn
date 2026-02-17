@@ -5,10 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://cvbdq36qwon" path="res://assets/sprites/bullets/round_about/round_about_death.png" id="2_nts1b"]
 [ext_resource type="Script" uid="uid://2bnqxjsoja2i" path="res://systems/animated_sprite.gd" id="3_nts1b"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://systems/state_machine/state_machine.gd" id="4_eyd8e"]
-[ext_resource type="Texture2D" uid="uid://cuapnxjbwe4t8" path="res://assets/sprites/bullets/round_about/round_about_spawn.png" id="4_hchfg"]
-[ext_resource type="Script" uid="uid://ejtlv4ulb476" path="res://features/bullet/spawn_state_base.gd" id="5_hchfg"]
-[ext_resource type="Script" path="res://features/bullet/rouand_about/round_about_fire_state.gd" id="6_wk5ll"]
-[ext_resource type="Script" path="res://features/bullet/death_state_base.gd" id="7_vkplg"]
+[ext_resource type="Script" uid="uid://ejtlv4ulb476" path="res://features/bullet/states/projectile_spawn_state.gd" id="5_hchfg"]
+[ext_resource type="Script" uid="uid://6v8ejqxr8vvm" path="res://features/bullet/rouand_about/round_about_fire_state.gd" id="6_wk5ll"]
+[ext_resource type="Script" uid="uid://b4u7s6hihj13h" path="res://features/bullet/states/projectile_death_state.gd" id="7_vkplg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wk5ll"]
 atlas = ExtResource("2_nts1b")
@@ -74,22 +73,6 @@ region = Rect2(0, 120, 100, 60)
 atlas = ExtResource("2_8x15r")
 region = Rect2(100, 120, 100, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ue7j"]
-atlas = ExtResource("4_hchfg")
-region = Rect2(0, 0, 101, 97)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_27npm"]
-atlas = ExtResource("4_hchfg")
-region = Rect2(101, 0, 101, 97)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x3fq0"]
-atlas = ExtResource("4_hchfg")
-region = Rect2(0, 97, 101, 97)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a1x0u"]
-atlas = ExtResource("4_hchfg")
-region = Rect2(101, 97, 101, 97)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_1kqx4"]
 animations = [{
 "frames": [{
@@ -149,23 +132,6 @@ animations = [{
 "loop": true,
 "name": &"fire",
 "speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0ue7j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_27npm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x3fq0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a1x0u")
-}],
-"loop": false,
-"name": &"spawn",
-"speed": 30.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
@@ -185,8 +151,6 @@ life_time = 5.0
 [node name="Animation" type="AnimatedSprite2D" parent="." unique_id=545080587]
 sprite_frames = SubResource("SpriteFrames_1kqx4")
 animation = &"death"
-frame = 5
-frame_progress = 1.0
 script = ExtResource("3_nts1b")
 metadata/_custom_type_script = "uid://2bnqxjsoja2i"
 
@@ -200,20 +164,20 @@ script = ExtResource("4_eyd8e")
 initial_state = NodePath("Spawn")
 metadata/_custom_type_script = "uid://c5h6mtgbt70v4"
 
-[node name="Spawn" type="Node" parent="StateMachine" unique_id=681465689 node_paths=PackedStringArray("bullet")]
+[node name="Spawn" type="Node" parent="StateMachine" unique_id=681465689 node_paths=PackedStringArray("projectile")]
 script = ExtResource("5_hchfg")
-bullet = NodePath("../..")
+projectile = NodePath("../..")
 animation_name = &"spawn"
 metadata/_custom_type_script = "uid://3k05lk64mid4"
 
-[node name="Fire" type="Node" parent="StateMachine" unique_id=511006287 node_paths=PackedStringArray("bullet")]
+[node name="Fire" type="Node" parent="StateMachine" unique_id=511006287 node_paths=PackedStringArray("projectile")]
 script = ExtResource("6_wk5ll")
-bullet = NodePath("../..")
+projectile = NodePath("../..")
 animation_name = &"fire"
 metadata/_custom_type_script = "uid://3k05lk64mid4"
 
-[node name="Death" type="Node" parent="StateMachine" unique_id=1038631759 node_paths=PackedStringArray("bullet")]
+[node name="Death" type="Node" parent="StateMachine" unique_id=1038631759 node_paths=PackedStringArray("projectile")]
 script = ExtResource("7_vkplg")
-bullet = NodePath("../..")
+projectile = NodePath("../..")
 animation_name = &"death"
 metadata/_custom_type_script = "uid://3k05lk64mid4"

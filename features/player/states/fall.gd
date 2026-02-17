@@ -8,7 +8,6 @@ func on_process(_delta):
 		transition_to("idle")
 	check_dash()
 	check_attack()
-	check_shoot()
 
 
 ## Applies movement physics each frame.
@@ -18,7 +17,6 @@ func on_physics_process(delta: float) -> void:
 
 ## Initializes fall state and starts coyote timer if transitioning from certain states.
 func enter(previous_state: String) -> void:
-	super(previous_state)
 	if previous_state not in ["jump", "dash", "fall_no_coyote"]:
 		player.coyote_timer.start()
 
@@ -26,3 +24,6 @@ func enter(previous_state: String) -> void:
 ## Returns true if player is airborne.
 func can_transition() -> bool:
 	return not player.is_on_floor()
+
+func allow_shooting() -> bool:
+	return true

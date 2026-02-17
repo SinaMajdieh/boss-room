@@ -42,18 +42,6 @@ func _on_hide_timeout() -> void:
 	active_hint = null
 	hint_cleared.emit(id)
 
-# func _input(event: InputEvent) -> void:
-# 	if not active_hint:
-# 		return
-	
-# 	if not active_hint.clear_on_action:
-# 		return
-	
-# 	for action: String in active_hint.input_actions:
-# 		if event.is_action_pressed(action):
-# 			clear_hint(active_hint.id)
-# 			break
-
 
 func get_action_display(action: String) -> String:
 	var events : Array[InputEvent] = InputMap.action_get_events(action)

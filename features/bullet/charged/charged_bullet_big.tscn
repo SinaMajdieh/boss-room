@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://wr48uowejft3"]
+[gd_scene format=3 uid="uid://3pimhipa8vsw"]
 
 [ext_resource type="Script" uid="uid://cef8cv220o1d5" path="res://features/bullet/charged/charge_bullet.gd" id="1_pmcum"]
 [ext_resource type="Texture2D" uid="uid://3dnia5uailjx" path="res://assets/sprites/bullets/charged/big/big_charging.png" id="2_8o2tg"]
@@ -7,10 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dgm0tsqde0jai" path="res://assets/sprites/bullets/charged/big/big_spawn.png" id="5_8o2tg"]
 [ext_resource type="Script" uid="uid://2bnqxjsoja2i" path="res://systems/animated_sprite.gd" id="5_ajwoo"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://systems/state_machine/state_machine.gd" id="6_pumdb"]
-[ext_resource type="Script" uid="uid://ejtlv4ulb476" path="res://features/bullet/spawn_state_base.gd" id="7_8wvyo"]
 [ext_resource type="Script" uid="uid://bagjeq020qa1b" path="res://features/bullet/charged/charging_state.gd" id="8_4d53r"]
-[ext_resource type="Script" path="res://features/bullet/fire_state_base.gd" id="9_3268g"]
-[ext_resource type="Script" path="res://features/bullet/death_state_base.gd" id="10_4l65k"]
+[ext_resource type="Script" uid="uid://ejtlv4ulb476" path="res://features/bullet/states/projectile_spawn_state.gd" id="8_8o2tg"]
+[ext_resource type="Script" uid="uid://cy7bhwnbhgwvh" path="res://features/bullet/states/projectile_fire_state.gd" id="10_62toe"]
+[ext_resource type="Script" uid="uid://b4u7s6hihj13h" path="res://features/bullet/states/projectile_death_state.gd" id="11_nh61s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gnlb4"]
 atlas = ExtResource("2_8o2tg")
@@ -136,18 +136,6 @@ region = Rect2(3200, 151, 320, 151)
 atlas = ExtResource("4_nh61s")
 region = Rect2(3520, 151, 320, 151)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g58aa"]
-atlas = ExtResource("4_nh61s")
-region = Rect2(0, 0, 320, 151)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7vey7"]
-atlas = ExtResource("4_nh61s")
-region = Rect2(320, 0, 320, 151)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4p4rp"]
-atlas = ExtResource("4_nh61s")
-region = Rect2(640, 0, 320, 151)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_62toe"]
 atlas = ExtResource("5_8o2tg")
 region = Rect2(0, 0, 400, 400)
@@ -183,6 +171,18 @@ region = Rect2(400, 800, 400, 400)
 [sub_resource type="AtlasTexture" id="AtlasTexture_itrtm"]
 atlas = ExtResource("5_8o2tg")
 region = Rect2(800, 800, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g58aa"]
+atlas = ExtResource("4_nh61s")
+region = Rect2(0, 0, 320, 151)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vey7"]
+atlas = ExtResource("4_nh61s")
+region = Rect2(320, 0, 320, 151)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4p4rp"]
+atlas = ExtResource("4_nh61s")
+region = Rect2(640, 0, 320, 151)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yjmct"]
 animations = [{
@@ -296,20 +296,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g58aa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7vey7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4p4rp")
-}],
-"loop": false,
-"name": &"intro",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_62toe")
 }, {
 "duration": 1.0,
@@ -337,8 +323,22 @@ animations = [{
 "texture": SubResource("AtlasTexture_itrtm")
 }],
 "loop": false,
-"name": &"spawn",
+"name": &"muzzle-fx",
 "speed": 45.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g58aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vey7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4p4rp")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 24.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jow84"]
@@ -355,8 +355,7 @@ damage = 15.0
 
 [node name="Animation" type="AnimatedSprite2D" parent="." unique_id=2075141434]
 sprite_frames = SubResource("SpriteFrames_yjmct")
-animation = &"fire"
-frame_progress = 0.89710504
+animation = &"charging"
 script = ExtResource("5_ajwoo")
 metadata/_custom_type_script = "uid://2bnqxjsoja2i"
 
@@ -371,26 +370,26 @@ script = ExtResource("6_pumdb")
 initial_state = NodePath("Charge")
 metadata/_custom_type_script = "uid://c5h6mtgbt70v4"
 
-[node name="Spawn" type="Node" parent="StateMachine" unique_id=1953892848 node_paths=PackedStringArray("bullet")]
-script = ExtResource("7_8wvyo")
-bullet = NodePath("../..")
+[node name="Spawn" type="Node" parent="StateMachine" unique_id=1953892848 node_paths=PackedStringArray("projectile")]
+script = ExtResource("8_8o2tg")
+projectile = NodePath("../..")
 animation_name = &"spawn"
 metadata/_custom_type_script = "uid://3k05lk64mid4"
 
-[node name="Charge" type="Node" parent="StateMachine" unique_id=1749076948 node_paths=PackedStringArray("bullet")]
+[node name="Charge" type="Node" parent="StateMachine" unique_id=1749076948 node_paths=PackedStringArray("projectile")]
 script = ExtResource("8_4d53r")
-bullet = NodePath("../..")
+projectile = NodePath("../..")
 animation_name = &"charging"
 metadata/_custom_type_script = "uid://3k05lk64mid4"
 
-[node name="Fire" type="Node" parent="StateMachine" unique_id=1439058907 node_paths=PackedStringArray("bullet")]
-script = ExtResource("9_3268g")
-bullet = NodePath("../..")
+[node name="Fire" type="Node" parent="StateMachine" unique_id=1439058907 node_paths=PackedStringArray("projectile")]
+script = ExtResource("10_62toe")
+projectile = NodePath("../..")
 animation_name = &"fire"
 metadata/_custom_type_script = "uid://3k05lk64mid4"
 
-[node name="Death" type="Node" parent="StateMachine" unique_id=327572353 node_paths=PackedStringArray("bullet")]
-script = ExtResource("10_4l65k")
-bullet = NodePath("../..")
+[node name="Death" type="Node" parent="StateMachine" unique_id=327572353 node_paths=PackedStringArray("projectile")]
+script = ExtResource("11_nh61s")
+projectile = NodePath("../..")
 animation_name = &"death"
 metadata/_custom_type_script = "uid://3k05lk64mid4"

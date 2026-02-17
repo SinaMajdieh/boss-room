@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ckf7wrtan8x6q"]
+[gd_scene format=3 uid="uid://bwhhijnu6quy4"]
 
 [ext_resource type="Script" uid="uid://cef8cv220o1d5" path="res://features/bullet/charged/charge_bullet.gd" id="1_4whgq"]
 [ext_resource type="Texture2D" uid="uid://bu6u3eoexhbsg" path="res://assets/sprites/bullets/charged/small/small_charging.png" id="2_cuqw3"]
@@ -7,10 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://b3utwstwx18fx" path="res://assets/sprites/bullets/charged/small/small_spawn.png" id="5_v7p70"]
 [ext_resource type="Script" uid="uid://2bnqxjsoja2i" path="res://systems/animated_sprite.gd" id="6_rxp60"]
 [ext_resource type="Script" uid="uid://c5h6mtgbt70v4" path="res://systems/state_machine/state_machine.gd" id="7_lpi4s"]
-[ext_resource type="Script" uid="uid://ejtlv4ulb476" path="res://features/bullet/spawn_state_base.gd" id="8_xl4tm"]
+[ext_resource type="Script" uid="uid://ejtlv4ulb476" path="res://features/bullet/states/projectile_spawn_state.gd" id="8_4whgq"]
 [ext_resource type="Script" uid="uid://bagjeq020qa1b" path="res://features/bullet/charged/charging_state.gd" id="9_3278p"]
-[ext_resource type="Script" path="res://features/bullet/fire_state_base.gd" id="10_1u3ss"]
-[ext_resource type="Script" path="res://features/bullet/death_state_base.gd" id="11_41ytw"]
+[ext_resource type="Script" uid="uid://cy7bhwnbhgwvh" path="res://features/bullet/states/projectile_fire_state.gd" id="10_cuqw3"]
+[ext_resource type="Script" uid="uid://b4u7s6hihj13h" path="res://features/bullet/states/projectile_death_state.gd" id="11_xkavl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3ry4"]
 atlas = ExtResource("2_cuqw3")
@@ -216,7 +216,7 @@ speed = 1000.0
 
 [node name="Animation" type="AnimatedSprite2D" parent="." unique_id=366199756]
 sprite_frames = SubResource("SpriteFrames_6sehu")
-animation = &"fire"
+animation = &"charging"
 script = ExtResource("6_rxp60")
 metadata/_custom_type_script = "uid://2bnqxjsoja2i"
 
@@ -230,26 +230,26 @@ script = ExtResource("7_lpi4s")
 initial_state = NodePath("Charge")
 metadata/_custom_type_script = "uid://c5h6mtgbt70v4"
 
-[node name="Spawn" type="Node" parent="StateMachine" unique_id=782479199 node_paths=PackedStringArray("bullet")]
-script = ExtResource("8_xl4tm")
-bullet = NodePath("../..")
+[node name="Spawn" type="Node" parent="StateMachine" unique_id=782479199 node_paths=PackedStringArray("projectile")]
+script = ExtResource("8_4whgq")
+projectile = NodePath("../..")
 animation_name = &"spawn"
 metadata/_custom_type_script = "uid://3k05lk64mid4"
 
-[node name="Charge" type="Node" parent="StateMachine" unique_id=1893345040 node_paths=PackedStringArray("bullet")]
+[node name="Charge" type="Node" parent="StateMachine" unique_id=1893345040 node_paths=PackedStringArray("projectile")]
 script = ExtResource("9_3278p")
-bullet = NodePath("../..")
+projectile = NodePath("../..")
 animation_name = &"charging"
 metadata/_custom_type_script = "uid://3k05lk64mid4"
 
-[node name="Fire" type="Node" parent="StateMachine" unique_id=1260563144 node_paths=PackedStringArray("bullet")]
-script = ExtResource("10_1u3ss")
-bullet = NodePath("../..")
+[node name="Fire" type="Node" parent="StateMachine" unique_id=1260563144 node_paths=PackedStringArray("projectile")]
+script = ExtResource("10_cuqw3")
+projectile = NodePath("../..")
 animation_name = &"fire"
 metadata/_custom_type_script = "uid://3k05lk64mid4"
 
-[node name="Death" type="Node" parent="StateMachine" unique_id=1179592877 node_paths=PackedStringArray("bullet")]
-script = ExtResource("11_41ytw")
-bullet = NodePath("../..")
+[node name="Death" type="Node" parent="StateMachine" unique_id=1179592877 node_paths=PackedStringArray("projectile")]
+script = ExtResource("11_xkavl")
+projectile = NodePath("../..")
 animation_name = &"death"
 metadata/_custom_type_script = "uid://3k05lk64mid4"

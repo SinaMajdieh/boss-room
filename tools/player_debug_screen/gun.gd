@@ -1,7 +1,6 @@
 extends PlayerDebugLabel
 
-
 func _process(_delta):
 	if not player:
 		return
-	text = "Range Attack: %s" % player.range_attacks.get_attack_name()
+	text = "Gun: %s" % player.gun_manager.get_gun_name()

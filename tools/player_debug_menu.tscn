@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://xhibhf685shx" path="res://tools/player_debug_screen/health.gd" id="2_avxac"]
 [ext_resource type="Script" uid="uid://dr108mbhicaai" path="res://tools/player_debug_screen/velocity.gd" id="2_r4825"]
 [ext_resource type="Script" uid="uid://l75vk7eqalfp" path="res://tools/player_debug_screen/position.gd" id="3_fl6t8"]
-[ext_resource type="Script" uid="uid://c12es5mc3ga5g" path="res://tools/player_debug_screen/range_attack.gd" id="5_3a78k"]
+[ext_resource type="Script" uid="uid://c12es5mc3ga5g" path="res://tools/player_debug_screen/gun.gd" id="5_3a78k"]
 [ext_resource type="Script" uid="uid://wk6fb421aysx" path="res://tools/player_debug_screen/coyote_timer.gd" id="5_fl6t8"]
 [ext_resource type="Script" uid="uid://btmo8x4etyw0w" path="res://tools/player_debug_screen/dash_cool_down.gd" id="6_0cfry"]
 [ext_resource type="Script" uid="uid://c0wobme8s8kxw" path="res://tools/player_debug_screen/combo_timer.gd" id="8_imwfo"]
