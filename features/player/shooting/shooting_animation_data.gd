@@ -20,9 +20,9 @@ class_name ShootingAnimations
 @export var jump_fall: Dictionary[VerticalState.State, AnimationRequest] = {}
 
 
-@export_subgroup("Shoot + Run")
+@export_subgroup("Shoot + Turn")
 ## Shooting animations while running and firing simultaneously.
-@export var shoot_run: Dictionary[VerticalState.State, AnimationRequest] = {}
+@export var shoot_turn: Dictionary[VerticalState.State, AnimationRequest] = {}
 
 
 ## Returns the appropriate AnimationRequest for the given movement state

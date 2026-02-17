@@ -57,6 +57,8 @@
 [ext_resource type="Texture2D" uid="uid://ca0guft1trnyx" path="res://assets/sprites/player/idle/idle.png" id="34_e8m1u"]
 [ext_resource type="Texture2D" uid="uid://cc15wrm6il3y2" path="res://assets/sprites/player/run/run_nomral.png" id="35_reqs7"]
 [ext_resource type="Texture2D" uid="uid://do6n5uviquexj" path="res://assets/sprites/player/shoot/shoot.png" id="36_8txt3"]
+[ext_resource type="Texture2D" uid="uid://drwvse8e728xp" path="res://assets/sprites/player/shoot/shoot_duck.png" id="37_700bv"]
+[ext_resource type="Texture2D" uid="uid://b142n5cf2770q" path="res://assets/sprites/player/shoot/run_shoot_diagonal_up_.png" id="37_udn7n"]
 [ext_resource type="Script" uid="uid://b0p2x2rw667u5" path="res://features/player/shooting/shooting.gd" id="41_sfltc"]
 [ext_resource type="Script" uid="uid://diww3p6hbhw7e" path="res://features/weapons/guns/patterns/charged_pattern.gd" id="42_5p8nq"]
 [ext_resource type="Script" uid="uid://dw6h65d0p6p3j" path="res://features/weapons/guns/gun/phase_data.gd" id="42_jvaia"]
@@ -191,6 +193,18 @@ region = Rect2(250, 1250, 250, 250)
 atlas = ExtResource("36_8txt3")
 region = Rect2(500, 1250, 250, 250)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivgrx"]
+atlas = ExtResource("37_700bv")
+region = Rect2(0, 0, 178, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_no1qx"]
+atlas = ExtResource("37_700bv")
+region = Rect2(178, 0, 178, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n70i"]
+atlas = ExtResource("37_700bv")
+region = Rect2(356, 0, 178, 81)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qjsmb"]
 atlas = ExtResource("36_8txt3")
 region = Rect2(0, 0, 250, 250)
@@ -255,6 +269,70 @@ region = Rect2(3500, 0, 250, 250)
 atlas = ExtResource("36_8txt3")
 region = Rect2(3750, 0, 250, 250)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_udn7n"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_700bv"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ei3r"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xoqs8"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l45t4"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jofjt"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fii6k"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(1200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8s0a"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(1400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5ho6"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(1600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5t15"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(1800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8im76"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(2000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtca1"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(2200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k06jl"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(2400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18x0u"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(2600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1uqb"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(2800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6fvi"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(3000, 0, 200, 200)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbf1i"]
 atlas = ExtResource("36_8txt3")
 region = Rect2(0, 500, 250, 250)
@@ -274,6 +352,14 @@ region = Rect2(0, 250, 250, 250)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvmy4"]
 atlas = ExtResource("36_8txt3")
 region = Rect2(250, 250, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb2p2"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jskty"]
+atlas = ExtResource("37_udn7n")
+region = Rect2(200, 200, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcu33"]
 atlas = ExtResource("36_8txt3")
@@ -584,6 +670,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ivgrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_no1qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n70i")
+}],
+"loop": true,
+"name": &"shoot_duck",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qjsmb")
 }, {
 "duration": 1.0,
@@ -637,6 +737,59 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_udn7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_700bv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ei3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xoqs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l45t4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jofjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fii6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8s0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5ho6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5t15")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8im76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtca1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k06jl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18x0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1uqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6fvi")
+}],
+"loop": false,
+"name": &"shoot_run_up_diagonal",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_cbf1i")
 }, {
 "duration": 1.0,
@@ -658,7 +811,18 @@ animations = [{
 }],
 "loop": false,
 "name": &"shoot_turn",
-"speed": 20.0
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb2p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jskty")
+}],
+"loop": false,
+"name": &"shoot_turn_up_diagonal",
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1340,9 +1504,9 @@ position = Vector2(0, 79)
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=416477062 node_paths=PackedStringArray("base")]
 position = Vector2(0, 74)
 sprite_frames = SubResource("SpriteFrames_487ah")
-animation = &"jump"
+animation = &"shoot_duck"
 autoplay = "idle"
-offset = Vector2(0, -125)
+offset = Vector2(0, -40)
 script = ExtResource("3_wnwbv")
 vertical_alignment = 4
 base = NodePath("../Base")
@@ -1491,11 +1655,11 @@ idle_markers = {
 4: NodePath("IdlePositions/Down")
 }
 run_markers = {
-0: NodePath("RunPositinos/Up"),
+0: NodePath(""),
 1: NodePath("RunPositinos/UpDiagonal"),
 2: NodePath("RunPositinos/Straight"),
 3: NodePath("RunPositinos/DownDiagonal"),
-4: NodePath("RunPositinos/Down")
+4: NodePath("")
 }
 air_markers = {
 0: NodePath("AirPositions/Up"),
@@ -1532,14 +1696,9 @@ position = Vector2(24, 80)
 gizmo_extents = 1.0
 
 [node name="RunPositinos" type="Node2D" parent="Shooting/PlayerGunAiming" unique_id=1684436395]
-visible = false
-
-[node name="Up" type="Marker2D" parent="Shooting/PlayerGunAiming/RunPositinos" unique_id=1418850678]
-position = Vector2(32, -88)
-gizmo_extents = 1.0
 
 [node name="UpDiagonal" type="Marker2D" parent="Shooting/PlayerGunAiming/RunPositinos" unique_id=1913766407]
-position = Vector2(64, -48)
+position = Vector2(68, -45)
 gizmo_extents = 1.0
 
 [node name="Straight" type="Marker2D" parent="Shooting/PlayerGunAiming/RunPositinos" unique_id=542988542]
@@ -1547,14 +1706,11 @@ position = Vector2(65, 13)
 gizmo_extents = 1.0
 
 [node name="DownDiagonal" type="Marker2D" parent="Shooting/PlayerGunAiming/RunPositinos" unique_id=974949795]
-position = Vector2(64, 48)
-gizmo_extents = 1.0
-
-[node name="Down" type="Marker2D" parent="Shooting/PlayerGunAiming/RunPositinos" unique_id=55051686]
-position = Vector2(24, 80)
+position = Vector2(88, 42)
 gizmo_extents = 1.0
 
 [node name="AirPositions" type="Node2D" parent="Shooting/PlayerGunAiming" unique_id=853551852]
+visible = false
 
 [node name="Up" type="Marker2D" parent="Shooting/PlayerGunAiming/AirPositions" unique_id=2021188188]
 position = Vector2(0, -12)

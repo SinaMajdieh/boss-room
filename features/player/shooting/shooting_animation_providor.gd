@@ -41,7 +41,7 @@ func get_animation_request() -> AnimationRequest:
     var request: AnimationRequest = animations.get_request(
         player.get_state(),
         aiming.get_vertical_state()
-    )
+    ).duplicate()
 
     if request == null:
         return null
@@ -52,6 +52,9 @@ func get_animation_request() -> AnimationRequest:
             if shooting.is_charging():
                 request.freeze = true
                 request.resume = false
+            else:
+                request.freeze = false
+                request.resume = true
         elif gun != null:
             request.speed = 1.0 / gun.data.cool_down_time
 
@@ -71,5 +74,5 @@ func _on_turn() -> void:
         return
 
     player.animation_resolver.request(
-        animations.shoot_run.get(aiming.get_vertical_state())
+        animations.shoot_turn.get(aiming.get_vertical_state())
     )
