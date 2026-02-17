@@ -1672,7 +1672,7 @@ data = SubResource("Resource_j0vbt")
 [node name="RoundAboutShooter" parent="Guns" unique_id=248238922 instance=ExtResource("43_a43qb")]
 data = SubResource("Resource_a43qb")
 
-[node name="ChargedShooter" parent="Guns" unique_id=849602943 instance=ExtResource("43_a43qb")]
+[node name="ChargedShooter" parent="Guns" unique_id=1891291740 instance=ExtResource("43_a43qb")]
 data = SubResource("Resource_o5bw3")
 
 [node name="Shooting" type="Node" parent="." unique_id=1845040276 node_paths=PackedStringArray("player", "gun_manager")]

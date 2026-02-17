@@ -6,7 +6,7 @@ class_name PlayerState
 
 ## Checks if the player is moving and on the floor, transitions to run state if true.
 func check_movement_input() -> void:
-	if player.movement.is_moving() and player.is_on_floor():
+	if PlayerInput.get_direction() and player.is_on_floor():
 		transition_to("run")
 
 
