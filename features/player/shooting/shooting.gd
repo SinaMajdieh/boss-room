@@ -54,8 +54,8 @@ func start_shooting() -> void:
 	if gun == null or shooting:
 		return
 
-	shooting = true
 	gun.start_firing()
+	shooting = gun.is_firing()
 
 
 ## Stops firing the currently selected gun.
@@ -64,8 +64,8 @@ func stop_shooting() -> void:
 	if gun == null or not shooting:
 		return
 
-	shooting = false
 	gun.stop_firing()
+	shooting = gun.is_firing()
 
 
 # ==================================================

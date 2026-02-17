@@ -5,7 +5,7 @@ extends FirePattern
 func update(_delta: float) -> void:
 	if not gun:
 		return
-	if not is_firing:
+	if not firing:
 		return
 	if not gun.cool_down_timer.is_stopped():
 		return

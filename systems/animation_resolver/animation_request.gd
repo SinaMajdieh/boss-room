@@ -18,12 +18,6 @@ class_name AnimationRequest
 ## Minimum time (seconds) this animation must play.
 @export var min_duration: float = 0.0
 
-## Whether to freeze the animation player.
-@export var freeze: bool = false
-
-## Whether playback should resume after being interrupted.
-@export var resume: bool = true
-
 ## Whether the animation is looped.
 @export var looped: bool = false
 
@@ -35,8 +29,6 @@ func _init(
 	lock_: bool = false,
 	min_duration_: float = 0.0,
 	speed_: float = 1.0,
-	freeze_: bool = false,
-	resume_: bool = true,
 	looped_: bool = false
 ) -> void:
 	name = name_
@@ -44,6 +36,4 @@ func _init(
 	lock = lock_
 	min_duration = min_duration_
 	speed = speed_
-	freeze = freeze_
-	resume = resume_
 	looped = looped_

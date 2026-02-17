@@ -56,6 +56,11 @@ func stop_firing() -> void:
 	fire_pattern.stop_firing()
 
 
+## Checks if the gun is currently firing.
+func is_firing() -> bool:
+	return fire_pattern.is_firing()
+
+
 ## Spawns a projectile from the muzzle position.
 func spawn_projectile(
 	projectile: PackedScene,

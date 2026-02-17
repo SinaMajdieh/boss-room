@@ -11,7 +11,7 @@ func start_firing() -> void:
         return
 
     charging = true
-    is_firing = true
+    firing = true
     charge_timer = 0.0
     current_phase = null
 
@@ -21,7 +21,7 @@ func stop_firing() -> void:
         return
     
     charging = false
-    is_firing = false
+    firing = false
     
     release_shot()
 

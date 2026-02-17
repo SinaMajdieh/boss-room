@@ -15,7 +15,7 @@ var vfx: AnimatedSprite
 
 
 ## Whether the fire pattern is currently active.
-var is_firing: bool = false
+var firing: bool = false
 
 
 ## Assigns the owning gun and caches required references.
@@ -28,7 +28,7 @@ func set_gun(gun_: Gun) -> void:
 ## Called every frame by the owning gun.
 ## Subclasses should override this.
 func update(_delta: float) -> void:
-	if not is_firing:
+	if not firing:
 		return
 	if not gun.cool_down_timer.is_stopped():
 		return
@@ -36,19 +36,19 @@ func update(_delta: float) -> void:
 
 ## Starts firing and enables muzzle VFX handling.
 func start_firing() -> void:
-	if is_firing:
+	if firing:
 		return
 
-	is_firing = true
+	firing = true
 	vfx.animation_finished.connect(stop_muzzle_flash)
 
 
 ## Stops firing and clears muzzle VFX.
 func stop_firing() -> void:
-	if not is_firing:
+	if not firing:
 		return
 
-	is_firing = false
+	firing = false
 	stop_muzzle_flash()
 
 	if vfx.animation_finished.is_connected(stop_muzzle_flash):
@@ -73,3 +73,8 @@ func stop_muzzle_flash() -> void:
 
 	vfx.stop()
 	vfx.hide()
+
+
+## Checks if the fire pattern is currently firing.
+func is_firing() -> bool:
+	return firing

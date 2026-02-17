@@ -16,7 +16,6 @@ class_name AnimationResolver
 var current_animation: StringName = ""
 var current_priority: int = -999
 var current_locked: bool = false
-var current_frozen: bool = false
 var current_looped: bool = false
 
 var time_since_played: float = 0.0
@@ -81,12 +80,6 @@ func _apply(req: AnimationRequest) -> void:
 	if time_since_played < min_duration:
 		return
 
-	# Resume a previously frozen animation
-	if req.resume and req.name == current_animation:
-		animated_sprite.speed_scale = req.speed
-		current_frozen = false
-		return
-
 	# Ignore identical requests
 	if _is_same_request(req):
 		return
@@ -102,7 +95,6 @@ func _play(req: AnimationRequest) -> void:
 	current_animation = req.name
 	current_priority = req.priority
 	current_locked = req.lock
-	current_frozen = req.freeze
 	current_looped = req.looped
 	min_duration = req.min_duration
 	time_since_played = 0.0
@@ -110,15 +102,11 @@ func _play(req: AnimationRequest) -> void:
 	animated_sprite.play_animation(req.name)
 	animated_sprite.speed_scale = req.speed
 
-	if current_frozen:
-		animated_sprite.stop()
-
 
 ## Checks whether the incoming request matches the current animation state.
 func _is_same_request(req: AnimationRequest) -> bool:
 	return (
 		req.name == current_animation
-		and req.freeze == current_frozen
 		and is_equal_approx(req.speed, animated_sprite.speed_scale)
 	)
 

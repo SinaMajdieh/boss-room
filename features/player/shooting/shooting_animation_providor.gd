@@ -6,7 +6,8 @@ class_name PlayerShootingAnimationProvider
 # ==================================================
 
 ## Shooting animation definitions.
-@export var animations: ShootingAnimations = ShootingAnimations.new()
+@export var shooting_animations: ShootingAnimations = ShootingAnimations.new()
+@export var charging_animations: ShootingAnimations = ShootingAnimations.new()
 
 ## Reference to the owning player.
 @export var player: Player
@@ -26,7 +27,7 @@ class_name PlayerShootingAnimationProvider
 # ==================================================
 
 func _ready() -> void:
-    player.movement.turn_around.connect(_on_turn)
+	player.movement.turn_around.connect(_on_turn)
 
 
 # ==================================================
@@ -35,30 +36,42 @@ func _ready() -> void:
 
 ## Provides an AnimationRequest for the AnimationResolver.
 func get_animation_request() -> AnimationRequest:
-    if not shooting.is_shooting():
-        return null
+	var request: AnimationRequest = _get_charging_animation_request()
+	if not request:
+		request = _get_shooting_animation_request()
+	return request
 
-    var request: AnimationRequest = animations.get_request(
-        player.get_state(),
-        aiming.get_vertical_state()
-    ).duplicate()
 
-    if request == null:
-        return null
+## Provides an AnimationRequest for the charged shooting.
+func _get_charging_animation_request() -> AnimationRequest:
+	if not shooting.is_charging() or not shooting.is_shooting():
+		return null
+	var request: AnimationRequest = charging_animations.get_request(
+		player.get_state(),
+		aiming.get_vertical_state()
+	)
+	return request
 
-    if player.state_machine.is_in_state("idle"):
-        var gun: Gun = gun_manager.get_gun()
-        if gun.fire_pattern is ChargedFirePattern:
-            if shooting.is_charging():
-                request.freeze = true
-                request.resume = false
-            else:
-                request.freeze = false
-                request.resume = true
-        elif gun != null:
-            request.speed = 1.0 / gun.data.cool_down_time
 
-    return request
+## Provides an AnimationRequest for the normal shooting.
+func _get_shooting_animation_request() -> AnimationRequest:
+	if not shooting.is_shooting():
+		return null
+
+	var request: AnimationRequest = shooting_animations.get_request(
+		player.get_state(),
+		aiming.get_vertical_state()
+	)
+
+	if not request:
+		return null
+
+	if player.state_machine.is_in_state("idle"):
+		var gun: Gun = gun_manager.get_gun()
+		if gun:
+			request.speed = 1.0 / gun.data.cool_down_time
+
+	return request
 
 
 # ==================================================
@@ -67,12 +80,12 @@ func get_animation_request() -> AnimationRequest:
 
 ## Handles shoot‑turn animation when the player flips direction mid‑run.
 func _on_turn() -> void:
-    if not shooting.is_shooting():
-        return
+	if not shooting.is_shooting():
+		return
 
-    if not player.state_machine.is_in_state("run"):
-        return
+	if not player.state_machine.is_in_state("run"):
+		return
 
-    player.animation_resolver.request(
-        animations.shoot_turn.get(aiming.get_vertical_state())
-    )
+	player.animation_resolver.request(
+		shooting_animations.shoot_turn.get(aiming.get_vertical_state())
+	)
