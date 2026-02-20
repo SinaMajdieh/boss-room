@@ -1,5 +1,6 @@
 ## Fire pattern that spawns multiple projectiles in a spread.
 extends FirePattern
+class_name StreamFirePattern
 
 
 ## Angle offsets (degrees) applied to the fire direction.
@@ -14,9 +15,14 @@ func update(_delta: float) -> void:
 	if not gun.cool_down_timer.is_stopped():
 		return
 
-	for angle_offset: float in stream_angles:
-		var direction : Vector2 = gun.fire_direction.rotated(deg_to_rad(angle_offset))
-		gun.spawn_projectile(data.projectile, direction)
+	spawn_projectile()
 
 	play_muzzle_flash()
 	gun.cool_down_timer.start(data.cool_down_time)
+
+
+## Spawns a projectile from the gun.
+func spawn_projectile() -> void:
+	for angle_offset: float in stream_angles:
+		var direction : Vector2 = gun.fire_direction.rotated(deg_to_rad(angle_offset))
+		gun.spawn_projectile(data.projectile, direction)

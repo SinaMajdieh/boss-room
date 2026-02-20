@@ -32,7 +32,7 @@ func _ready() -> void:
 	vfx.hide()
 	vfx.sprite_frames = data.vfx_sprites
 
-	fire_pattern = data.fire_pattern_script.new()
+	fire_pattern = data.fire_pattern
 	fire_pattern.set_gun(self)
 
 
@@ -66,7 +66,7 @@ func spawn_projectile(
 	projectile: PackedScene,
 	direction: Vector2 = fire_direction
 ) -> void:
-	var bullet_instance := projectile.instantiate() as ProjectileBase
+	var bullet_instance : ProjectileBase = projectile.instantiate() as ProjectileBase
 	if not bullet_instance:
 		return
 

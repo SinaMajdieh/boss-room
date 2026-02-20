@@ -1,11 +1,11 @@
 extends PlayerState
 
 var damage: Variant = 1
-var knock_back: float = 0.0
+var knock_back: Vector2 = Vector2.ZERO
 
 
 ## Sets the damage and knockback values for the hurt state.
-func set_attributes(damage_: Variant = 1, knock_back_: float = 0.0) -> void:
+func set_attributes(damage_: Variant = 1, knock_back_: Vector2 = Vector2.ZERO) -> void:
 	damage = damage_
 	knock_back = knock_back_
 

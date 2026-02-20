@@ -19,7 +19,7 @@ func enter(_previous_state: String) -> void:
 	previous_velocity = player.velocity.x
 	if not dash_direction:
 		dash_direction = 1.0
-	
+	player.animation.trigger_dash(dash_timer.wait_time)
 	dash_timer.start()
 
 

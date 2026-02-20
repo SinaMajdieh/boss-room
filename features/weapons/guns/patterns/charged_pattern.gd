@@ -1,9 +1,17 @@
 extends FirePattern
 class_name ChargedFirePattern
 
+## Fire pattern to use when spawning projectiles.
+@export var spawn_pattern: FirePattern
+
 var charge_timer: float = 0.0
 var current_phase: PhaseData = null
 var charging: bool = false
+
+
+func set_gun(gun_: Gun) -> void:
+    super(gun_)
+    spawn_pattern.set_gun(gun_)
 
 
 func start_firing() -> void:
@@ -24,6 +32,13 @@ func stop_firing() -> void:
     firing = false
     
     release_shot()
+
+## Spawns a projectile from the gun.
+func spawn_projectile() -> void:
+    if not spawn_pattern:
+        return
+
+    spawn_pattern.spawn_projectile()
 
 
 func update(delta: float) -> void:
@@ -49,8 +64,9 @@ func update_phase() -> void:
 func release_shot() -> void:
     if not current_phase:
         return
-    
-    gun.spawn_projectile(current_phase.projectile)
+
+    spawn_pattern.data.projectile = current_phase.projectile
+    spawn_projectile()
     gun.cool_down_timer.start(data.cool_down_time)
     
     play_muzzle_flash()

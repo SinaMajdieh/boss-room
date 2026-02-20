@@ -8,8 +8,7 @@ var allowed_dash_count: int = MAX_ALLOWED_DASH_COUNT
 func on_process(_delta):
 	if not player.coyote_timer.is_stopped():
 		check_jump_input()
-	if player.is_on_floor():
-		transition_to("idle")
+	_check_landing()
 	if allowed_dash_count:
 		check_dash()
 	check_attack()
@@ -29,6 +28,16 @@ func enter(previous_state: String) -> void:
 		allowed_dash_count -= 1
 	else:
 		allowed_dash_count = MAX_ALLOWED_DASH_COUNT
+
+
+## Checks if the player has landed.
+func _check_landing() -> void:
+	if not player.is_on_floor():
+		return
+	if not player.jump_timer.is_stopped():
+		transition_to("jump")
+	else:
+		transition_to("idle")
 
 
 ## Returns true if player is airborne.

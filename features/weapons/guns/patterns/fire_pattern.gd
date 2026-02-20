@@ -1,6 +1,6 @@
 ## Base class for all gun fire patterns.
 ## Controls firing state, cooldown checks, and muzzle VFX handling.
-extends RefCounted
+extends Resource
 class_name FirePattern
 
 
@@ -32,6 +32,11 @@ func update(_delta: float) -> void:
 		return
 	if not gun.cool_down_timer.is_stopped():
 		return
+
+
+## Spawns a projectile from the gun.
+func spawn_projectile() -> void:
+	gun.spawn_projectile(data.projectile, gun.fire_direction)
 
 
 ## Starts firing and enables muzzle VFX handling.

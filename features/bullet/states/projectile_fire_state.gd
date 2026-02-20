@@ -35,7 +35,7 @@ func on_hit(target: Variant) -> void:
 	if not target:
 		return
 
-	if target.has_method("hurt"):
+	if target is BaseHitBox:
 		target.hurt(projectile.damage)
 
 	transition_to("death")

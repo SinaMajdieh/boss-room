@@ -3,7 +3,7 @@ class_name HurtBox
 
 @export var shape: CollisionShape2D
 @export var damage: float = 1.0
-@export var affected_group: String = "enemy"
+@export var knock_back_force: float = 0.0
 
 var entities: Array[Node] = []
 var active: bool = false:
@@ -37,10 +37,11 @@ func disable() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if not area:
 		return
-	if area in entities or not area.has_method("hurt") or not area.is_in_group(affected_group):
+	if area in entities or not area is BaseHitBox:
 		return
 	entities.append(area)
-	area.hurt(damage, global_position)
+	var knock_back_direction: Vector2 = (area.global_position - global_position).normalized()
+	area.hurt(damage, knock_back_direction * knock_back_force)
 
 
 ## Returns whether the hurtbox is currently active.

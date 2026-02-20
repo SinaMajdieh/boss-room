@@ -4,7 +4,7 @@ class_name GunData
 
 
 ## Script implementing the fire pattern logic.
-@export var fire_pattern_script: Script
+@export var fire_pattern: FirePattern
 
 ## Time (seconds) between shots.
 @export var cool_down_time: float = 1.0

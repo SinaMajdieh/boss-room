@@ -1,5 +1,6 @@
 ## Fire pattern that spawns a single projectile per shot.
 extends FirePattern
+class_name SingleShotFirePattern
 
 
 func update(_delta: float) -> void:
@@ -10,6 +11,6 @@ func update(_delta: float) -> void:
 	if not gun.cool_down_timer.is_stopped():
 		return
 
-	gun.spawn_projectile(data.projectile, gun.fire_direction)
+	spawn_projectile()
 	play_muzzle_flash()
 	gun.cool_down_timer.start(data.cool_down_time)

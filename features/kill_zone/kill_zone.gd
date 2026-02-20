@@ -12,8 +12,4 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if not area or not area is BaseHitBox:
 		return
-
-	var hitbox := area as BaseHitBox
-
-	if hitbox.entity.has_method("kill"):
-		hitbox.entity.kill()
+	area.hurt(INF)

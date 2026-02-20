@@ -3,15 +3,11 @@
 extends Area2D
 class_name BaseHitBox
 
-## Reference to the entity that will receive damage (must have hurt method)
-@export var entity: Node
+signal damaged(damage: Variant, knock_back: Vector2)
 
 
-func hurt(amount: Variant, direction: Vector2 = Vector2.ZERO, knock_back: float = 0.0) -> void:
-	if not entity:
-		push_warning("No health component")
-		return
-	entity.hurt(amount, direction, knock_back)
+func hurt(amount: Variant, knock_back: Vector2 = Vector2.ZERO) -> void:
+	damaged.emit(amount, knock_back)
 
 
 ## Disables the hitbox and hides it from view.

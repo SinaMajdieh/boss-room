@@ -83,3 +83,10 @@ func is_charging() -> bool:
 	if gun != null and gun.fire_pattern is ChargedFirePattern:
 		return gun.fire_pattern.charging
 	return false
+
+
+func get_gun_cool_down() -> float:
+	var gun: Gun = gun_manager.get_gun()
+	if not gun:
+		return 0.0
+	return gun.data.cool_down_time

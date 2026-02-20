@@ -20,7 +20,7 @@ func decelerate(_delta: float) -> void:
 func apply_gravity(_delta: float) -> void:
 	pass
 
-func apply_knock_back(_knock_back_velocity: float) -> void:
+func apply_knock_back(_knock_back_velocity: Vector2) -> void:
 	print_rich("[color=yellow]apply_knock_back needs to be implemented")
 
 func process_jump() -> void:
