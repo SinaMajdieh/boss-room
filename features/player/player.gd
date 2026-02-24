@@ -31,7 +31,7 @@ class_name Player
 @export var shooting: PlayerShooting
 
 ## Resolves animation requests from states and systems.
-@export var animation_resolver: AnimationResolver
+@export var animation_tree: PlayerAnimationTree
 
 
 @export_category("Timers")
@@ -46,9 +46,6 @@ class_name Player
 
 ## Invulnerability timer after taking damage.
 @export var hurt_timer: Timer
-
-## Shooting cooldown timer.
-@export var shoot_cool_down: Timer
 
 
 ## Initializes player connections.

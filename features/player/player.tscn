@@ -634,54 +634,6 @@ script = ExtResource("12_gl8cc")
 color = "pink"
 metadata/_custom_type_script = "uid://bteogiun258he"
 
-[sub_resource type="GDScript" id="GDScript_pkm35"]
-script/source = "## Describes a request to play an animation with resolver metadata.
-extends Resource
-class_name AnimationRequest
-
-
-## Animation name to be played.
-@export var name: StringName
-
-## Priority used by the animation resolver.
-@export var priority: int = 0
-
-## Playback speed multiplier.
-@export var speed: float = 1.0
-
-## Whether this animation locks the resolver.
-@export var lock: bool = false
-
-## Minimum time (seconds) this animation must play.
-@export var min_duration: float = 0.0
-
-## Whether the animation is looped.
-@export var looped: bool = false
-
-
-## Creates an AnimationRequest with sane defaults.
-func _init(
-	name_: StringName = \"\",
-	priority_: int = 0,
-	lock_: bool = false,
-	min_duration_: float = 0.0,
-	speed_: float = 1.0,
-	looped_: bool = false
-) -> void:
-	name = name_
-	priority = priority_
-	lock = lock_
-	min_duration = min_duration_
-	speed = speed_
-	looped = looped_
-"
-
-[sub_resource type="Resource" id="Resource_700bv"]
-script = SubResource("GDScript_pkm35")
-name = &"turn"
-lock = true
-metadata/_custom_type_script = "uid://cony4ped0spln"
-
 [sub_resource type="Animation" id="Animation_xoqs8"]
 length = 0.001
 tracks/0/type = "value"
@@ -1101,9 +1053,6 @@ nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_su5sh")
 nodes/TimeScale/position = Vector2(-80, 140)
 node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Loop"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cqiub"]
-animation = &"RESET"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_su5sh"]
 animation = &"dash"
 
@@ -1161,6 +1110,9 @@ nodes/HitOneShot/position = Vector2(-300, 160)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_tk43w")
 nodes/TimeScale/position = Vector2(-20, 180)
 node_connections = [&"output", 0, &"TimeScale", &"HitOneShot", 0, &"Start", &"HitOneShot", 1, &"Hit", &"TimeScale", 0, &"HitOneShot"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cqiub"]
+animation = &"RESET"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y43xc"]
 animation = &"charge_straight"
@@ -1398,8 +1350,6 @@ advance_expression = "!locomotion.is_on_floor || locomotion.is_running"
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_l1uqb"]
 states/Air/node = SubResource("AnimationNodeBlendTree_cq1rp")
 states/Air/position = Vector2(736.48755, 47)
-states/Base/node = SubResource("AnimationNodeAnimation_cqiub")
-states/Base/position = Vector2(608, 47)
 states/Dash/node = SubResource("AnimationNodeBlendTree_b1vui")
 states/Dash/position = Vector2(466.48755, -70)
 states/Death/node = SubResource("AnimationNodeBlendTree_tk43w")
@@ -1407,15 +1357,17 @@ states/Death/position = Vector2(346, -70)
 states/End/position = Vector2(899, 47)
 states/Hit/node = SubResource("AnimationNodeBlendTree_juq83")
 states/Hit/position = Vector2(228, -70)
+states/Hub/node = SubResource("AnimationNodeAnimation_cqiub")
+states/Hub/position = Vector2(608, 47)
 states/Idle/node = SubResource("AnimationNodeBlendTree_18x0u")
 states/Idle/position = Vector2(466.48755, 47)
 states/Run/node = SubResource("AnimationNodeBlendTree_0n70i")
 states/Run/position = Vector2(608, -100)
 states/Start/position = Vector2(608, 216)
-transitions = ["Base", "Idle", SubResource("AnimationNodeStateMachineTransition_x8i68"), "Start", "Base", SubResource("AnimationNodeStateMachineTransition_b25gh"), "Base", "Run", SubResource("AnimationNodeStateMachineTransition_pkm35"), "Run", "Base", SubResource("AnimationNodeStateMachineTransition_femra"), "Dash", "Base", SubResource("AnimationNodeStateMachineTransition_nq2ic"), "Base", "Air", SubResource("AnimationNodeStateMachineTransition_kd3uu"), "Air", "Base", SubResource("AnimationNodeStateMachineTransition_xhq5x"), "Idle", "Base", SubResource("AnimationNodeStateMachineTransition_y43xc")]
+transitions = ["Hub", "Idle", SubResource("AnimationNodeStateMachineTransition_x8i68"), "Start", "Hub", SubResource("AnimationNodeStateMachineTransition_b25gh"), "Hub", "Run", SubResource("AnimationNodeStateMachineTransition_pkm35"), "Run", "Hub", SubResource("AnimationNodeStateMachineTransition_femra"), "Dash", "Hub", SubResource("AnimationNodeStateMachineTransition_nq2ic"), "Hub", "Air", SubResource("AnimationNodeStateMachineTransition_kd3uu"), "Air", "Hub", SubResource("AnimationNodeStateMachineTransition_xhq5x"), "Idle", "Hub", SubResource("AnimationNodeStateMachineTransition_y43xc")]
 graph_offset = Vector2(-181.48755, -205)
 
-[node name="Player" type="CharacterBody2D" unique_id=1670544063 node_paths=PackedStringArray("animation", "movement", "health", "state_machine", "collision_controller", "attack_animation_player", "gun_manager", "shooting", "jump_timer", "coyote_timer", "combo_timer", "hurt_timer") groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1670544063 node_paths=PackedStringArray("animation", "movement", "health", "state_machine", "collision_controller", "attack_animation_player", "gun_manager", "shooting", "animation_tree", "jump_timer", "coyote_timer", "combo_timer", "hurt_timer") groups=["player"]]
 z_index = 1
 collision_mask = 5
 script = ExtResource("1_xhfnw")
@@ -1427,6 +1379,7 @@ collision_controller = NodePath("CollisionController")
 attack_animation_player = NodePath("Attacks/AttackAnimationPlayer")
 gun_manager = NodePath("Shooting/GunManager")
 shooting = NodePath("Shooting")
+animation_tree = NodePath("AnimationTree")
 jump_timer = NodePath("Timers/JumpTimer")
 coyote_timer = NodePath("Timers/CoyoteTimer")
 combo_timer = NodePath("Timers/Combo")
@@ -1688,7 +1641,6 @@ player = NodePath("../..")
 
 [node name="Run" type="Node" parent="PlayerStateMachine" unique_id=1689839288 node_paths=PackedStringArray("player")]
 script = ExtResource("4_vgqql")
-turn_animation = SubResource("Resource_700bv")
 player = NodePath("../..")
 
 [node name="Fall" type="Node" parent="PlayerStateMachine" unique_id=1314801619 node_paths=PackedStringArray("player")]
@@ -1799,6 +1751,7 @@ action = NodePath("AnimationActionModule")
 [node name="AnimationLocomotionModule" type="Node" parent="AnimationTree" unique_id=1434139803 node_paths=PackedStringArray("player")]
 script = ExtResource("45_pkm35")
 player = NodePath("../..")
+is_on_floor = true
 metadata/_custom_type_script = "uid://x75uvmtkf6iv"
 
 [node name="AnimationActionModule" type="Node" parent="AnimationTree" unique_id=1027988791 node_paths=PackedStringArray("player")]

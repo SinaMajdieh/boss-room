@@ -3,10 +3,6 @@
 extends PlayerState
 
 
-## Animation requested when the player turns around.
-@export var turn_animation: AnimationRequest
-
-
 ## Applies horizontal movement.
 func on_physics_process(delta: float) -> void:
 	player.movement.apply_movement(delta)
